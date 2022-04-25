@@ -7,17 +7,6 @@
  * Created: 25/04/2022
  */
 
-/**deliveryType varchar(10),
-    deliveryDate date,
-    deliveryStatus boolean,
-    deliveryUnit int,
-    deliveryStreetNo int,
-    deliveryStreetName varchar(50),
-    deliveryCity varchar(50),
-    deliveryState varchar(3),
-    deliveryCountry (varchar(50),
-*/
-
 INSERT INTO Delivery (deliveryType, deliveryDate, deliveryStatus,deliveryUnit,deliveryStreetNo,deliveryStreetName,
 deliveryCity,deliveryState,deliveryCountry) VALUES
 ('Standard',07/05/2022,true,19,100,'Broadway St','Sydney','NSW','Australia'),

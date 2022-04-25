@@ -7,11 +7,6 @@
  * Created: 25/04/2022
  */
 
-/**productID int NOT NULL,
-    orderID int NOT NULL,
-    quantity int,
-*/
-
 INSERT INTO OrderLine (productID, orderID, quantity) VALUES 
 (1,1,10),
 (2,2,8),

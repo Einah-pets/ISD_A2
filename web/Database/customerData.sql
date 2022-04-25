@@ -7,13 +7,6 @@
  * Created: 25/04/2022
  */
 
-/**customerID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    dateOfRegistration date,
-    userID int,
-    PRIMARY KEY (customerID),
-    FOREIGN KEY (userID) REFERENCES Users(userID) ON DELETE CASCADE
-*/
-
 INSERT INTO Customer (dateOfRegistration, userID) VALUES
 ('01/01/2022',21),
 ('01/01/2022',22),

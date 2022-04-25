@@ -7,12 +7,6 @@
  * Created: 25/04/2022
  */
 
-/**orderID int,
-    amount double,
-    paymentStatus boolean,
-    paymentType varchar(20)
-*/
-
 INSERT INTO Payment (orderID, amount, paymentStatus, paymentType) VALUES
 (1,2463.63,true,'credit card'),
 (2,263.03,true,'credit card'),
