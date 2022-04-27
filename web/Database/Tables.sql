@@ -14,6 +14,7 @@ CREATE TABLE Users (
     phone varchar(10),
     email varchar(30),
     password varchar(30),
+    isActive boolean,
     PRIMARY KEY (userID)
 );
 
