@@ -51,7 +51,7 @@
                                 <tr><td>Full name:</td><td><input type="text" placeholder="Enter name" name="name" required="true"></td></tr>
                                 <tr><td>Email:</td><td><input type="text" placeholder="Enter email" name="email" required></td></tr>
                                 <tr><td>Password:</td><td><input type="password" placeholder="Enter password" name="password" required></td></tr>
-                                <tr><td>Date of birth:</td><td><input type="date" name="dob" required></td></tr>
+                                <tr><td>Phone:</td><td><input type="text" name="phone" required></td></tr>
                             </table>
                             <br>
                             <div>

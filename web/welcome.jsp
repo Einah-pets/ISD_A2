@@ -4,7 +4,7 @@
     Author     : bluin
 --%>
 
-<%@page import="Users.Customer"%>
+<%@page import="uts.isd.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -41,20 +41,22 @@
                    
            
             <%
-                String name = request.getParameter("name");
+                int userID = request.getInt("userID");
+                String firstName = request.getParameter("firstName");
+                String lastName = request.getParameter("lastName");
                 String email = request.getParameter("email");
                 String password = request.getParameter("password");
-                String dob = request.getParameter("dob");
+                String phone = request.getParameter("phone");
             %>
             
-            <p>Welcome to IoTBay <%= name%></p>
+            <p>Welcome to IoTBay <%= firstName + " " + lastName%></p>
             <p>Your email is: <%= email %></p>
             <p>Your password is: <%= password %></p>
-            <p>Your DOB is: <%= dob %></p>
+            <p>Your phone is: <%= phone %></p>
             
             <%
-              Customer customer = new Customer(name,email,password,dob);
-              session.setAttribute("customer", customer);
+              User user = new User(userID,firstName,lastName,email,password,phone);
+              session.setAttribute("user", user);
             %>
             
         </div>

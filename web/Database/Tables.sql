@@ -14,24 +14,33 @@ CREATE TABLE Users (
     phone varchar(10),
     email varchar(30),
     password varchar(30),
+    userType varchar(20),
     isActive boolean,
     PRIMARY KEY (userID)
 );
 
 CREATE TABLE Customer (
-    customerID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     dateOfRegistration date,
     userID int,
-    PRIMARY KEY (customerID),
+    PRIMARY KEY (userID),
     FOREIGN KEY (userID) REFERENCES Users(userID) ON DELETE CASCADE
 );
 
 CREATE TABLE Staff (
-    staffID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     location varchar(15),
     staffRole varchar(15),
     userID int,
-    PRIMARY KEY (staffID)
+    PRIMARY KEY (userID),
+    FOREIGN KEY (userID) REFERENCES Users(userID) ON DELETE CASCADE
+);
+
+CREATE TABLE ApplicationAccessLog (
+    appAccessID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    userID int,
+    accessDate date,
+    accessTime time,
+    userAction varchar(20),
+    PRIMARY KEY (appAccessID),
     FOREIGN KEY (userID) REFERENCES Users(userID) ON DELETE CASCADE
 );
 
@@ -46,14 +55,28 @@ CREATE TABLE Product (
     PRIMARY KEY (productID)
 );
 
+CREATE TABLE Delivery (
+    deliveryID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    deliveryType varchar(10),
+    deliveryDate date,
+    deliveryStatus boolean,
+    deliveryUnit int,
+    deliveryStreetNo int,
+    deliveryStreetName varchar(50),
+    deliveryCity varchar(50),
+    deliveryState varchar(3),
+    deliveryCountry varchar(50),
+    PRIMARY KEY (deliveryID)
+);
+
 CREATE TABLE Orders (
     orderID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    customerID int,
+    userID int,
     orderStatus boolean,
     dateOfOrder date,
     deliveryID int,
     PRIMARY KEY (orderID),
-    FOREIGN KEY (customerID) REFERENCES Customer(customerID) ON DELETE CASCADE,
+    FOREIGN KEY (userID) REFERENCES Customer(userID) ON DELETE CASCADE,
     FOREIGN KEY (deliveryID) REFERENCES Delivery(deliveryID) ON DELETE CASCADE
 );
 
@@ -66,30 +89,14 @@ CREATE TABLE OrderLine (
     FOREIGN KEY (orderID) REFERENCES Orders(orderID) ON DELETE CASCADE
 );
 
-CREATE TABLE Delivery (
-    deliveryID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    deliveryType varchar(10),
-    deliveryDate date,
-    deliveryStatus boolean,
-    deliveryUnit int,
-    deliveryStreetNo int,
-    deliveryStreetName varchar(50),
-    deliveryCity varchar(50),
-    deliveryState varchar(3),
-    deliveryCountry (varchar(50),
-    PRIMARY KEY (deliveryID)
-);
-
 CREATE TABLE Payment (
     paymentID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     orderID int,
     amount double,
     paymentStatus boolean,
-    paymentType varchar(20)
-    cardID int,
+    paymentType varchar(20),
     PRIMARY KEY (paymentID),
     FOREIGN KEY (orderID) REFERENCES Orders(orderID) ON DELETE CASCADE
-    FOREIGN KEY (cardID) REFERENCES CreditCard(cardID) ON DELETE CASCADE
 );
 
 CREATE TABLE CreditCard (
@@ -98,17 +105,7 @@ CREATE TABLE CreditCard (
     creditCardNo bigint,
     expirationDate Date,
     CVV int,
-    PRIMARY KEY (cardID),
-);
-
-CREATE TABLE ApplicationAccessLog (
-    appAccessID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    userID int,
-    accessDate date,
-    accessTime time,
-    userAction varchar(20),
-    PRIMARY KEY (appAccessID),
-    FOREIGN KEY (userID) REFERENCES Users(userID) ON DELETE CASCADE
+    PRIMARY KEY (cardID)
 );
 
 -- CREATE TABLE Afterpay (

@@ -7,6 +7,9 @@
  * Created: 25/04/2022
  */
 
+/**DATE FORMAT NEEDS TO BE CHANGED TO YEAY-MONTH-DAY
+**/
+
 INSERT INTO Orders (customerID, orderStatus, dateOfOrder, deliveryID) VALUES
 (1,true,'01/05/2022',1),
 (2,true,'01/05/2022',2),
