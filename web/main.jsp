@@ -4,7 +4,7 @@
     Author     : bluin
 --%>
 
-<%@page import="Users.Customer"%>
+<%@page import="uts.isd.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -42,7 +42,7 @@
         </nav>
         
         <%
-            Customer customer = (Customer)session.getAttribute("customer");
+            User user = (User)session.getAttribute("user");
         %>
         
         <h2>Your profile</h2>

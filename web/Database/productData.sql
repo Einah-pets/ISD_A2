@@ -54,10 +54,10 @@ your lights, turn appliances on/off and provides the ability to monitor them fro
 useful IoT smart device for daily purposes. It is a universal remote which lets you control your house media, 
 lighting, and other smart devices from one location remotely.'),
 ('Particle Photon Wi-Fi with Headers','Particles iot board','Particle',25.00,190,'This is the particles IoT board which provides 
-everything that a user needs to build a connection project. It makes prototyping simple and easy due to plugins.');
-('NETGEAR Orbi Ultra-Performance Whole Home Mesh Wi-Fi System','Mesh Wi-Fi system','Netgear',323.99,60,'It is an extremely 
-powerful Internet of Things device which maintains the whole-home mesh Wi-Fi system that is capable to cover the whole house 
-with fast WI-FI. It can work with the existing internet service provider.'),
+everything that a user needs to build a connection project. It makes prototyping simple and easy due to plugins.'),
+('NETGEAR Orbi Ultra Performance Whole Home Mesh WiFi System','Mesh WiFi system','Netgear',323.99,60,'It is an extremely 
+powerful Internet of Things device which maintains the whole home mesh WiFi system that is capable to cover the whole house 
+with fast WIFI. It can work with the existing internet service provider.'),
 ('Fitbit Charge 5 – Wearables:','Smart watch','Fitbit',179.99,130,'The Fitbit Charge 5 tracks your steps, floors climbed, 
 calories burned, and sleep quality. The device also syncs with computers and smartphones through wifi to transmit your 
 fitness data in understandable charts to monitor your progress.'),

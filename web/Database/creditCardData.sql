@@ -7,6 +7,9 @@
  * Created: 25/04/2022
  */
 
+/**DATE FORMAT NEEDS TO BE CHANGED TO YEAY-MONTH-DAY
+**/
+
 INSERT INTO CreditCard (nameOnCard, creditCardNo, expirationDate, CVV) VALUES
 ('Quentin Gil',123958372638491,'01/01/2023',836),
 ('Denis Samar',578394057382946,'02/02/2023',123),

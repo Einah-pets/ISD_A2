@@ -7,6 +7,9 @@
  * Created: 25/04/2022
  */
 
+/**DATE FORMAT NEEDS TO BE CHANGED TO YEAY-MONTH-DAY
+**/
+
 INSERT INTO Delivery (deliveryType, deliveryDate, deliveryStatus,deliveryUnit,deliveryStreetNo,deliveryStreetName,
 deliveryCity,deliveryState,deliveryCountry) VALUES
 ('Standard','07/05/2022',true,19,100,'Broadway St','Sydney','NSW','Australia'),
