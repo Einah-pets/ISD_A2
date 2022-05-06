@@ -11,6 +11,8 @@ package uts.isd.model.dao;
 
 import uts.isd.model.User;
 import java.sql.*;
+import java.util.ArrayList;
+import uts.isd.model.AccessLog;
 
 /* 
 * DBManager is the primary DAO class to interact with the database. 
@@ -50,34 +52,57 @@ public class DBManager {
     //Add a user-data into the database   
     public void addUser(String firstName, String lastName, String email, String password, String phone, String userType) throws SQLException {  
         boolean isActive = true;
-        st.executeUpdate("insert into users" + "values ('" + firstName + "', '" + lastName + "', '" + email + "', '" + password + "', '" + phone + "', '" + userType + "', '" + isActive + "')");   
+        st.executeUpdate("INSERT INTO users" + "VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', '" + password + "', '" + phone + "', '" + userType + "', '" + isActive + "')");   
     }
     
     //Add a customer-data into the database
     public void addCustomer(String dateOfRegistration, int userID) throws SQLException {  
-        st.executeUpdate("insert into customer" + "values ('" + dateOfRegistration + "', '" + userID + "')");   
+        st.executeUpdate("INSERT INTO customer" + "VALUES ('" + dateOfRegistration + "', '" + userID + "')");   
     }
     
     //Add a staff-data into the database
     public void addStaff(String location, String staffRole, int userID) throws SQLException {  
-        st.executeUpdate("insert into staff" + "values ('" + location + "', '" + staffRole + "', '" + userID + "')");   
+        st.executeUpdate("INSERT INTO staff" + "VALUES ('" + location + "', '" + staffRole + "', '" + userID + "')");   
     }
     
     //update a user details in the database   
-    public void updateUser( String email, String name, String password, String gender, String favcol) throws SQLException {       
-       //code for update-operation   
-
-    }       
+    public void updateUser( String firstName, String lastName, String password, String phone) throws SQLException {       
+       st.executeUpdate("UPDATE ISDUSER.users SET firstName ='"+ firstName +"', lastName ='"+ lastName +"', password ='"+ password +"', phone ='"+ phone +"'");   
+    } 
+    
+    //update a staff user details in the database
+     public void updateStaff( String location, String staffRole) throws SQLException {       
+       st.executeUpdate("UPDATE ISDUSER.users SET location ='"+ location +"', staffRole ='"+ staffRole +"'");   
+    } 
 
     //delete a user from the database   
-    public void deleteUser(String email) throws SQLException{       
-       //code for delete-operation   
-
+    public void deleteUser(int userID) throws SQLException{       
+        st.executeUpdate("DELETE FROM ISDUSER.customer WHERE userID ='"+ userID +"'");  
+        st.executeUpdate("DELETE FROM ISDUSER.staff WHERE userID ='"+ userID +"'");  
+        st.executeUpdate("DELETE FROM ISDUSER.users WHERE userID ='"+ userID +"'");   
     }
 
     //arraylist
+    public ArrayList<AccessLog> fetchAccessLog() throws SQLException {
+        String fetch = "SELECT * FROM accessLog";
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<User> accessLogArray = new ArrayList();
+        
+        while (rs.next()){
+            int appAccessID = rs.getInt(1);
+            int userID = rs.getInt(2);
+            String accessDate = rs.getString(3);
+            String accessTime = rs.getString(4);
+            String userAction = rs.getString(5)
+            
+        }
+    
+    }
     
     //checkuser
+    public boolean checkUser(String email, String password) throws SQLException {
+        String fetch = "SELECT * FROM ISDUSER.users WHERE email =";
+    }
     
     
 }
