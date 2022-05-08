@@ -10,18 +10,24 @@ package uts.isd.model;
  */
 
 public class AccessLog {
+    private int appAccessID;
     private int userID;
     private String accessDate;
     private String accessTime; 
     private String userAction;
 
-    public AccessLog(int userID, String accessDate, String accessTime, String userAction){
+    public AccessLog(int appAccessID, int userID, String accessDate, String accessTime, String userAction){
+        this.appAccessID = appAccessID;
         this.userID = userID;
         this.accessDate = accessDate;
         this.accessTime = accessTime;
         this.userAction = userAction;
     }   
     
+     public int getAppAccessID() {
+        return appAccessID;
+    }
+     
     public int getUserID() {
         return userID;
     }
