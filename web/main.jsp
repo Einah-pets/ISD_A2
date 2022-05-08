@@ -16,7 +16,7 @@
     </head>
     <body>
         <%
-            User user = (User) session.getAttribute("user");
+            User user = (User)session.getAttribute("user");
         %>
         
         <div class="container">
@@ -36,10 +36,10 @@
                   <a class="nav-link" href="main.jsp">Main</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="accessLog.jsp">Access Log</a>
+                  <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="LogoutServlet">Logout</a>
+                  <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a>
                 </li>   
               </ul>          
             </div>

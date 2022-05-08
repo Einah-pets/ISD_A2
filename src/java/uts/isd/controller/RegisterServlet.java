@@ -6,6 +6,8 @@ package uts.isd.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -66,10 +68,18 @@ public class RegisterServlet extends HttpServlet {
                     User user = manager.findUserEP(email, password);
                     session.setAttribute("user", user);
                     request.getRequestDispatcher("main.jsp").include(request, response);
+                    //create accesslog
+                    int userID = user.getUserID();
+                    LocalDateTime currentDateTime = LocalDateTime.now();
+                    String accessDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    String accessTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+                    String userAction = "Login";
+                    manager.addAccessLog(userID, accessDate, accessTime, userAction);
                 }
             }
-            catch (SQLException ex) {
+            catch (SQLException | NullPointerException ex) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage() == null ? "User does not exist" : "welcome");
             }
         }
     }

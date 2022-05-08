@@ -15,6 +15,9 @@
         <title>Successful User Delete</title>
     </head>
     <body>
+        <!--        redirect to the index page after 3 seconds-->
+        <meta http-equiv="Refresh" content="3;url=index.jsp">
+        
         <div class="container">
 
         <h1>IoTBay</h1>

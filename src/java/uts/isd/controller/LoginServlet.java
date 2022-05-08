@@ -32,6 +32,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         DBManager manager = (DBManager) session.getAttribute("manager");
         validator.clear(session);
+        User user = null;
 
         if (!validator.validateEmail(email)) {
             session.setAttribute("emailErr","Incorrect email format");
@@ -43,17 +44,17 @@ public class LoginServlet extends HttpServlet {
         }
         else{
             try {
-                User user = manager.findUserEP(email, password);
+                user = manager.findUserEP(email, password);
                 if (user != null){
                     session.setAttribute("user", user);
                     request.getRequestDispatcher("main.jsp").include(request, response);
                     //create accesslog
-//                    int userID = user.getUserID();
-//                    LocalDateTime currentDateTime = LocalDateTime.now();
-//                    String accessDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//                    String accessTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
-//                    String userAction = "Login";
-//                    manager.addAccessLog(userID, accessDate, accessTime, userAction);
+                    int userID = user.getUserID();
+                    LocalDateTime currentDateTime = LocalDateTime.now();
+                    String accessDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    String accessTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+                    String userAction = "Login";
+                    manager.addAccessLog(userID, accessDate, accessTime, userAction);
                 }
                 else{
                     session.setAttribute("existErr","Error: User does not exist in the database.");
@@ -61,7 +62,7 @@ public class LoginServlet extends HttpServlet {
                 }
             } 
             catch (SQLException | NullPointerException ex) {
-            //Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage() == null ? "User does not exist" : "welcome");
             }
         }

@@ -15,6 +15,9 @@
         <title>Home Page</title>
     </head>
     <body>
+        <%
+            //User user = (User) session.getAttribute("user");
+        %>
         <div class="container">
 
         <h1>IoTBay</h1>
