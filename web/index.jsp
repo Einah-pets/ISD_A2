@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="uts.isd.model.*" %> 
 <!DOCTYPE html>
 <html>
     <head>

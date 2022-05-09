@@ -13,6 +13,14 @@
         <title>Registration Page</title>
     </head>
     <body>
+        <%
+          String existErr = (String) session.getAttribute("existErr");
+          String emailErr = (String) session.getAttribute("emailErr"); 
+          String passwordErr = (String) session.getAttribute("passwordErr");
+          String nameErr = (String) session.getAttribute("nameErr");
+          String phoneErr = (String) session.getAttribute("phoneErr");
+        %>
+        
         <div class="container">
             <h1>IoTBay</h1>
 
@@ -51,18 +59,28 @@
                   </div>
                   <div class="col">
                         <h2>Create your account:</h2>
-                        <form action="welcome.jsp" method="post">
+                        <%=(existErr != null ? existErr : "")%>
+                        <form action="RegisterServlet" method="post">
                             <br>
                             <table>
-                                <tr><td>Full name:</td><td><input type="text" placeholder="Enter name" name="name" required="true"></td></tr>
-                                <tr><td>Email:</td><td><input type="text" placeholder="Enter email" name="email" required></td></tr>
-                                <tr><td>Password:</td><td><input type="password" placeholder="Enter password" name="password" required></td></tr>
-                                <tr><td>Phone:</td><td><input type="text" name="phone" required></td></tr>
+                                <tr><td>First name:</td><td><input type="text" placeholder="<%=(nameErr != null ? nameErr : "Enter first name")%>" name="firstName" required="true"></td></tr>
+                                <tr><td>Last name:</td><td><input type="text" placeholder="<%=(nameErr != null ? nameErr : "Enter last name")%>" name="lastName" required="true"></td></tr>
+                                <tr><td>Email:</td><td><input type="text" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" name="email" required></td></tr>
+                                <tr><td>Password:</td><td><input type="password" placeholder="<%=(passwordErr != null ? passwordErr : "Enter password")%>" name="password" required></td></tr>
+                                <tr><td>Phone:</td><td><input type="text" placeholder="<%=(phoneErr != null ? phoneErr : "Enter phone")%>" name="phone" required></td></tr> 
+                                <tr><td><label for="userType">Role:</label></td><td>
+                                    <select id="userType" name="userType" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option value="Customer">Customer</option>
+                                        <option value="Staff">Staff</option>
+                                    </select>
+                                    </td></tr> 
                             </table>
+                                
+                            
                             <br>
                             <div>
                                 <a href="index.jsp">Cancel</a>
-                                <input type="submit" value="Register">
+                                <input type="submit" class="btn btn-primary" value="Register">
                             </div>
                         </form>
                   </div>

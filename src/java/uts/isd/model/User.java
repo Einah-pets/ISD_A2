@@ -12,19 +12,19 @@ public class User {
     private int userID;
     private String firstName;
     private String lastName;
+    private String phone;
     private String email;
     private String password;
-    private String phone;  
     private String userType;
     private boolean isActive;
 
-    public User (int userID, String firstName, String lastName, String email, String password, String phone, String userType, boolean isActive){
+    public User (int userID, String firstName, String lastName, String phone, String email, String password, String userType, boolean isActive){
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phone = phone;
         this.email = email;
         this.password = password;
-        this.phone = phone;
         this.userType = userType;
         this.isActive = isActive;
     }
@@ -81,13 +81,16 @@ public class User {
         return userType;
     }
 
-//    public void setUserType(String userType) {
-//        this.userType = userType;
-//    }
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
     public boolean isActive() {
         return isActive;
     }
 
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
     
 }

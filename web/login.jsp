@@ -4,6 +4,7 @@
     Author     : bluin
 --%>
 
+<%@page import="uts.isd.model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,7 +32,6 @@
                 <li class="nav-item">
                   <a class="nav-link" href="register.jsp">Register</a>
                 </li>  
-                </li>
                 <li class="nav-item">
                   <a class="nav-link" href="login.jsp">Login</a>
                 </li>   
@@ -46,6 +46,11 @@
           </div>
         </nav>
         
+        <% 
+            String existErr = (String) session.getAttribute("existErr");
+            String emailErr = (String) session.getAttribute("emailErr");
+            String passwordErr = (String) session.getAttribute("passwordErr");
+        %>
                 
         <div class="container">
                 <div class="row">
@@ -53,16 +58,17 @@
                   </div>
                   <div class="col">
                         <h2>Login:</h2>
-                        <form action="welcome.jsp" method="post">
+                        <%=(existErr != null ? existErr : "")%>
+                        <form method="post" action="LoginServlet">
                             <br>
                             <table>
-                                <tr><td>Email:</td><td><input type="text" placeholder="Enter email" name="email" required="true"></td></tr>
-                                <tr><td>Password:</td><td><input type="password" placeholder="Enter password" name="password" required></td></tr>                    
+                                <tr><td>Email:</td><td><input type="text" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" name="email" required="true"></td></tr>
+                                <tr><td>Password:</td><td><input type="password" placeholder="<%=(passwordErr != null ? passwordErr : "Enter password")%>" name="password" required></td></tr>                    
                             </table>
                             <br>
                             <div>
                                 <a href="index.jsp">Cancel</a>
-                                <input type="submit" value="Login">
+                                <input class="btn btn-primary" type="submit" value="Login">
                             </div>
                         </form>
                   </div>
@@ -70,10 +76,7 @@
                   </div>
                 </div>
             </div>
-        
-        
-        
-        
+
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
