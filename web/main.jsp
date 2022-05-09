@@ -15,8 +15,11 @@
         <title>Main Page</title>
     </head>
     <body>
+        <%
+            User user = (User) session.getAttribute("user");
+        %>
+        
         <div class="container">
-
         <h1>IoTBay</h1>
         
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -27,34 +30,31 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link" href="main.jsp">Main</a>
-                </li>  
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="logout.jsp">Logout</a>
+                  <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a>
                 </li>   
               </ul>          
             </div>
           </div>
         </nav>
         
-        <%
-            User user = (User)session.getAttribute("user");
-        %>
-        
-        <h2>Your profile</h2>
+
+        <br>
+        <h3>Your profile</h3>
         
         <table class="table">
-          <thead class="table-light"><th>Name</th><th>Email</th><th>Password</th><th>Date of birth</th></thead>
-          <tr><td>${customer.name}</td><td>${customer.email}</td><td>${customer.password}</td><td>${customer.dob}</td></tr>    
+          <thead class="table-light"><th>First Name</th><th>Last Name</th><th>Phone</th><th>Email</th><th>Password</th></thead>
+        <tr><td>${user.firstName}</td><td>${user.lastName}</td><td>${user.phone}</td><td>${user.email}</td><td><input type="password" disabled value="${user.password}"></td></tr>    
         </table>
 
         <div>
-            <a href="edit.jsp" class="button">Edit</a>
-            
+            <a href="UserEditServlet?email='<%=user.getEmail()%>'&password='<%=user.getPassword()%>'" class="btn btn-primary">Edit profile</a>
+            <a href="userDeactivate.jsp" class="btn btn-secondary" style="float: right;">Deactivate account</a>
         </div>
         
         </div>
