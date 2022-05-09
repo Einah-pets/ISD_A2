@@ -1,18 +1,14 @@
 <%-- 
-    Document   : main
-    Created on : 30/03/2022, 11:13:01 AM
-    Author     : bluin
+    Document   : productView.jsp
+    Created on : 05/05/2022, 6:11:30 PM
+    Author     : Stephanie
 --%>
 
-<%@page import="uts.isd.model.User"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/demo.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <title>Main Page</title>
+        <title>Product Page</title>
     </head>
     <body>
         <div class="container">
@@ -31,15 +27,16 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
-                            </li>  
+                            </li> 
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
                                     <input type="hidden" value="1" name="page">
                                     <input type="submit" class="btn btn-light" value="Catalogue">
-                                </form>                            </li>  
+                                </form>
+                            </li>  
                             <li class="nav-item">
                                 <a class="nav-link" href="logout.jsp">Logout</a>
-                            </li>   
+                            </li>  
                             <li class="nav-item">
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
@@ -54,25 +51,36 @@
                         </ul>          
                     </div>
                 </div>
-            </nav>
+            </nav>       
 
-            <%
-                User user = (User) session.getAttribute("user");
-            %>
+            <div class="container p-5">
+                <div class="row">
+                    <div class="col">
+                        <%
+                            String prodName = (String) session.getAttribute("prod" + request.getParameter("selectedProd") + "Name");
+                            String prodType = (String) session.getAttribute("prod" + request.getParameter("selectedProd") + "Type");
+                            String prodBrand = (String) session.getAttribute("prod" + request.getParameter("selectedProd") + "Brand");
+                            String prodPrice = (String) session.getAttribute("prod" + request.getParameter("selectedProd") + "Price");
+                            String prodDescription = (String) session.getAttribute("prod" + request.getParameter("selectedProd") + "Description");
+                        %>
 
-            <h2>Your profile</h2>
-
-            <table class="table">
-                <thead class="table-light"><th>Name</th><th>Email</th><th>Password</th><th>Date of birth</th></thead>
-                <tr><td>${customer.name}</td><td>${customer.email}</td><td>${customer.password}</td><td>${customer.dob}</td></tr>    
-            </table>
-
-            <div>
-                <a href="edit.jsp" class="button">Edit</a>
+                        <p><%= prodName%></p>
+                        <p><%= prodType%></p>
+                        <p><%= prodBrand%></p>
+                        <p><%= prodPrice%></p>
+                        <p><%= prodDescription%></p>
+                        <!--<button class="btn btn-primary" type="submit">Add to cart</button> --->
+                        <form action="OrderController" method="POST">
+                            
+                            <%int p = (Integer)session.getAttribute("page") * 6 - 6 + Integer.parseInt(request.getParameter("selectedProd"));%>
+                            <input type="hidden" name="productID" value="<%=p%>">
+                            <input class="btn btn-primary" type="submit" value="Add to cart">
+                        </form>
+                    </div>
+                </div>
 
             </div>
 
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
 </html>

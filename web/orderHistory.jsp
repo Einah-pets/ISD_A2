@@ -1,10 +1,11 @@
 <%-- 
-    Document   : main
-    Created on : 30/03/2022, 11:13:01 AM
-    Author     : bluin
+    Document   : orderHistory
+    Created on : 09/05/2022, 8:33:15 PM
+    Author     : Stephanie
 --%>
 
-<%@page import="uts.isd.model.User"%>
+<%@page import="uts.isd.model.*"%>
+<%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/demo.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <title>Main Page</title>
+        <title>order History Page</title>
     </head>
     <body>
         <div class="container">
@@ -32,11 +33,13 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
                             </li>  
+                            </li>
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
                                     <input type="hidden" value="1" name="page">
                                     <input type="submit" class="btn btn-light" value="Catalogue">
-                                </form>                            </li>  
+                                </form>
+                            </li>  
                             <li class="nav-item">
                                 <a class="nav-link" href="logout.jsp">Logout</a>
                             </li>   
@@ -51,26 +54,42 @@
                                     <input type="submit" class="btn btn-light" value="Order History">
                                 </form>
                             </li>  
+                            <%}%>
                         </ul>          
                     </div>
                 </div>
             </nav>
 
-            <%
-                User user = (User) session.getAttribute("user");
-            %>
-
-            <h2>Your profile</h2>
-
-            <table class="table">
-                <thead class="table-light"><th>Name</th><th>Email</th><th>Password</th><th>Date of birth</th></thead>
-                <tr><td>${customer.name}</td><td>${customer.email}</td><td>${customer.password}</td><td>${customer.dob}</td></tr>    
-            </table>
-
-            <div>
-                <a href="edit.jsp" class="button">Edit</a>
-
+            <div class="container">
+                <table class="table">
+                    <thead class="table-light">
+                    <th>Order ID</th>
+                    <th>Order Status</th>
+                    <th>Date of Order</th>
+                    <th>Delivery ID</th>
+                    <th>Products</th>
+                    </thead>
+                    <%
+                        ArrayList <Order> previousOrders = (ArrayList) session.getAttribute("previousOrders");
+                        for (int i = 0; i < previousOrders.size(); i++) {
+                    %>
+                    <tr>
+                        <td><%=previousOrders.get(i).getOrderID()%></td>
+                        <td><%=previousOrders.get(i).getOrderStatus()%></td>
+                        <td><%=previousOrders.get(i).getDateOfOrder()%></td>
+                        <td><%=previousOrders.get(i).getDeliveryID()%></td>
+                        <td>
+                            <form action="OrderLineController" method="POST">
+                                <input type="hidden" name="orderID" value="<%=previousOrders.get(i).getOrderID()%>"
+                                <input type="submit" name="acttion" value="See all products">
+                            </form>
+                        </td>
+                    </tr>    
+                    <%}%>
+                </table>
             </div>
+
+
 
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
