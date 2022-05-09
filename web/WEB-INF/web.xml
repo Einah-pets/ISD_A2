@@ -68,7 +68,7 @@
         <servlet-name>UserDeleteServlet</servlet-name>
         <url-pattern>/UserDeleteServlet</url-pattern>
     </servlet-mapping>
-    
+<!--    
     <servlet>
         <servlet-name>UserDeleteConfirmServlet</servlet-name>
         <servlet-class>uts.isd.controller.UserDeleteConfirmServlet</servlet-class>
@@ -76,7 +76,7 @@
     <servlet-mapping>
         <servlet-name>UserDeleteConfirmServlet</servlet-name>
         <url-pattern>/UserDeleteConfirmServlet</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
     
     <session-config>
         <session-timeout>

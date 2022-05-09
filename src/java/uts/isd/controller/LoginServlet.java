@@ -45,18 +45,22 @@ public class LoginServlet extends HttpServlet {
         else{
             try {
                 user = manager.findUserEP(email, password);
-                if (user != null){
+                if (user != null && user.isActive()){
                     session.setAttribute("user", user);
                     request.getRequestDispatcher("main.jsp").include(request, response);
                     //create accesslog
                     int userID = user.getUserID();
-                    LocalDateTime currentDateTime = LocalDateTime.now();
-                    String accessDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    String accessTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
-                    String userAction = "Login";
-                    manager.addAccessLog(userID, accessDate, accessTime, userAction);
+//                    LocalDateTime currentDateTime = LocalDateTime.now();
+//                    String accessDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//                    String accessTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+//                    String userAction = "Login";
+                    manager.addAccessLog(userID, "Login");
                 }
-                else{
+                else if (user != null && !user.isActive()){
+                    session.setAttribute("existErr","Error: This user has been deactivated.");
+                    request.getRequestDispatcher("login.jsp").include(request, response);
+                }
+                else {
                     session.setAttribute("existErr","Error: User does not exist in the database.");
                     request.getRequestDispatcher("login.jsp").include(request, response);
                 }

@@ -13,34 +13,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import uts.isd.model.*;
 import uts.isd.model.dao.DBManager;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import uts.isd.model.User;
-
 /**
  *
  * @author bluin
  */
-public class LogoutServlet extends HttpServlet {
-
+public class UserDeactivateServlet extends HttpServlet {
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        //String email = request.getParameter("email");
         DBManager manager = (DBManager) session.getAttribute("manager");
         User user = (User) session.getAttribute("user");
 
         try {
-            //create accesslog
-            int userID = user.getUserID();
-            manager.addAccessLog(userID, "Logout");
-            //end session
+            //deactivate
+            String email = user.getEmail();
+            manager.deactivateUser(email);
+            //end
             session.invalidate();
-            request.getRequestDispatcher("logout.jsp").include(request, response);
-        } catch (SQLException | NullPointerException ex) {
-            Logger.getLogger(LogoutServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.getRequestDispatcher("userDeactivateSuccess.jsp").include(request, response);
+        }
+        catch (SQLException | NullPointerException ex) {
+            Logger.getLogger(UserDeactivateServlet.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());
         }
-
     }
 }

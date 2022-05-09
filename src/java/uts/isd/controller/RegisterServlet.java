@@ -35,6 +35,7 @@ public class RegisterServlet extends HttpServlet {
         String userType = request.getParameter("userType");
         DBManager manager = (DBManager) session.getAttribute("manager");
         validator.clear(session);
+        User user = null;
         
         if(!validator.validateName(firstName)){
             session.setAttribute("nameErr","Incorrect name format");
@@ -58,23 +59,28 @@ public class RegisterServlet extends HttpServlet {
         }
         else{
             try{
-                User exist = manager.findUserE(email);
-                if (exist != null){
+                user = manager.findUserE(email);
+                if (user != null && !user.isActive()){
+                    session.setAttribute("existErr", "This user has been deactivated.");
+                    request.getRequestDispatcher("register.jsp").include(request, response);
+                }
+                if (user != null && user.isActive()){
                     session.setAttribute("existErr", "This user already exist in the database.");
                     request.getRequestDispatcher("register.jsp").include(request, response);
                 }
-                else{
+                else if (user == null){
+                    //create user
                     manager.addUser(firstName, lastName, phone, email, password, userType);
-                    User user = manager.findUserEP(email, password);
+                    user = manager.findUserEP(email, password);
                     session.setAttribute("user", user);
-                    request.getRequestDispatcher("main.jsp").include(request, response);
                     //create accesslog
                     int userID = user.getUserID();
-                    LocalDateTime currentDateTime = LocalDateTime.now();
-                    String accessDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    String accessTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
-                    String userAction = "Login";
-                    manager.addAccessLog(userID, accessDate, accessTime, userAction);
+//                    LocalDateTime currentDateTime = LocalDateTime.now();
+//                    String accessDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//                    String accessTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+//                    String userAction = "Login";
+                    manager.addAccessLog(userID, "Login");
+                    request.getRequestDispatcher("main.jsp").include(request, response);
                 }
             }
             catch (SQLException | NullPointerException ex) {

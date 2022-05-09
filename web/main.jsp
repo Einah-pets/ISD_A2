@@ -16,7 +16,7 @@
     </head>
     <body>
         <%
-            User user = (User)session.getAttribute("user");
+            User user = (User) session.getAttribute("user");
         %>
         
         <div class="container">
@@ -57,7 +57,7 @@
 
         <div>
             <a href="UserEditServlet?email='<%=user.getEmail()%>'&password='<%=user.getPassword()%>'" class="btn btn-primary">Edit profile</a>
-            <a href="UserDeleteConfirmServlet?email='<%=user.getEmail()%>'&password='<%=user.getPassword()%>'" class="btn btn-secondary" style="float: right;">Delete account</a>
+            <a href="userDeactivate.jsp" class="btn btn-secondary" style="float: right;">Deactivate account</a>
         </div>
         
         </div>

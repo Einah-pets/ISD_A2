@@ -50,22 +50,22 @@
         
         <br>
         <p>Are you sure you want to delete your account?</p>
-<!--        <br>
+        <br>
         <div>
             <a href="main.jsp">Cancel</a>
-            <a href="UserDeleteServlet?email='</%=user.getEmail()%>'&password='</%=user.getPassword()%>'" class="btn btn-secondary">Delete account</a>
-        </div>-->
+            <a href="UserDeleteServlet?email='<%=user.getUserID()%>'" class="btn btn-secondary">Delete account</a>
+        </div>
                 
-        <form action="UserDeleteServlet" method="post">
-            <input type="hidden" name="email" value="${user.email}" required="true" >
-            <input type="hidden" name="password" value="${user.password}" required="true">
+<!--        <form action="UserDeleteServlet" method="post">
+            <input type="hidden" name="email" value="$/{user.email}" required="true" >
+            <input type="hidden" name="password" value="$/{user.password}" required="true">
         
             <br>
             <div>
                 <a href="main.jsp">Cancel</a>
                 <input type="submit" class="btn btn-primary" value="Delete account">
             </div>
-        </form>
+        </form>-->
         
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

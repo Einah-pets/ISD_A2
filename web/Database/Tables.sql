@@ -23,7 +23,7 @@ CREATE TABLE Customer (
     dateOfRegistration date,
     userID int,
     PRIMARY KEY (userID),
-    FOREIGN KEY (userID) REFERENCES Users(userID) ON DELETE CASCADE
+    FOREIGN KEY (userID) REFERENCES Users(userID) --ON DELETE CASCADE
 );
 
 CREATE TABLE Staff (
@@ -31,7 +31,7 @@ CREATE TABLE Staff (
     staffRole varchar(15),
     userID int,
     PRIMARY KEY (userID),
-    FOREIGN KEY (userID) REFERENCES Users(userID) ON DELETE CASCADE
+    FOREIGN KEY (userID) REFERENCES Users(userID) --ON DELETE CASCADE
 );
 
 CREATE TABLE ApplicationAccessLog (
@@ -41,7 +41,7 @@ CREATE TABLE ApplicationAccessLog (
     accessTime time,
     userAction varchar(20),
     PRIMARY KEY (appAccessID),
-    FOREIGN KEY (userID) REFERENCES Users(userID)
+    FOREIGN KEY (userID) REFERENCES Users(userID) ON DELETE CASCADE
 );
 
 CREATE TABLE Product (
@@ -76,7 +76,7 @@ CREATE TABLE Orders (
     dateOfOrder date,
     deliveryID int,
     PRIMARY KEY (orderID),
-    FOREIGN KEY (userID) REFERENCES Customer(userID),
+    FOREIGN KEY (userID) REFERENCES Customer(userID), --ON DELETE SET NULL, --ON DELETE CASCADE, --
     FOREIGN KEY (deliveryID) REFERENCES Delivery(deliveryID) ON DELETE CASCADE
 );
 

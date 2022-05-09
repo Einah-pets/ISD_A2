@@ -129,16 +129,26 @@ public class TestDBUserAccess {
     }
     
     //testDelete for user
-    private void testDelete(){
+//    private void testDelete(){
+//        System.out.println("User ID: ");
+//        int userID = in.nextInt();
+//        in.nextLine();
+//
+//        try{
+//                db.deleteUser(userID);
+//        }
+//        catch (SQLException ex){
+//            Logger.getLogger(TestDBUserAccess.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+    
+    //testDelete for user as deactivate
+        private void testDelete(){
         System.out.println("User email: ");
         String email = in.nextLine();
-        System.out.println("User password: ");
-        String password = in.nextLine();
-        
+
         try{
-            if (db.checkUser(email, password)){
-                db.deleteUser(email);
-            }
+            db.deactivateUser(email);
         }
         catch (SQLException ex){
             Logger.getLogger(TestDBUserAccess.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,15 +160,15 @@ public class TestDBUserAccess {
         System.out.print("UserID: ");
         int userID = in.nextInt();
         in.nextLine();
-        System.out.println("Access date: ");
-        String accessDate = in.nextLine();
-        System.out.print("Access time: ");
-        String accessTime = in.nextLine();
+//        System.out.println("Access date: ");
+//        String accessDate = in.nextLine();
+//        System.out.print("Access time: ");
+//        String accessTime = in.nextLine();
         System.out.print("User action: ");
         String userAction = in.nextLine();
                
         try {
-            db.addAccessLog (userID, accessDate, accessTime, userAction );
+            db.addAccessLog(userID, userAction );
         }
         catch (SQLException ex){
             Logger.getLogger(TestDBUserAccess.class.getName()).log(Level.SEVERE, null, ex);

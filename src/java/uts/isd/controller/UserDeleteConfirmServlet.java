@@ -21,28 +21,28 @@ import uts.isd.model.dao.DBManager;
  */
 
 public class UserDeleteConfirmServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        DBManager manager = (DBManager) session.getAttribute("manager");
-        
-        try{
-            User user = manager.findUserEP(email, password);
-            if (user != null){
-                session.setAttribute("user", user);
-                request.getRequestDispatcher("userDelete.jsp").include(request, response);
-            }
-            else{
-                session.setAttribute("existErr","Error: User does not exist in the database.");
-                request.getRequestDispatcher("userDelete.jsp").include(request, response);
-            } 
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(UserDeleteConfirmServlet.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex.getErrorCode() + " and " + ex.getMessage());
-        }
-        response.sendRedirect("userDelete.jsp");
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        HttpSession session = request.getSession();
+//        String email = request.getParameter("email");
+//        String password = request.getParameter("password");
+//        DBManager manager = (DBManager) session.getAttribute("manager");
+//        
+//        try{
+//            User user = manager.findUserEP(email, password);
+//            if (user != null){
+//                session.setAttribute("user", user);
+//                request.getRequestDispatcher("userDelete.jsp").include(request, response);
+//            }
+//            else{
+//                session.setAttribute("existErr","Error: User does not exist in the database.");
+//                request.getRequestDispatcher("userDelete.jsp").include(request, response);
+//            } 
+//        }
+//        catch (SQLException ex) {
+//            Logger.getLogger(UserDeleteConfirmServlet.class.getName()).log(Level.SEVERE, null, ex);
+//            System.out.println(ex.getErrorCode() + " and " + ex.getMessage());
+//        }
+//        response.sendRedirect("userDelete.jsp");
+//    }
 }

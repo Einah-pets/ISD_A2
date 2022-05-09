@@ -11,6 +11,8 @@ package uts.isd.model.dao;
 
 import uts.isd.model.User;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import uts.isd.model.AccessLog;
 
@@ -98,9 +100,17 @@ public class DBManager {
     } 
 
     //delete a user from the database 
-    public void deleteUser(String email) throws SQLException, NullPointerException{       
-        st.executeUpdate("DELETE FROM ISDUSER.users WHERE email ='"+ email +"'");   
-    }
+//    public void deleteUser(int userID) throws SQLException, NullPointerException{       
+//        st.executeUpdate("DELETE FROM ISDUSER.customer WHERE userID ="+ userID +""); 
+//        st.executeUpdate("DELETE FROM ISDUSER.staff WHERE userID ="+ userID +""); 
+//        st.executeUpdate("DELETE FROM ISDUSER.users WHERE userID ="+ userID +"");   
+//    }
+    
+    //deactivate a user
+    public void deactivateUser(String email) throws SQLException, NullPointerException {
+        boolean isActive = false;
+        st.executeUpdate("UPDATE ISDUSER.users SET isActive ="+ isActive +" WHERE email='"+ email +"'");   
+    } 
 
     //checkuser with email and password
     public boolean checkUser(String email, String password) throws SQLException, NullPointerException {
@@ -118,7 +128,10 @@ public class DBManager {
     }
     
     //Add a user access log
-    public void addAccessLog(int userID, String accessDate, String accessTime, String userAction) throws SQLException, NullPointerException {
+    public void addAccessLog(int userID, String userAction) throws SQLException, NullPointerException {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        String accessDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String accessTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         st.executeUpdate("INSERT INTO ApplicationAccessLog (userID, accessDate, accessTime, userAction) VALUES ("+ userID +", '"+ accessDate +"', '"+ accessTime +"', '"+ userAction +"')");
     }
     

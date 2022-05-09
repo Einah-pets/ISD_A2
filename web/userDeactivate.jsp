@@ -1,25 +1,26 @@
 <%-- 
-    Document   : userDeleteSuccess
-    Created on : 08/05/2022, 2:45:23 PM
+    Document   : userDeactivate
+    Created on : 09/05/2022, 12:15:19 PM
     Author     : bluin
 --%>
 
+<%@page import="uts.isd.model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="uts.isd.model.*" %> 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/demo.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <title>Successful User Delete</title>
+        <title>Confirm User Deactivation</title>
     </head>
     <body>
-        <!--        redirect to the index page after 3 seconds-->
-        <meta http-equiv="Refresh" content="3;url=index.jsp">
+        
+        <%
+            User user = (User)session.getAttribute("user");
+        %>
         
         <div class="container">
-
         <h1>IoTBay</h1>
         
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,19 +34,27 @@
                   <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="register.jsp">Register</a>
-                </li>  
+                  <a class="nav-link" href="main.jsp">Main</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="login.jsp">Login</a>
+                  <a class="nav-link" href="AccessLogViewServlet?email='<%= user.getEmail()%>'">Access Log</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a> 
+<!--                  this-->
                 </li>   
               </ul>          
             </div>
           </div>
         </nav>
-        
+
         <br>
-        <p>Your account has been successfully deleted. Redirecting to the Home page.</p>
+        <p>Are you sure you want to deactivate your account?</p>
+        <br>
+        <div>
+            <a href="main.jsp">Cancel</a>
+            <a href="UserDeactivateServlet?userID='<%= user.getEmail()%>'" class="btn btn-secondary">Deactivate account</a>
+        </div>
 
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

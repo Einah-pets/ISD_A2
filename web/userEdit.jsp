@@ -40,10 +40,10 @@
                                     <a class="nav-link" href="main.jsp">Main</a>
                                 </li> 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AccessLogViewServlet?email=<%= user.getEmail()%>">Access Log</a>
+                                    <a class="nav-link" href="AccessLogViewServlet?email='<%= user.getEmail()%>'">Access Log</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="LogoutServlet">Logout</a>
+                                    <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a>
                                 </li>  
                             </ul>          
                         </div>
