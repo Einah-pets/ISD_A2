@@ -26,9 +26,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
-                            </li>
+                           
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
                             </li> 
@@ -45,13 +43,15 @@
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
                             <%
-                                if (session.getAttribute("user") != null) {
+                                //User user = (User) session.getAttribute("user");
+                                //if ( user!= null) {
                             %>
                             <li class="nav-item">
                                 <form action="orderHistoryController" method="POST">
                                     <input type="submit" class="btn btn-light" value="Order History">
                                 </form>
-                            </li>  
+                            </li> 
+                            <%//}%>
                         </ul>          
                     </div>
                 </div>

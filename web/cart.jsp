@@ -47,7 +47,7 @@
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
                             <%
-                                if (session.getAttribute("user") != null) {
+                                //if (session.getAttribute("user") != null) {
                             %>
                             <li class="nav-item">
                                 <form action="orderHistoryController" method="POST">

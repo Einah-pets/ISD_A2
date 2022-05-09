@@ -27,27 +27,27 @@ import uts.isd.model.dao.*;
 @WebServlet(name = "CatalogueController", urlPatterns = {"/CatalogueController"})
 public class CatalogueController extends HttpServlet {
 
-    private DBConnector db;
-
-    private DBManager manager;
-
-    private Connection conn;
+//    private DBConnector db;
+//
+//    private DBManager manager;
+//
+//    private Connection conn;
 
     @Override
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
-        //DBManager manager = (DBManager) session.getAttribute("manager");
+        DBManager manager = (DBManager) session.getAttribute("manager");
 
         ArrayList<Product> products;
         int page = Integer.parseInt(request.getParameter("page"));
         session.setAttribute("page", page);
         //int page = 1;
         try {
-            db = new DBConnector();
-            conn = db.openConnection();
-            manager = new DBManager(conn);
+//            db = new DBConnector();
+//            conn = db.openConnection();
+//            manager = new DBManager(conn);
 
             products = manager.fetchAllProducts();
 
@@ -75,7 +75,7 @@ public class CatalogueController extends HttpServlet {
             }
             request.getRequestDispatcher("catalogue.jsp").include(request, response);
 
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
 
             Logger.getLogger(CatalogueController.class.getName()).log(Level.SEVERE, null, ex);
 
