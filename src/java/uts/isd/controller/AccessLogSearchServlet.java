@@ -36,8 +36,7 @@ public class AccessLogSearchServlet extends HttpServlet {
         if (!validator.validateDate(accessDate)) {
             session.setAttribute("dateErr", "Incorrect date format");
             request.getRequestDispatcher("accessLog.jsp").include(request, response);
-        } 
-        else {
+        } else {
             try {
                 searchUserLogs = manager.fetchAccessLog(user.getUserID(), accessDate);
                 session.setAttribute("accessLog", searchUserLogs);
