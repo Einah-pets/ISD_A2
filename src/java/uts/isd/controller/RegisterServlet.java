@@ -45,10 +45,10 @@ public class RegisterServlet extends HttpServlet {
             session.setAttribute("nameErr","Incorrect name format");
             request.getRequestDispatcher("register.jsp").include(request, response);
         }
-//        else if(!validator.validatePhone(phone)){
-//            session.setAttribute("phoneErr","Incorrect phone format");
-//            request.getRequestDispatcher("register.jsp").include(request, response);
-//        }
+        else if(!validator.validatePhone(phone)){
+            session.setAttribute("phoneErr","Incorrect phone format");
+            request.getRequestDispatcher("register.jsp").include(request, response);
+        }
         else if(!validator.validateEmail(email)){
             session.setAttribute("emailErr","Incorrect email format");
             request.getRequestDispatcher("register.jsp").include(request, response);
@@ -75,11 +75,7 @@ public class RegisterServlet extends HttpServlet {
                     session.setAttribute("user", user);
                     //create accesslog
                     int userID = user.getUserID();
-//                    LocalDateTime currentDateTime = LocalDateTime.now();
-//                    String accessDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//                    String accessTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
-//                    String userAction = "Login";
-                    manager.addAccessLog(userID, "Login");
+                    manager.addAccessLog(userID, "Register");
                     request.getRequestDispatcher("main.jsp").include(request, response);
                 }
             }

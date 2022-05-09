@@ -18,7 +18,7 @@
           String emailErr = (String) session.getAttribute("emailErr"); 
           String passwordErr = (String) session.getAttribute("passwordErr");
           String nameErr = (String) session.getAttribute("nameErr");
-          //String phoneErr = (String) session.getAttribute("phoneErr");
+          String phoneErr = (String) session.getAttribute("phoneErr");
         %>
         
         <div class="container">
@@ -61,7 +61,7 @@
                                 <tr><td>Last name:</td><td><input type="text" placeholder="<%=(nameErr != null ? nameErr : "Enter last name")%>" name="lastName" required="true"></td></tr>
                                 <tr><td>Email:</td><td><input type="text" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" name="email" required></td></tr>
                                 <tr><td>Password:</td><td><input type="password" placeholder="<%=(passwordErr != null ? passwordErr : "Enter password")%>" name="password" required></td></tr>
-                                <tr><td>Phone:</td><td><input type="text" placeholder="Enter phone" name="phone" required></td></tr> 
+                                <tr><td>Phone:</td><td><input type="text" placeholder="<%=(phoneErr != null ? phoneErr : "Enter phone")%>" name="phone" required></td></tr> 
                                 <tr><td><label for="userType">Role:</label></td><td>
                                     <select id="userType" name="userType" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                         <option value="Customer">Customer</option>

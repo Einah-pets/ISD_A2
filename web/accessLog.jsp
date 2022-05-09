@@ -19,7 +19,7 @@
         <%
             User user = (User) session.getAttribute("user");
             ArrayList<AccessLog> userAccessLog = (ArrayList<AccessLog>) session.getAttribute("accessLog");
-            String accessLogDateErr = (String) session.getAttribute("accessLogDateErr");
+            String dateErr = (String) session.getAttribute("dateErr");
         %>
 
         <div class="container">
@@ -52,19 +52,37 @@
             <br>
             <h3>Your access log</h3>
             <br>
-            <div>
-                <label class="label">Search log by date: YYYY-MM-DD<input class="input" type="text" placeholder="<%=(accessLogDateErr != null ? accessLogDateErr : "")%>" name="accessDate"></label>
+            <form method="post" action="AccessLogSearchServlet">
+                <label class="label">Search log by date (YYYY-MM-DD): 
+                    <input class="input" type="text" placeholder="<%=(dateErr != null ? dateErr : "")%>" name="accessDate" required="true">
+                </label>
+                <input class="btn btn-secondary btn-sm" type="submit" value="Search">
+                <a href="AccessLogViewServlet" class="btn btn-secondary btn-sm">Reset search</a>
+            </form>
+            <br>
+            <div class="container">
+                <table class="table">
+                    <thead class="table-light">
+                    <th>Access ID</th>
+                    <th>Access date</th>
+                    <th>Access time</th>
+                    <th>Action</th>
+                    </thead>
+                    <%
+                        for (AccessLog log : userAccessLog) {
+                    %>
+                    <tr>
+                        <td><%= log.getAppAccessID()%></td>
+                        <td><%= log.getAccessDate()%></td>
+                        <td><%= log.getAccessTime()%></td>
+                        <td><%= log.getUserAction()%></td>
+                    </tr>
+                    <%
+                        }
+                    %>
+                </table>
             </div>
-            <table class="table">
-                <thead class="table-light"><th>User ID</th><th>Access ID</th><th>Access date</th><th>Access time</th><th>Action</th></thead>
-                <%
-                    for (AccessLog logs : userAccessLog) {
-                %>
-                <tr><td>${logs.appAccessID}</td><td>${logs.userID}</td><td>${logs.accessDate}</td><td>${logs.accessTime}</td><td>${logs.userAction}</td></tr>
-                <%
-                    }
-                %>
-            </table>
+
 
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

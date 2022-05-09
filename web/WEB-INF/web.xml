@@ -61,22 +61,31 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>UserDeleteServlet</servlet-name>
-        <servlet-class>uts.isd.controller.UserDeleteServlet</servlet-class>
+        <servlet-name>UserDeactivateServlet</servlet-name>
+        <servlet-class>uts.isd.controller.UserDeactivateServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserDeleteServlet</servlet-name>
-        <url-pattern>/UserDeleteServlet</url-pattern>
+        <servlet-name>UserDeactivateServlet</servlet-name>
+        <url-pattern>/UserDeactivateServlet</url-pattern>
     </servlet-mapping>
-<!--    
+    
     <servlet>
-        <servlet-name>UserDeleteConfirmServlet</servlet-name>
-        <servlet-class>uts.isd.controller.UserDeleteConfirmServlet</servlet-class>
+        <servlet-name>AccessLogViewServlet</servlet-name>
+        <servlet-class>uts.isd.controller.AccessLogViewServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserDeleteConfirmServlet</servlet-name>
-        <url-pattern>/UserDeleteConfirmServlet</url-pattern>
-    </servlet-mapping>-->
+        <servlet-name>AccessLogViewServlet</servlet-name>
+        <url-pattern>/AccessLogViewServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AccessLogSearchServlet</servlet-name>
+        <servlet-class>uts.isd.controller.AccessLogSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AccessLogSearchServlet</servlet-name>
+        <url-pattern>/AccessLogSearchServlet</url-pattern>
+    </servlet-mapping>
     
     <session-config>
         <session-timeout>

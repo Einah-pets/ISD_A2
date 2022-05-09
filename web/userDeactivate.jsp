@@ -41,7 +41,6 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a> 
-<!--                  this-->
                 </li>   
               </ul>          
             </div>
@@ -53,7 +52,7 @@
         <br>
         <div>
             <a href="main.jsp">Cancel</a>
-            <a href="UserDeactivateServlet?userID='<%= user.getEmail()%>'" class="btn btn-secondary">Deactivate account</a>
+            <a href="UserDeactivateServlet?email='<%= user.getEmail()%>'" class="btn btn-secondary">Deactivate account</a>
         </div>
 
         </div>

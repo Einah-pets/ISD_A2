@@ -24,12 +24,12 @@ public class AccessLogViewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String userID = request.getParameter("userID");
+        User user = (User) session.getAttribute("user");
         DBManager manager = (DBManager) session.getAttribute("manager");
         ArrayList<AccessLog> allUserLogs;
         
         try{
-            allUserLogs = manager.fetchAllAccessLog(Integer.parseInt(userID));
+            allUserLogs = manager.fetchAllAccessLog(user.getUserID());
             session.setAttribute("accessLog", allUserLogs);
             session.setAttribute("accessLogDateErr", "");
             request.getRequestDispatcher("accessLog.jsp").include(request, response);

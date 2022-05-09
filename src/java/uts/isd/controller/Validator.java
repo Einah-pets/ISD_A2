@@ -18,7 +18,8 @@ public class Validator implements Serializable {
     private String emailPattern = "([a-zA-Z0-9]+)(([._-])([a-zA-Z0-9]+))*(@)([a-z]+)(.)([a-z]{3})((([.])[a-z]{0,2})*)";
     private String namePattern = "([A-Z][a-z]*)";
     private String passwordPattern = "[a-z0-9]{4,}";
-    //private String phonePattern = " ";
+    private String phonePattern = "^[0-9]{10}$";
+    private String datePattern = "^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$";
 
     public Validator() {
     }
@@ -45,9 +46,13 @@ public class Validator implements Serializable {
         return validate(passwordPattern, password);
     }
     
-//    public boolean validatePphone(String phone) {
-//        return validate(phonePattern, phone);
-//    }
+    public boolean validatePhone(String phone) {
+        return validate(phonePattern, phone);
+    }
+    
+    public boolean validateDate(String date) {
+        return validate(datePattern, date);
+    }
     
     public void clear(HttpSession session){
         session.setAttribute("emailErr","Enter email");
@@ -55,9 +60,11 @@ public class Validator implements Serializable {
         session.setAttribute("existErr","");
         session.setAttribute("firstNameErr","Enter first name");
         session.setAttribute("lastNameErr","Enter last name");
+        session.setAttribute("phoneErr","Enter phone number");
         session.setAttribute("updated","");
         session.setAttribute("updatePasswordErr","");
         session.setAttribute("updateNameErr","");
-        //session.setAttribute("phoneErr","Enter phone number");
+        session.setAttribute("updatePhoneErr","");
+        session.setAttribute("dateErr","");
     }
 }

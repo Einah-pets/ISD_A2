@@ -44,10 +44,10 @@ public class UserUpdateServlet extends HttpServlet {
             session.setAttribute("updateNameErr","Incorrect last name format");
             request.getRequestDispatcher("userEdit.jsp").include(request, response);
         }
-////        else if(!validator.validatePhone(phone)){
-////            session.setAttribute("phoneErr","Incorrect phone format");
-////            request.getRequestDispatcher("userEdit.jsp").include(request, response);
-////        }
+        else if(!validator.validatePhone(phone)){
+            session.setAttribute("updatePhoneErr","Incorrect phone format");
+            request.getRequestDispatcher("userEdit.jsp").include(request, response);
+        }
         else if(!validator.validatePassword(password)){
             session.setAttribute("updatePasswordErr","Incorrect password format");
             request.getRequestDispatcher("userEdit.jsp").include(request, response);
@@ -59,6 +59,8 @@ public class UserUpdateServlet extends HttpServlet {
                     manager.updateUser(firstName, lastName, phone, email, password);
                     session.setAttribute("updated", "Information successfully updated.");
                     request.getRequestDispatcher("userEdit.jsp").include(request, response);
+                    user = manager.findUserE(email);
+                    session.setAttribute("user", user);
                 }
                 else{
                     session.setAttribute("updated", "Information update was not successful.");

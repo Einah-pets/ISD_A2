@@ -24,7 +24,6 @@ public class UserDeactivateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        //String email = request.getParameter("email");
         DBManager manager = (DBManager) session.getAttribute("manager");
         User user = (User) session.getAttribute("user");
 
@@ -32,6 +31,9 @@ public class UserDeactivateServlet extends HttpServlet {
             //deactivate
             String email = user.getEmail();
             manager.deactivateUser(email);
+            //create deactivate access log
+            int userID = user.getUserID();
+            manager.addAccessLog(userID, "Deactivate");
             //end
             session.invalidate();
             request.getRequestDispatcher("userDeactivateSuccess.jsp").include(request, response);
@@ -40,5 +42,6 @@ public class UserDeactivateServlet extends HttpServlet {
             Logger.getLogger(UserDeactivateServlet.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());
         }
+        
     }
 }

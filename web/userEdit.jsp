@@ -20,7 +20,7 @@
                 String updated = (String)session.getAttribute("updated");
                 String updatePasswordErr = (String) session.getAttribute("updatePasswordErr");
                 String updateNameErr = (String) session.getAttribute("updateNameErr");
-                //String phoneErr = (String) session.getAttribute("phoneErr");
+                String updatePhoneErr = (String) session.getAttribute("updatePhoneErr");
             %>
             
             <div class="container">
@@ -60,6 +60,7 @@
                             <%=(updated != null ? updated : "")%>
                             <%=(updatePasswordErr != null ? updatePasswordErr : "")%>
                             <%=(updateNameErr != null ? updateNameErr : "")%>
+                            <%=(updatePhoneErr != null ? updatePhoneErr : "")%>
                             <form action="UserUpdateServlet" method="post">
                                 <br>
                                 <table>
