@@ -27,25 +27,19 @@ import uts.isd.model.dao.*;
 @WebServlet(name = "OrderHistoryController", urlPatterns = {"/OrderHistoryController"})
 public class OrderHistoryController extends HttpServlet {
 
-    private DBConnector db;
 
-    private DBManager manager;
-
-    private Connection conn;
 
     @Override
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
-        //DBManager manager = (DBManager) session.getAttribute("manager");
+        DBManager manager = (DBManager) session.getAttribute("manager");
 
         User currentUser = (User) session.getAttribute("user");
 
         try {
-            db = new DBConnector();
-            conn = db.openConnection();
-            manager = new DBManager(conn);
+
             
             ArrayList <Order> orders = manager.getOrders(currentUser.getUserID());
             session.setAttribute("previousOrders",orders);
@@ -56,8 +50,7 @@ public class OrderHistoryController extends HttpServlet {
 
             Logger.getLogger(OrderHistoryController.class.getName()).log(Level.SEVERE, null, ex);
 
-        } catch (ClassNotFoundException ex) {
-        }
+        } 
 
     }
 

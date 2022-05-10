@@ -45,13 +45,14 @@
                         <a class="nav-link" href="cart.jsp">Cart</a>
                     </li>
                     <%
-                        //if (session.getAttribute("user") != null) {
+                        if (session.getAttribute("user") != null) {
                     %>
                     <li class="nav-item">
-                        <form action="orderHistoryController" method="POST">
+                        <form action="OrderHistoryController" method="POST">
                             <input type="submit" class="btn btn-light" value="Order History">
                         </form>
-                    </li>  
+                    </li>
+                    <%}%>
                 <li class="nav-item">
                   <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a>
                 </li>   

@@ -1,105 +1,92 @@
 package uts.isd.controller;
 
- 
+import java.io.IOException;
 
-   import java.io.IOException;
+import java.sql.Connection;
 
-   import java.sql.Connection;
+import java.sql.SQLException;
 
-   import java.sql.SQLException;
+import java.util.logging.Level;
 
-   import java.util.logging.Level;
+import java.util.logging.Logger;
 
-   import java.util.logging.Logger;
+import javax.servlet.ServletException;
 
-   import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 
-   import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
-   import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-   import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-   import javax.servlet.http.HttpSession;
+import uts.isd.model.dao.*;
 
-   import uts.isd.model.dao.*;
+public class ConnServlet extends HttpServlet {
 
- 
+    private DBConnector db;
 
-   public class ConnServlet extends HttpServlet {
+    private DBManager manager;
 
- 
+    private Connection conn;
 
-       private DBConnector db;
+    @Override //Create and instance of DBConnector for the deployment session
 
-       private DBManager manager;
+    public void init() {
 
-       private Connection conn;
+        try {
 
-        
+            db = new DBConnector();
 
-       @Override //Create and instance of DBConnector for the deployment session
+        } catch (ClassNotFoundException | SQLException ex) {
 
-       public void init() {
+            Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
 
-           try {
+        }
 
-               db = new DBConnector();
+    }
 
-           } catch (ClassNotFoundException | SQLException ex) {
+    @Override //Add the DBConnector, DBManager, Connection instances to the session
 
-               Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-           }      
+        response.setContentType("text/html;charset=UTF-8");
 
-       }
+        HttpSession session = request.getSession();
 
-      
+        conn = db.openConnection();
 
-       @Override //Add the DBConnector, DBManager, Connection instances to the session
+        try {
 
-       protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            manager = new DBManager(conn);
+            session.setAttribute("manager", manager);
+            String emp = "";
+            session.setAttribute("AnonymousUser", manager.findUserE(emp));
 
-               throws ServletException, IOException {
+        } catch (SQLException ex) {
 
-           response.setContentType("text/html;charset=UTF-8");       
+            Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
 
-           HttpSession session = request.getSession();
+        }
 
-           conn = db.openConnection();       
+        //export the DB manager to the view-session (JSPs)
+    }
 
-           try {
+    @Override //Destroy the servlet and release the resources of the application (terminate also the db connection)
 
-               manager = new DBManager(conn);
+    public void destroy() {
 
-           } catch (SQLException ex) {
+        try {
 
-               Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            db.closeConnection();
 
-           }
+        } catch (SQLException ex) {
 
-           //export the DB manager to the view-session (JSPs)
+            Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
 
-           session.setAttribute("manager", manager);           
+        }
 
-       }   
+    }
 
-        
-
-       @Override //Destroy the servlet and release the resources of the application (terminate also the db connection)
-
-        public void destroy() {
-
-           try {
-
-               db.closeConnection();
-
-           } catch (SQLException ex) {
-
-               Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
-
-           }
-
-       }
-
-   }
+}

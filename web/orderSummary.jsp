@@ -1,5 +1,5 @@
 <%-- 
-    Document   : orderHistory
+    Document   : orderSummary
     Created on : 09/05/2022, 8:33:15 PM
     Author     : Stephanie
 --%>
@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/demo.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <title>order History Page</title>
+        <title>Order Summary Page</title>
     </head>
     <body>
         <div class="container">
@@ -47,7 +47,7 @@
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
                             <%
-                                //if (session.getAttribute("user") != null) {
+                                if (session.getAttribute("user") != null) {
                             %>
                             <li class="nav-item">
                                 <form action="orderHistoryController" method="POST">
@@ -72,6 +72,7 @@
                     </thead>
                     <%
                         ArrayList<Product> products = (ArrayList) session.getAttribute("productsInPrevOrder");
+                        
                         ArrayList quantities = (ArrayList) session.getAttribute("quantities");
                         double total = 0;
                         for (int i = 0; i < products.size(); i++) {

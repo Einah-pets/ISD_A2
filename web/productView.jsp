@@ -34,9 +34,17 @@
                                     <input type="submit" class="btn btn-light" value="Catalogue">
                                 </form>
                             </li>  
+                            <%
+                                if (session.getAttribute("user") != null) {
+                            %>
                             <li class="nav-item">
                                 <a class="nav-link" href="logout.jsp">Logout</a>
                             </li>  
+                            <%} else {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.jsp">Login</a>
+                            </li>   
+                            <%}%> 
                             <li class="nav-item">
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
@@ -44,7 +52,7 @@
                                 //if (session.getAttribute("user") != null) {
                             %>
                             <li class="nav-item">
-                                <form action="orderHistoryController" method="POST">
+                                <form action="OrderHistoryController" method="POST">
                                     <input type="submit" class="btn btn-light" value="Order History">
                                 </form>
                             </li>  
@@ -69,7 +77,6 @@
                         <p><%= prodBrand%></p>
                         <p><%= prodPrice%></p>
                         <p><%= prodDescription%></p>
-                        <!--<button class="btn btn-primary" type="submit">Add to cart</button> --->
                         <form action="OrderController" method="POST">
                             
                             <%int p = (Integer)session.getAttribute("page") * 6 - 6 + Integer.parseInt(request.getParameter("selectedProd"));%>

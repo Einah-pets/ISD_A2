@@ -27,25 +27,19 @@ import uts.isd.model.dao.*;
 @WebServlet(name = "OrderLineController", urlPatterns = {"/OrderLineController"})
 public class OrderLineController extends HttpServlet {
 
-    private DBConnector db;
 
-    private DBManager manager;
-
-    private Connection conn;
 
     @Override
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
-        //DBManager manager = (DBManager) session.getAttribute("manager");
+        DBManager manager = (DBManager) session.getAttribute("manager");
 
         User currentUser = (User) session.getAttribute("user");
 
         try {
-            db = new DBConnector();
-            conn = db.openConnection();
-            manager = new DBManager(conn);
+ 
             
             int orderID = Integer.parseInt(request.getParameter("orderID"));
             
@@ -67,9 +61,7 @@ public class OrderLineController extends HttpServlet {
 
             Logger.getLogger(OrderLineController.class.getName()).log(Level.SEVERE, null, ex);
 
-        } catch (ClassNotFoundException ex) {
-        }
-
+        } 
     }
 
 }

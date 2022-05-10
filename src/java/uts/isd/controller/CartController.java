@@ -27,23 +27,17 @@ import uts.isd.model.dao.*;
 @WebServlet(name = "CartController", urlPatterns = {"/CartController"})
 public class CartController extends HttpServlet {
 
-    private DBConnector db;
 
-    private DBManager manager;
-
-    private Connection conn;
 
     @Override
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
-        //DBManager manager = (DBManager) session.getAttribute("manager");
+        DBManager manager = (DBManager) session.getAttribute("manager");
 
         try {
-            db = new DBConnector();
-            conn = db.openConnection();
-            manager = new DBManager(conn);
+
 
             Order cart = (Order) session.getAttribute("cart");
             OrderLine ol = manager.findOrderLine(cart.getOrderID(), Integer.parseInt(request.getParameter("productID")));
@@ -75,7 +69,6 @@ public class CartController extends HttpServlet {
 
             Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
 
-        } catch (ClassNotFoundException ex) {
         }
 
     }

@@ -26,18 +26,18 @@ public class DBManager {
     public DBManager(Connection conn) throws SQLException {
         st = conn.createStatement();
     }
-    
+
     //Online Access User Management //////////////////////////////////////////////////////////////////////////////////
     //Find user by email and password in the database   
-    public User findUserEP(String email, String password) throws SQLException, NullPointerException {       
-       String fetch = "select * from users where email = '" + email + "' and password = '" + password + "'";      
-       ResultSet rs = st.executeQuery(fetch);
-       
-       while (rs.next()) {
-           String userEmail = rs.getString(5); 
-           String userPassword = rs.getString(6); 
-           
-           if (userEmail.equals(email) && userPassword.equals(password)){
+    public User findUserEP(String email, String password) throws SQLException, NullPointerException {
+        String fetch = "select * from users where email = '" + email + "' and password = '" + password + "'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            String userEmail = rs.getString(5);
+            String userPassword = rs.getString(6);
+
+            if (userEmail.equals(email) && userPassword.equals(password)) {
                 int userID = rs.getInt(1);
                 String userFirstName = rs.getString(2);
                 String userLastName = rs.getString(3);
@@ -49,16 +49,16 @@ public class DBManager {
         }
         return null;
     }
-    
+
     //Find user by email only
-    public User findUserE(String email) throws SQLException, NullPointerException {       
-       String fetch = "select * from users where email = '" + email + "'";      
-       ResultSet rs = st.executeQuery(fetch);
-       
-       while (rs.next()) {
-           String userEmail = rs.getString(5); 
-           
-           if (userEmail.equals(email)){
+    public User findUserE(String email) throws SQLException, NullPointerException {
+        String fetch = "select * from users where email = '" + email + "'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            String userEmail = rs.getString(5);
+
+            if (userEmail.equals(email)) {
                 int userID = rs.getInt(1);
                 String userFirstName = rs.getString(2);
                 String userLastName = rs.getString(3);
@@ -67,36 +67,36 @@ public class DBManager {
                 String userType = rs.getString(7);
                 boolean userIsActive = rs.getBoolean(8);
                 return new User(userID, userFirstName, userLastName, userPhone, userEmail, userPassword, userType, userIsActive);
-           }
-       }              
-       return null;   
+            }
+        }
+        return null;
     }
 
     //Add a user-data into the database 
-    public void addUser(String firstName, String lastName, String phone, String email, String password, String userType) throws SQLException, NullPointerException {  
+    public void addUser(String firstName, String lastName, String phone, String email, String password, String userType) throws SQLException, NullPointerException {
         boolean isActive = true;
-        st.executeUpdate("INSERT INTO users (firstName,lastName,phone,email,password,userType,isActive) VALUES ('"+ firstName +"', '" +lastName +"', '"+ phone +"', '"+ email +"', '"+ password +"', '"+ userType +"', "+ isActive +")");   
+        st.executeUpdate("INSERT INTO users (firstName,lastName,phone,email,password,userType,isActive) VALUES ('" + firstName + "', '" + lastName + "', '" + phone + "', '" + email + "', '" + password + "', '" + userType + "', " + isActive + ")");
     }
-    
+
     //Add a customer-data into the database
-    public void addCustomer(String dateOfRegistration, int userID) throws SQLException, NullPointerException {  
-        st.executeUpdate("INSERT INTO customer VALUES ('" + dateOfRegistration + "', " + userID + ")");   
+    public void addCustomer(String dateOfRegistration, int userID) throws SQLException, NullPointerException {
+        st.executeUpdate("INSERT INTO customer VALUES ('" + dateOfRegistration + "', " + userID + ")");
     }
-    
+
     //Add a staff-data into the database
-    public void addStaff(String location, String staffRole, int userID) throws SQLException, NullPointerException {  
-        st.executeUpdate("INSERT INTO staff VALUES ('" + location + "', '" + staffRole + "', " + userID + ")");   
+    public void addStaff(String location, String staffRole, int userID) throws SQLException, NullPointerException {
+        st.executeUpdate("INSERT INTO staff VALUES ('" + location + "', '" + staffRole + "', " + userID + ")");
     }
-    
+
     //update a user details in the database   
-    public void updateUser(String firstName, String lastName, String phone, String email, String password) throws SQLException, NullPointerException {       
-       st.executeUpdate("UPDATE ISDUSER.users SET firstName ='"+ firstName +"', lastName ='"+ lastName +"', phone ='"+ phone +"', password ='"+ password +"' WHERE email='"+ email +"'");   
-    } 
-    
+    public void updateUser(String firstName, String lastName, String phone, String email, String password) throws SQLException, NullPointerException {
+        st.executeUpdate("UPDATE ISDUSER.users SET firstName ='" + firstName + "', lastName ='" + lastName + "', phone ='" + phone + "', password ='" + password + "' WHERE email='" + email + "'");
+    }
+
     //update a staff user details in the database
-    public void updateStaff(int userID, String location, String staffRole) throws SQLException, NullPointerException {       
-       st.executeUpdate("UPDATE ISDUSER.users SET location ='"+ location +"', staffRole ='"+ staffRole +"' WHERE userID = "+ userID +"");   
-    } 
+    public void updateStaff(int userID, String location, String staffRole) throws SQLException, NullPointerException {
+        st.executeUpdate("UPDATE ISDUSER.users SET location ='" + location + "', staffRole ='" + staffRole + "' WHERE userID = " + userID + "");
+    }
 
     //delete a user from the database 
 //    public void deleteUser(int userID) throws SQLException, NullPointerException{       
@@ -104,22 +104,21 @@ public class DBManager {
 //        st.executeUpdate("DELETE FROM ISDUSER.staff WHERE userID ="+ userID +""); 
 //        st.executeUpdate("DELETE FROM ISDUSER.users WHERE userID ="+ userID +"");   
 //    }
-    
     //deactivate a user
     public void deactivateUser(String email) throws SQLException, NullPointerException {
         boolean isActive = false;
-        st.executeUpdate("UPDATE ISDUSER.users SET isActive ="+ isActive +" WHERE email='"+ email +"'");   
-    } 
+        st.executeUpdate("UPDATE ISDUSER.users SET isActive =" + isActive + " WHERE email='" + email + "'");
+    }
 
     //checkuser with email and password
     public boolean checkUser(String email, String password) throws SQLException, NullPointerException {
-        String fetch = "SELECT * FROM ISDUSER.users WHERE email ='"+ email +"' and password='"+ password+"'";
+        String fetch = "SELECT * FROM ISDUSER.users WHERE email ='" + email + "' and password='" + password + "'";
         ResultSet rs = st.executeQuery(fetch);
-        
-        while (rs.next()){
+
+        while (rs.next()) {
             String userEmail = rs.getString(5);
             String userPassword = rs.getString(6);
-            if (userEmail.equals(email) && userPassword.equals(password)){
+            if (userEmail.equals(email) && userPassword.equals(password)) {
                 return true;
             }
         }
@@ -144,13 +143,13 @@ public class DBManager {
         st.executeUpdate("UPDATE orders SET orderStatus='" + orderStatus + "'");
 
     }
-    
-    public ArrayList <Order> getOrders(int userID) throws SQLException{
-        String fetch = "select * from orders where userID="+userID;
+
+    public ArrayList<Order> getOrders(int userID) throws SQLException {
+        String fetch = "select * from orders where userID=" + userID;
         ResultSet rs = st.executeQuery(fetch);
-        ArrayList <Order> orders = new ArrayList();
-        
-        while(rs.next()){
+        ArrayList<Order> orders = new ArrayList();
+
+        while (rs.next()) {
             int orderID = rs.getInt(1);
             boolean orderStatus = rs.getBoolean(3);
             String orderDate = rs.getString(4);
@@ -163,8 +162,10 @@ public class DBManager {
     public Order getLastOrder() throws SQLException {
         String fetch1 = "select count(*) from Orders";
         ResultSet rs1 = st.executeQuery(fetch1);
+        
         rs1.next();
         int totalOrders = rs1.getInt(1);
+        System.out.println(totalOrders);
         //totalOrders -= 1;
 
         String fetch = "select * from Orders where orderID =" + totalOrders;
@@ -196,7 +197,7 @@ public class DBManager {
 
     //delete product from order
     public void deleteOrderLine(int productID, int orderID) throws SQLException {
-        st.executeUpdate("delete from orderline where productID =" + productID + " and orderID =" + orderID );
+        st.executeUpdate("delete from orderline where productID =" + productID + " and orderID =" + orderID);
     }
 
     public ArrayList<OrderLine> fetchOrderLines(int orderID) throws SQLException {
@@ -212,12 +213,12 @@ public class DBManager {
         return temp;
     }
 
-    public OrderLine findOrderLine(int orderID, int productID) throws SQLException{
+    public OrderLine findOrderLine(int orderID, int productID) throws SQLException {
         String fetch = "select * from orderline where orderID=" + orderID + " and productID=" + productID;
         ResultSet rs = st.executeQuery(fetch);
 
-        while(rs.next()){
-            return new OrderLine (rs.getInt(1),rs.getInt(2), rs.getInt(3));
+        while (rs.next()) {
+            return new OrderLine(rs.getInt(1), rs.getInt(2), rs.getInt(3));
         }
         return null;
     }
@@ -245,8 +246,6 @@ public class DBManager {
         }
         return temp;        //array of products objects that are in the order
     }
-
-
 
     //find a product by id
     public Product findProduct(int productID) throws SQLException {
@@ -288,23 +287,21 @@ public class DBManager {
         return temp;        //array of all products in database
     }
 
-}
-    
     //Add a user access log
     public void addAccessLog(int userID, String userAction) throws SQLException, NullPointerException {
         LocalDateTime currentDateTime = LocalDateTime.now();
         String accessDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String accessTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
-        st.executeUpdate("INSERT INTO ApplicationAccessLog (userID, accessDate, accessTime, userAction) VALUES ("+ userID +", '"+ accessDate +"', '"+ accessTime +"', '"+ userAction +"')");
+        st.executeUpdate("INSERT INTO ApplicationAccessLog (userID, accessDate, accessTime, userAction) VALUES (" + userID + ", '" + accessDate + "', '" + accessTime + "', '" + userAction + "')");
     }
-    
+
     //list all access logs for a specific user
     public ArrayList<AccessLog> fetchAllAccessLog(int userID) throws SQLException, NullPointerException {
-        String fetch = "SELECT * FROM ApplicationAccessLog WHERE userID = "+ userID +"";
+        String fetch = "SELECT * FROM ApplicationAccessLog WHERE userID = " + userID + "";
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<AccessLog> accessLogArray = new ArrayList();
-        
-        while (rs.next()){
+
+        while (rs.next()) {
             int appAccessID = rs.getInt(1);
             String accessDate = rs.getString(3);
             String accessTime = rs.getString(4);
@@ -313,14 +310,14 @@ public class DBManager {
         }
         return accessLogArray;
     }
-    
+
     //search access log for a specific user by date
     public ArrayList<AccessLog> fetchAccessLog(int userID, String accessDate) throws SQLException, NullPointerException {
-        String fetch = "SELECT * FROM ApplicationAccessLog WHERE userID = "+ userID +" and accessDate = '"+ accessDate +"'";
+        String fetch = "SELECT * FROM ApplicationAccessLog WHERE userID = " + userID + " and accessDate = '" + accessDate + "'";
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<AccessLog> accessLogArray = new ArrayList();
-        
-        while (rs.next()){
+
+        while (rs.next()) {
             int appAccessID = rs.getInt(1);
             String accessTime = rs.getString(4);
             String userAction = rs.getString(5);
@@ -328,6 +325,7 @@ public class DBManager {
         }
         return accessLogArray;
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
+

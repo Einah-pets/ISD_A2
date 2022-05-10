@@ -27,11 +27,7 @@ import uts.isd.model.dao.*;
 @WebServlet(name = "CatalogueController", urlPatterns = {"/CatalogueController"})
 public class CatalogueController extends HttpServlet {
 
-//    private DBConnector db;
-//
-//    private DBManager manager;
-//
-//    private Connection conn;
+
 
     @Override
 
@@ -45,9 +41,7 @@ public class CatalogueController extends HttpServlet {
         session.setAttribute("page", page);
         //int page = 1;
         try {
-//            db = new DBConnector();
-//            conn = db.openConnection();
-//            manager = new DBManager(conn);
+
 
             products = manager.fetchAllProducts();
 

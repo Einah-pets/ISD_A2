@@ -28,55 +28,48 @@ import uts.isd.model.dao.DBManager;
 @WebServlet(name = "OrderController", urlPatterns = {"/OrderController"})
 public class OrderController extends HttpServlet {
 
-    private DBConnector db;
-
-    private DBManager manager;
-
-    private Connection conn;
-
     @Override
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
-        //manager = (DBManager) session.getAttribute("manager");
+        DBManager manager = (DBManager) session.getAttribute("manager");
 
-        Order cart;
+        Order cart = (Order) session.getAttribute("cart");
         ArrayList<OrderLine> orderLines;
         ArrayList<Product> products;
-        //User currentUser = (User) session.getAttribute("user");
+        User currentUser = (User) session.getAttribute("user");
+        User anonymousUser = (User) session.getAttribute("AnonymousUser");
 
         try {
-            db = new DBConnector();
-            conn = db.openConnection();
-            manager = new DBManager(conn);
+
             int userID;
 
             //create cart if doesn't exist
-            if (session.getAttribute("cart") == null) {
+            if (cart == null) {
                 //check if user registered or anonymous
-                
-//                if (currentUser != null) {
-//                    //int userID = currentUser.getUserID();}
-//                    
-//                }
-//                else {
-                     userID = 21;
-                //}
+
+                if (currentUser != null) {
+                    userID = currentUser.getUserID();
+
+                } else {
+                    userID = anonymousUser.getUserID();
+                }
 
                 String date = "2022-05-05";
                 int deliveryID = 1;
                 manager.addOrder(userID, date, deliveryID);
                 Order mycart = (Order) manager.getLastOrder();
+                
                 session.setAttribute("cart", mycart);
             }
-
-            //add selected product to cart
             cart = (Order) session.getAttribute("cart");
+            //add selected product to cart
 
             //set list of orderlines in cart into session
 //            orderLines = manager.fetchOrderLines(cart.getOrderID());
 //            session.setAttribute("orderlinesInCart", orderLines);
+            //OrderLine ol = manager.findOrderLine(cart.getOrderID(),Integer.parseInt(request.getParameter("productID")) + 1);
             OrderLine ol = manager.findOrderLine(cart.getOrderID(), Integer.parseInt(request.getParameter("productID")) + 1);
 
             if (ol == null) {
@@ -97,9 +90,7 @@ public class OrderController extends HttpServlet {
 
             Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
 
-        } catch (ClassNotFoundException ex) {
         }
 
     }
-
 }

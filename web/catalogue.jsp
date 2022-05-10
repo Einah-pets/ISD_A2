@@ -26,7 +26,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                           
+
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
                             </li> 
@@ -36,22 +36,29 @@
                                     <input type="submit" class="btn btn-light" value="Catalogue">
                                 </form>
                             </li>  
+                            <%
+                                if (session.getAttribute("user") != null) {
+                            %>
                             <li class="nav-item">
                                 <a class="nav-link" href="logout.jsp">Logout</a>
                             </li>  
+                            <%} else {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.jsp">Login</a>
+                            </li>   
+                            <%}%>
                             <li class="nav-item">
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
                             <%
-                                //User user = (User) session.getAttribute("user");
-                                //if ( user!= null) {
+                                if (session.getAttribute("user") != null) {
                             %>
                             <li class="nav-item">
-                                <form action="orderHistoryController" method="POST">
+                                <form action="OrderHistoryController" method="POST">
                                     <input type="submit" class="btn btn-light" value="Order History">
                                 </form>
                             </li> 
-                            <%//}%>
+                            <%}%>
                         </ul>          
                     </div>
                 </div>
@@ -125,8 +132,7 @@
                 </div>
 
                 <div class="row p-4 g-10">
-                    <%                        
-                        if (session.getAttribute("prod3Name") != null) {
+                    <%                        if (session.getAttribute("prod3Name") != null) {
                     %>
                     <div class="col">
                         <%

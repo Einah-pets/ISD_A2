@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/demo.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <title>order History Page</title>
+        <title>Order History Page</title>
     </head>
     <body>
         <div class="container">
@@ -47,7 +47,7 @@
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
                             <%
-                                //if (session.getAttribute("user") != null) {
+                                if (session.getAttribute("user") != null) {
                             %>
                             <li class="nav-item">
                                 <form action="orderHistoryController" method="POST">
@@ -70,7 +70,7 @@
                     <th>Products</th>
                     </thead>
                     <%
-                        ArrayList <Order> previousOrders = (ArrayList) session.getAttribute("previousOrders");
+                        ArrayList <Order> previousOrders = (ArrayList)session.getAttribute("previousOrders");
                         for (int i = 0; i < previousOrders.size(); i++) {
                     %>
                     <tr>
