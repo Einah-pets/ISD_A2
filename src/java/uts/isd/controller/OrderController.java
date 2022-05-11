@@ -5,8 +5,7 @@
 package uts.isd.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
+
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uts.isd.model.*;
-import uts.isd.model.dao.DBConnector;
 import uts.isd.model.dao.DBManager;
 
 /**
@@ -67,17 +65,14 @@ public class OrderController extends HttpServlet {
                 session.setAttribute("cart", mycart);
             }
             cart = (Order) session.getAttribute("cart");
-            //add selected product to cart
 
-            //set list of orderlines in cart into session
-//            orderLines = manager.fetchOrderLines(cart.getOrderID());
-//            session.setAttribute("orderlinesInCart", orderLines);
-            //OrderLine ol = manager.findOrderLine(cart.getOrderID(),Integer.parseInt(request.getParameter("productID")) + 1);
             OrderLine ol = manager.findOrderLine(cart.getOrderID(), Integer.parseInt(request.getParameter("productID")) + 1);
 
             if (ol == null) {
+                //add product to cart
                 manager.addOrderLine(Integer.parseInt(request.getParameter("productID")) + 1, cart.getOrderID());
             } else {
+                //update product quantity
                 manager.updateOrderLine(Integer.parseInt(request.getParameter("productID")) + 1, cart.getOrderID(), ol.getQuantity() + 1);
 
             }

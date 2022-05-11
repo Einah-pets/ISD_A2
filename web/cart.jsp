@@ -20,7 +20,7 @@
 
             <h1>IoTBay</h1>
 
-                        <%User user = (User) session.getAttribute("user");%>
+            <%User user = (User) session.getAttribute("user");%>
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </nav>    
-                        
+
             <div class="container p-5">
                 <%
                     if (session.getAttribute("cart") != null && session.getAttribute("orderlinesInCart") != null) {%>
@@ -158,6 +158,13 @@
                             <input class="btn btn-light" type="submit" name="action" value="Confirm cart">
                         </form>
                     </div>
+
+                </div>
+                
+                <div class="col">
+                    <%if (session.getAttribute("orderErr") != null) {%>
+                    <p class="text-warning"><%=session.getAttribute("orderErr")%></p>
+                    <%}%>
                 </div>
                 <%} else {
                 %>
