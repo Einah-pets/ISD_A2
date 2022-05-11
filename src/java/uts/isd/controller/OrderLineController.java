@@ -36,15 +36,13 @@ public class OrderLineController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         DBManager manager = (DBManager) session.getAttribute("manager");
 
-        User currentUser = (User) session.getAttribute("user");
-
         try {
  
             
             int orderID = Integer.parseInt(request.getParameter("orderID"));
             
             ArrayList <Product> products = new ArrayList();
-            ArrayList <OrderLine> orderLines = new ArrayList();
+            ArrayList <OrderLine> orderLines;
             ArrayList quantities = new ArrayList();
             
             orderLines = manager.fetchOrderLines(orderID);

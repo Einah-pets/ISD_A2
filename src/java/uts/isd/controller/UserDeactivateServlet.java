@@ -38,7 +38,7 @@ public class UserDeactivateServlet extends HttpServlet {
             manager.addAccessLog(userID, "Deactivate");
 
             //cancel all orders for this user
-            ArrayList<Order> orders = manager.getOrders(userID);
+            ArrayList<Order> orders = manager.getOrders(userID,null,null);
             for (Order o : orders) {
                 manager.updateOrderStatus(o.getOrderID(),"Cancelled");
             }

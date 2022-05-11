@@ -6,7 +6,8 @@
 
 <%@page import="uts.isd.model.*"%>
 <%@page import="java.util.*"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,6 +21,8 @@
 
             <h1>IoTBay</h1>
 
+            <%User user = (User) session.getAttribute("user");%>
+
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,40 +30,62 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            
+                            <!--Main-->
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
-                            </li>  
                             </li>
+                            <!--Catalogue-->
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
                                     <input type="hidden" value="1" name="page">
                                     <input type="submit" class="btn btn-light" value="Catalogue">
-                                </form>
-                            </li>  
-                            <li class="nav-item">
-                                <a class="nav-link" href="logout.jsp">Logout</a>
-                            </li>   
+                                </form>                            
+                            </li>
+                            <!--Cart-->
                             <li class="nav-item">
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
-                            <%
-                                if (session.getAttribute("user") != null) {
-                            %>
+                            <!--Access log-->
                             <li class="nav-item">
-                                <form action="orderHistoryController" method="POST">
+                                <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
+                            </li>
+                            <!--Order history-->                            
+                            <li class="nav-item">
+                                <form action="OrderHistoryController" method="POST">
                                     <input type="submit" class="btn btn-light" value="Order History">
                                 </form>
+                            </li>
+                            <!--Logout-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a>
                             </li>  
-                            <%}%>
+
                         </ul>          
                     </div>
                 </div>
-            </nav>
+            </nav>    
 
             <div class="container">
-                
+                <form action="OrderSearchController" method="POST">
+                    <br>
+                    <table>
+                        <tr>
+                            <td>Order ID:</td>
+                            <td><input type="text" name="orderIDSearch" value=""></td>
+                        </tr>
+                        <tr>
+                            <td>Date of Order</td>
+                            <td><input type="date" name="dateOfOrderSearch" value=""></td>
+                        </tr>                    
+                    </table>
+                    <br>
+                    <div>
+                        <input class="btn btn-primary" type="submit" name="action" value="Search">
+                    </div>
+                </form>
+
             </div>
+                            <br>
 
             <div class="container">
                 <table class="table">
@@ -69,10 +94,10 @@
                     <th>Order Status</th>
                     <th>Date of Order</th>
                     <th>Delivery ID</th>
-                    <th>Products</th>
+                    <th colspan="2">Actions</th>
                     </thead>
                     <%
-                        ArrayList <Order> previousOrders = (ArrayList)session.getAttribute("previousOrders");
+                        ArrayList<Order> previousOrders = (ArrayList) session.getAttribute("previousOrders");
                         for (int i = 0; i < previousOrders.size(); i++) {
                     %>
                     <tr>
@@ -82,11 +107,22 @@
                         <td><%=previousOrders.get(i).getDeliveryID()%></td>
                         <td>
                             <form action="OrderLineController" method="POST">
-                                <input type="hidden" name="orderID" value="<%=previousOrders.get(i).getOrderID()%>"
-                                       <input type="submit" name="acttion" value="See all products">
+                                <input type="hidden" name="orderID" value="<%=previousOrders.get(i).getOrderID()%>">
+                                <input class="btn btn-light" type="submit" value="See all products">
+                            </form>
+
+                        </td>
+
+                        <%if (!previousOrders.get(i).getOrderStatus().equals("Cancelled")) {%>
+                        <td>
+                            <!--cancel this order-->
+                            <form action="CancelOrderController" method="POST">
+                                <input type="hidden" name="orderIDtodel" value="<%=previousOrders.get(i).getOrderID()%>">
+                                <input class="btn btn-light" type="submit" value="Cancel order">
                             </form>
                         </td>
-                    </tr>    
+                        <%}%>
+                    </tr>
                     <%}%>
                 </table>
             </div>

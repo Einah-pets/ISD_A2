@@ -6,48 +6,39 @@ package uts.isd.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uts.isd.model.*;
-import uts.isd.model.dao.*;
+import uts.isd.model.Order;
+import uts.isd.model.User;
+import uts.isd.model.dao.DBManager;
 
 /**
  *
  * @author Stephanie
  */
-@WebServlet(name = "OrderHistoryController", urlPatterns = {"/OrderHistoryController"})
-public class OrderHistoryController extends HttpServlet {
+@WebServlet(name = "ConfirmOrderController", urlPatterns = {"/ConfirmOrderController"})
+public class ConfirmOrderController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        response.setContentType("text/html;charset=UTF-8");
         DBManager manager = (DBManager) session.getAttribute("manager");
-
-        User currentUser = (User) session.getAttribute("user");
-        ArrayList<Order> orders;
+        Order cart = (Order) session.getAttribute("cart");
 
         try {
+            manager.updateOrderStatus(cart.getOrderID(), "Confirmed");
+            request.getRequestDispatcher("confirmedCart.jsp").include(request, response);
 
-            orders = manager.getAllOrders(currentUser.getUserID());
-
-            session.setAttribute("previousOrders", orders);
-
-            request.getRequestDispatcher("orderHistory.jsp").include(request, response);
-
-        } catch (NullPointerException | SQLException ex) {
-
-            Logger.getLogger(OrderHistoryController.class.getName()).log(Level.SEVERE, null, ex);
-
+        } catch (SQLException | NullPointerException ex) {
+            Logger.getLogger(ConfirmOrderController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

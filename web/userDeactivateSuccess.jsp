@@ -21,27 +21,40 @@
 
         <h1>IoTBay</h1>
         
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="register.jsp">Register</a>
-                </li>  
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="login.jsp">Login</a>
-                </li>   
-              </ul>          
-            </div>
-          </div>
-        </nav>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <!--Home-->
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+                            </li>
+                            <!--Catalogue-->
+                            <li class="nav-item">
+                                <form action="CatalogueController" method="POST">
+                                    <input type="hidden" value="1" name="page">
+                                    <input type="submit" class="btn btn-light" value="Catalogue">
+                                </form>                            
+                            </li>
+                            <!--Cart-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="cart.jsp">Cart</a>
+                            </li>
+                            <!--Register-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="register.jsp">Register</a>
+                            </li> 
+                            <!--Login-->  
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.jsp">Login</a>
+                            </li>   
+                        </ul>          
+                    </div>
+                </div>
+            </nav>
         
         <br>
         <p>Your account has been successfully deactivated. Redirecting to the Home page.</p>

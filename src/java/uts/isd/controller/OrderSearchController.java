@@ -6,39 +6,43 @@ package uts.isd.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uts.isd.model.*;
-import uts.isd.model.dao.*;
+import uts.isd.model.Order;
+import uts.isd.model.User;
+import uts.isd.model.dao.DBManager;
 
 /**
  *
  * @author Stephanie
  */
-@WebServlet(name = "OrderHistoryController", urlPatterns = {"/OrderHistoryController"})
-public class OrderHistoryController extends HttpServlet {
+@WebServlet(name = "OrderSearchController", urlPatterns = {"/OrderSearchController"})
+public class OrderSearchController extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         DBManager manager = (DBManager) session.getAttribute("manager");
 
         User currentUser = (User) session.getAttribute("user");
         ArrayList<Order> orders;
+        int userID = currentUser.getUserID();
+        String date = request.getParameter("dateOfOrderSearch");
+        String orderID = request.getParameter("orderIDSearch");
 
         try {
 
-            orders = manager.getAllOrders(currentUser.getUserID());
+            orders = manager.getOrders(userID, date, orderID);
 
             session.setAttribute("previousOrders", orders);
 
@@ -49,7 +53,6 @@ public class OrderHistoryController extends HttpServlet {
             Logger.getLogger(OrderHistoryController.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-
     }
 
 }

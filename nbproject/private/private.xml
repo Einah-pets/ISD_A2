@@ -5,6 +5,11 @@
         <group>
             <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/web/productView.jsp</file>
             <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/src/java/uts/isd/model/Order.java</file>
+            <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/src/java/uts/isd/controller/OrderHistoryController.java</file>
+            <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/src/java/uts/isd/controller/CancelOrderController.java</file>
+            <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/src/java/uts/isd/controller/OrderSearchController.java</file>
+            <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/web/orderHistory.jsp</file>
+            <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/src/java/uts/isd/controller/OrderController.java</file>
             <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/web/cart.jsp</file>
             <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/web/catalogue.jsp</file>

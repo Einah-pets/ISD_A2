@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,11 +58,12 @@ public class OrderController extends HttpServlet {
                     userID = anonymousUser.getUserID();
                 }
 
-                String date = "2022-05-05";
+                LocalDateTime currentDateTime = LocalDateTime.now();
+                String date = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 int deliveryID = 1;
                 manager.addOrder(userID, date, deliveryID);
                 Order mycart = (Order) manager.getLastOrder();
-                
+
                 session.setAttribute("cart", mycart);
             }
             cart = (Order) session.getAttribute("cart");
