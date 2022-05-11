@@ -11,14 +11,14 @@ package uts.isd.model;
 public class Order {
     private int orderID;
     private int userID;
-    private boolean orderStatus;
+    private String orderStatus;
     private String dateOfOrder;
     private int deliveryID;
             
                       
 
     //initialise constructor
-    public Order(int orderID, int userID, boolean orderStatus, String dateOfOrder, int deliveryID) {
+    public Order(int orderID, int userID, String orderStatus, String dateOfOrder, int deliveryID) {
         this.orderID = orderID;
         this.userID = userID;
         this.orderStatus = orderStatus;
@@ -35,11 +35,11 @@ public class Order {
         return userID;
     }
 
-    public boolean getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }  
     
-    public void setOrderStatus(boolean orderStatus){
+    public void setOrderStatus(String orderStatus){
         this.orderStatus = orderStatus;
     }
     

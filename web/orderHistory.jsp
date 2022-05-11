@@ -27,9 +27,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
-                            </li>
+                            
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
                             </li>  
@@ -61,6 +59,10 @@
             </nav>
 
             <div class="container">
+                
+            </div>
+
+            <div class="container">
                 <table class="table">
                     <thead class="table-light">
                     <th>Order ID</th>
@@ -81,7 +83,7 @@
                         <td>
                             <form action="OrderLineController" method="POST">
                                 <input type="hidden" name="orderID" value="<%=previousOrders.get(i).getOrderID()%>"
-                                <input type="submit" name="acttion" value="See all products">
+                                       <input type="submit" name="acttion" value="See all products">
                             </form>
                         </td>
                     </tr>    

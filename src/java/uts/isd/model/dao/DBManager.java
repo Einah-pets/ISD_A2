@@ -133,25 +133,25 @@ public class DBManager {
     //when customer put items in cart, order is created with orderStatus 
     //Add a new order into the database   
     public void addOrder(int userID, String dateOfOrder, int deliveryID) throws SQLException {
-        boolean orderStatus = false;
+        String orderStatus = "In progress";
         st.executeUpdate("insert into Orders (userID, orderStatus, dateOfOrder, deliveryID)" + " values (" + userID + ", " + orderStatus + ", '" + dateOfOrder + "', " + deliveryID + ")");
     }
 
     //update a order status 
-    public void updateOrderStatus(boolean orderStatus) throws SQLException {
+    public void updateOrderStatus(int orderID,String orderStatus) throws SQLException {
         //code for update-operation   
-        st.executeUpdate("UPDATE orders SET orderStatus='" + orderStatus + "'");
+        st.executeUpdate("UPDATE orders SET orderStatus='" + orderStatus + "' where orderID=" + orderID);
 
     }
 
     public ArrayList<Order> getOrders(int userID) throws SQLException {
-        String fetch = "select * from orders where userID=" + userID;
+        String fetch = "select * from orders where userID=" + userID + " and orderStatus='Confirmed' or orderStatus='Cancelled'";
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<Order> orders = new ArrayList();
 
         while (rs.next()) {
             int orderID = rs.getInt(1);
-            boolean orderStatus = rs.getBoolean(3);
+            String orderStatus = rs.getString(3);
             String orderDate = rs.getString(4);
             int deliveryID = rs.getInt(5);
             orders.add(new Order(orderID, userID, orderStatus, orderDate, deliveryID));
@@ -174,7 +174,7 @@ public class DBManager {
         if (rs.next()) {
             int orderID = rs.getInt(1);
             int userID = rs.getInt(2);
-            boolean orderStatus = rs.getBoolean(3);
+            String orderStatus = rs.getString(3);
             String dateOfOrder = rs.getString(4);
             int deliveryID = rs.getInt(5);
 
