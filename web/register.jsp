@@ -41,6 +41,12 @@
                     <li class="nav-item">
                       <a class="nav-link" href="login.jsp">Login</a>
                     </li>   
+                    <li class="nav-item">
+                                <form action="CatalogueController" method="POST">
+                                    <input type="hidden" value="1" name="page">
+                                    <input type="submit" class="btn btn-light" value="Catalogue">
+                                </form>
+                            </li>  
                   </ul>          
                 </div>
               </div>

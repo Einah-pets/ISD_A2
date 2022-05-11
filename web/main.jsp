@@ -36,6 +36,24 @@
                   <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
                 </li>
                 <li class="nav-item">
+                    <form action="CatalogueController" method="POST">
+                        <input type="hidden" value="1" name="page">
+                        <input type="submit" class="btn btn-light" value="Catalogue">
+                    </form>                            
+                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.jsp">Cart</a>
+                    </li>
+                    <%
+                        if (session.getAttribute("user") != null) {
+                    %>
+                    <li class="nav-item">
+                        <form action="OrderHistoryController" method="POST">
+                            <input type="submit" class="btn btn-light" value="Order History">
+                        </form>
+                    </li>
+                    <%}%>
+                <li class="nav-item">
                   <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a>
                 </li>   
               </ul>          

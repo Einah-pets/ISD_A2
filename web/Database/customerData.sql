@@ -7,8 +7,7 @@
  * Created: 25/04/2022
  */
 
-insert into customer (dateOfRegistration, userID) values
-('2022-01-07',26);
+insert into customer (dateOfRegistration, userID) values('2022-01-07',44);
 
 
 INSERT INTO Customer (dateOfRegistration, userID) VALUES
