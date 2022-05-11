@@ -72,11 +72,11 @@ CREATE TABLE Delivery (
 CREATE TABLE Orders (
     orderID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     userID int,
-    orderStatus boolean,
+    orderStatus varchar(20),
     dateOfOrder date,
     deliveryID int,
     PRIMARY KEY (orderID),
-    FOREIGN KEY (userID) REFERENCES Customer(userID), --ON DELETE SET NULL, --ON DELETE CASCADE, --
+    FOREIGN KEY (userID) REFERENCES Users(userID), --ON DELETE SET NULL, --ON DELETE CASCADE, --
     FOREIGN KEY (deliveryID) REFERENCES Delivery(deliveryID) ON DELETE CASCADE
 );
 
