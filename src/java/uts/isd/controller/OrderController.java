@@ -5,9 +5,10 @@
 package uts.isd.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
+
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uts.isd.model.*;
-import uts.isd.model.dao.DBConnector;
 import uts.isd.model.dao.DBManager;
 
 /**
@@ -56,25 +56,23 @@ public class OrderController extends HttpServlet {
                     userID = anonymousUser.getUserID();
                 }
 
-                String date = "2022-05-05";
+                LocalDateTime currentDateTime = LocalDateTime.now();
+                String date = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 int deliveryID = 1;
                 manager.addOrder(userID, date, deliveryID);
                 Order mycart = (Order) manager.getLastOrder();
-                
+
                 session.setAttribute("cart", mycart);
             }
             cart = (Order) session.getAttribute("cart");
-            //add selected product to cart
 
-            //set list of orderlines in cart into session
-//            orderLines = manager.fetchOrderLines(cart.getOrderID());
-//            session.setAttribute("orderlinesInCart", orderLines);
-            //OrderLine ol = manager.findOrderLine(cart.getOrderID(),Integer.parseInt(request.getParameter("productID")) + 1);
             OrderLine ol = manager.findOrderLine(cart.getOrderID(), Integer.parseInt(request.getParameter("productID")) + 1);
 
             if (ol == null) {
+                //add product to cart
                 manager.addOrderLine(Integer.parseInt(request.getParameter("productID")) + 1, cart.getOrderID());
             } else {
+                //update product quantity
                 manager.updateOrderLine(Integer.parseInt(request.getParameter("productID")) + 1, cart.getOrderID(), ol.getQuantity() + 1);
 
             }

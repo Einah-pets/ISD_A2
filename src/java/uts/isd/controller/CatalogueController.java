@@ -5,8 +5,6 @@
 package uts.isd.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,8 +25,6 @@ import uts.isd.model.dao.*;
 @WebServlet(name = "CatalogueController", urlPatterns = {"/CatalogueController"})
 public class CatalogueController extends HttpServlet {
 
-
-
     @Override
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +35,6 @@ public class CatalogueController extends HttpServlet {
         ArrayList<Product> products;
         int page = Integer.parseInt(request.getParameter("page"));
         session.setAttribute("page", page);
-        //int page = 1;
         try {
 
 
