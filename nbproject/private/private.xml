@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/web/productView.jsp</file>
-            <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/src/java/uts/isd/model/Order.java</file>
-            <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/src/java/uts/isd/controller/OrderController.java</file>
-            <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/web/cart.jsp</file>
-            <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/web/catalogue.jsp</file>
-            <file>file:/C:/Users/Stephanie/OneDrive/Documents/GitHub/ISD_A2/src/java/uts/isd/model/dao/DBManager.java</file>
+            <file>file:/C:/Users/Mohumed%20J%20Merhebi/Desktop/Wisam/ISD/ISD_A2/src/java/uts/isd/controller/PaymentController.java</file>
+            <file>file:/C:/Users/Mohumed%20J%20Merhebi/Desktop/Wisam/ISD/ISD_A2/web/cart.jsp</file>
+            <file>file:/C:/Users/Mohumed%20J%20Merhebi/Desktop/Wisam/ISD/ISD_A2/src/java/uts/isd/controller/CreditCardController.java</file>
+            <file>file:/C:/Users/Mohumed%20J%20Merhebi/Desktop/Wisam/ISD/ISD_A2/web/payment.jsp</file>
+            <file>file:/C:/Users/Mohumed%20J%20Merhebi/Desktop/Wisam/ISD/ISD_A2/src/java/uts/isd/model/dao/DBManager.java</file>
         </group>
     </open-files>
 </project-private>

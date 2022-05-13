@@ -134,7 +134,7 @@ public class DBManager {
     //Add a new order into the database   
     public void addOrder(int userID, String dateOfOrder, int deliveryID) throws SQLException {
         String orderStatus = "In progress";
-        st.executeUpdate("insert into Orders (userID, orderStatus, dateOfOrder, deliveryID)" + " values (" + userID + ", " + orderStatus + ", '" + dateOfOrder + "', " + deliveryID + ")");
+        st.executeUpdate("insert into Orders (userID, orderStatus, dateOfOrder, deliveryID)" + " values (" + userID + ", '" + orderStatus + "', '" + dateOfOrder + "', " + deliveryID + ")");
     }
 
     //update a order status 
@@ -327,5 +327,15 @@ public class DBManager {
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Wisam's Part - Payment Processing
+    public void addCreditCard(String nameOnCard, long creditCardNo, String expirationDate, int cvv) throws SQLException, NullPointerException {
+        st.executeUpdate("INSERT INTO CREDITCARD (nameOnCard, creditCardNo, expirationDate, cvv) VALUES ('" + nameOnCard + "', " + creditCardNo + ", '" + expirationDate + "', " + cvv + ")");
+    }
+    
+    public void addPayment(int orderID, double amount) throws SQLException, NullPointerException {
+        boolean paymentStatus = true;
+        String paymentType = "credit card";
+        st.executeUpdate("INSERT INTO PAYMENT (orderID, amount, paymentStatus, paymentType) VALUES (" + orderID + ", " + amount + ", " + paymentStatus + ", '" + paymentType + "')");
+    }
 }
 

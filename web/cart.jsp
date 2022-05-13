@@ -140,6 +140,11 @@
                         <h4>$<%=totalPrice%></h4>
                     </div>
                 </div>
+                    <br>
+                    <div>
+                        <% session.setAttribute("totalPrice",totalPrice);%>
+                        <a href="payment.jsp" class="btn btn-secondary" style="float: right;">Proceed to Checkout</a>
+                    </div>
                 <%} else {
                 %>
                 <p class="text-center">Cart is empty</p>
