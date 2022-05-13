@@ -134,18 +134,18 @@ public class DBManager {
     //Add a new order into the database   
     public void addOrder(int userID, String dateOfOrder, int deliveryID) throws SQLException {
         String orderStatus = "In progress";
-        st.executeUpdate("insert into Orders (userID, orderStatus, dateOfOrder, deliveryID)" + " values (" + userID + ", '" + orderStatus + "', '" + dateOfOrder + "', " + deliveryID + ")");
+        st.executeUpdate("insert into Orders (userID, orderStatus, dateOfOrder, deliveryID) values (" + userID + ", '" + orderStatus + "', '" + dateOfOrder + "', " + deliveryID + ")");
     }
 
     //update a order status 
-    public void updateOrderStatus(int orderID,String orderStatus) throws SQLException {
+    public void updateOrderStatus(int orderID, String orderStatus) throws SQLException {
         //code for update-operation   
         st.executeUpdate("UPDATE orders SET orderStatus='" + orderStatus + "' where orderID=" + orderID);
 
     }
 
-    public ArrayList<Order> getOrders(int userID) throws SQLException {
-        String fetch = "select * from orders where userID=" + userID + " and orderStatus='Confirmed' or orderStatus='Cancelled'";
+    public ArrayList<Order> getAllOrders(int userID) throws SQLException {
+        String fetch = "select * from orders where userID=" + userID + " and orderStatus in ('Confirmed','Cancelled')";
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<Order> orders = new ArrayList();
 
@@ -159,10 +159,42 @@ public class DBManager {
         return orders;
     }
 
+    public ArrayList<Order> getOrders(int userIDSearch, String dateSearch, String orderIDSearch) throws SQLException {
+        String fetch = "";
+        int orderIDSearchInt;
+        if (dateSearch.equals("") && orderIDSearch.equals("")) {
+            fetch = "select * from orders where userID=" + userIDSearch + " and orderStatus in ('Confirmed', 'Cancelled')";
+        } else if (!dateSearch.equals("") && orderIDSearch.equals("")) {
+            fetch = "select * from orders where userID=" + userIDSearch + " and orderStatus in ('Confirmed', 'Cancelled') and dateOfOrder='" + dateSearch + "'";
+
+        } else if (dateSearch.equals("") && !orderIDSearch.equals("")) {
+            orderIDSearchInt = Integer.parseInt(orderIDSearch);
+
+            fetch = "select * from orders where userID=" + userIDSearch + " and orderStatus in ('Confirmed', 'Cancelled') and orderID=" + orderIDSearchInt;
+
+        } else if (!dateSearch.equals("") && !orderIDSearch.equals("")) {
+            orderIDSearchInt = Integer.parseInt(orderIDSearch);
+
+            fetch = "select * from orders where userID=" + userIDSearch + " and orderStatus in ('Confirmed', 'Cancelled') and dateOfOrder='" + dateSearch + "' and orderID=" + orderIDSearchInt;
+
+        }
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Order> orders = new ArrayList();
+
+        while (rs.next()) {
+            int orderID = rs.getInt(1);
+            String orderStatus = rs.getString(3);
+            String orderDate = rs.getString(4);
+            int deliveryID = rs.getInt(5);
+            orders.add(new Order(orderID, userIDSearch, orderStatus, orderDate, deliveryID));
+        }
+        return orders;
+    }
+
     public Order getLastOrder() throws SQLException {
         String fetch1 = "select count(*) from Orders";
         ResultSet rs1 = st.executeQuery(fetch1);
-        
+
         rs1.next();
         int totalOrders = rs1.getInt(1);
         System.out.println(totalOrders);
@@ -185,17 +217,17 @@ public class DBManager {
         return null;
     }
 
-    //add product to order
+    //add product to cart
     public void addOrderLine(int productID, int orderID) throws SQLException {
         st.executeUpdate("insert into orderline(productID, orderID, quantity)" + "values (" + productID + ", " + orderID + ", 1 )");
     }
 
-    //change product quantity in order
+    //change product quantity in cart
     public void updateOrderLine(int productID, int orderID, int productQuantity) throws SQLException {
         st.executeUpdate("update orderline set quantity =" + productQuantity + " where productID = " + productID + " and orderID = " + orderID);
     }
 
-    //delete product from order
+    //delete product from cart
     public void deleteOrderLine(int productID, int orderID) throws SQLException {
         st.executeUpdate("delete from orderline where productID =" + productID + " and orderID =" + orderID);
     }
@@ -249,7 +281,7 @@ public class DBManager {
 
     //find a product by id
     public Product findProduct(int productID) throws SQLException {
-        String fetch = "select * from product where productID = '" + productID + "'";
+        String fetch = "select * from product where productID = " + productID;
         ResultSet rs = st.executeQuery(fetch);
 
         while (rs.next()) {
@@ -338,4 +370,3 @@ public class DBManager {
         st.executeUpdate("INSERT INTO PAYMENT (orderID, amount, paymentStatus, paymentType) VALUES (" + orderID + ", " + amount + ", " + paymentStatus + ", '" + paymentType + "')");
     }
 }
-

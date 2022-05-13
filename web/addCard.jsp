@@ -77,7 +77,7 @@
                             <br>
                             <div>
                                 <a href="cart.jsp">Cancel</a>
-                                <input type="submit" class="btn btn-primary" value="Register">
+                                <input type="submit" class="btn btn-primary" value="Pay">
                             </div>
                         </form>
                         

@@ -64,6 +64,20 @@
         <servlet-name>PaymentController</servlet-name>
 
         <servlet-class>uts.isd.controller.PaymentController</servlet-class>
+    </servlet>
+        
+    <servlet>
+
+        <servlet-name>CancelOrderController</servlet-name>
+
+        <servlet-class>uts.isd.controller.CancelOrderController</servlet-class>
+
+    </servlet>
+    <servlet>
+
+        <servlet-name>OrderSearchController</servlet-name>
+
+        <servlet-class>uts.isd.controller.OrderSearchController</servlet-class>
 
     </servlet>
 
@@ -106,6 +120,18 @@
         <servlet-name>OrderLineController</servlet-name>
 
         <url-pattern>/OrderLineController</url-pattern>
+
+    </servlet-mapping>
+    <servlet-mapping>        
+        <servlet-name>CancelOrderController</servlet-name>
+
+        <url-pattern>/CancelOrderController</url-pattern>
+
+    </servlet-mapping>
+    <servlet-mapping>        
+        <servlet-name>OrderSearchController</servlet-name>
+
+        <url-pattern>/OrderSearchController</url-pattern>
 
     </servlet-mapping>
 
@@ -204,5 +230,5 @@
         </session-timeout>
 
     </session-config>
-
+    
 </web-app>
