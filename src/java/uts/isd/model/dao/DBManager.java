@@ -129,8 +129,7 @@ public class DBManager {
     //checkuser
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //STEPH's PART
-    // NOTE: orderStatus = order confirmed = not cart
-    //when customer put items in cart, order is created with orderStatus 
+    //when customer put items in cart, order is created with orderStatus = in progress
     //Add a new order into the database   
     public void addOrder(int userID, String dateOfOrder, int deliveryID) throws SQLException {
         String orderStatus = "In progress";
@@ -317,6 +316,10 @@ public class DBManager {
 
         }
         return temp;        //array of all products in database
+    }
+
+    public void updateStock(int productID, int quantity) throws SQLException{
+        st.executeUpdate("update product set productquantity =" + quantity + " where productID = " + productID);
     }
 
     //Add a user access log

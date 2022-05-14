@@ -45,6 +45,13 @@ public class ConfirmOrderController extends HttpServlet {
             if (qtyCheck) {
                 session.setAttribute("orderErr",null);
                 manager.updateOrderStatus(cart.getOrderID(), "Confirmed");
+                
+                //update stock
+                for (OrderLine product: ol){
+                    manager.updateStock(product.getProductID(), manager.findProduct(product.getProductID()).getProductQuantity()-product.getQuantity());
+                }
+                
+                
                 request.getRequestDispatcher("confirmedCart.jsp").include(request, response);
             } else {
                 request.getRequestDispatcher("cart.jsp").include(request, response);
