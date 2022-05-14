@@ -360,10 +360,13 @@ public class DBManager {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Wisam's Part - Payment Processing
+    
+    //Add a creditCard record to the CREDITCARD table in the database
     public void addCreditCard(String nameOnCard, long creditCardNo, String expirationDate, int cvv) throws SQLException, NullPointerException {
         st.executeUpdate("INSERT INTO CREDITCARD (nameOnCard, creditCardNo, expirationDate, cvv) VALUES ('" + nameOnCard + "', " + creditCardNo + ", '" + expirationDate + "', " + cvv + ")");
     }
     
+    //Add a payment record to the PAYMENT table in the database
     public void addPayment(int orderID, double amount) throws SQLException, NullPointerException {
         boolean paymentStatus = true;
         String paymentType = "credit card";

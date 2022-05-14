@@ -170,11 +170,10 @@
                     <%}%>
                 </div>
                 
-                <br>
-                    <div>
-                        <% session.setAttribute("totalPrice",totalPrice);%>
-                        <a href="payment.jsp" class="btn btn-secondary" style="float: right;">Proceed to Checkout</a>
-                    </div>
+                
+                <!-- Setting the dollar amount of the products in the cart to the session -->
+                <% session.setAttribute("totalPrice",totalPrice);%>
+                        
                 <%} else {
                 %>
                 <p class="text-center">Cart is empty</p>

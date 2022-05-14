@@ -1,5 +1,5 @@
 <%-- 
-    Document   : addCard
+    Document   : confirmpayment
     Author     : Wisam
 --%>
 
@@ -66,21 +66,46 @@
                 </div>
             </nav>
                         
-                        <form action="confirmpayment.jsp" method="POST">
-                            <br>
-                            <table>
-                                <tr><td>Owner: </td><td><input type="text" name = "nameOnCard" required></td></tr>
-                                <tr><td>Card Number: </td><td><input type="number" name = "creditCardNo" required></td></tr>
-                                <tr><td>Expiration Date: </td><td><input type="date" name = "expirationDate" required></td></tr>
-                                <tr><td>CVV: </td><td><input type="number" name = "cvv" required></td></tr>
-                            </table>
-                            <br>
-                            <div>
-                                <a href="cart.jsp">Cancel</a>
-                                <input type="submit" class="btn btn-primary" value="Pay">
-                            </div>
-                        </form>
-                        
+            <% 
+               String nameOnCard = request.getParameter("nameOnCard");
+               //session.setAttribute("nameOnCard", nameOnCard);
+               
+               //long creditCardNo = request.getParameter("creditCardNo");
+               long creditCardNo = Long.parseLong(request.getParameter("creditCardNo"));
+               //session.setAttribute("creditCardNo", creditCardNo);
+               
+               String expirationDate = request.getParameter("expirationDate");
+               //session.setAttribute("expirationDate", expirationDate);
+               
+               int cvv = Integer.parseInt(request.getParameter("cvv"));
+               //session.setAttribute("cvv", cvv);
+            %>
+            
+            <br>
+            <% Double amount = (Double) session.getAttribute("totalPrice");%>
+            <h3>$<%=amount%></h3>
+            <h3>Confirm payment?</h3>
+
+            <table class="table">
+                <thead class="table-light"><th>Owner</th><th>Card Number</th><th>Expiration Date</th><th>CVV</th></thead>
+                <tr><td><%=nameOnCard%></td><td><%=creditCardNo%></td><td><%=expirationDate%></td><td><%=cvv%></td></tr>    
+            </table>
+            
+            <br>
+            
+            <form action="CreditCardController" method="POST">
+                
+                <input type="hidden" name="nameOnCard" value="<%=nameOnCard%>">
+                <input type="hidden" name="creditCardNo" value="<%=creditCardNo%>">
+                <input type="hidden" name="expirationDate" value="<%=expirationDate%>">
+                <input type="hidden" name="cvv" value="<%=cvv%>">
+                
+                <div>
+                    <a href="addCard.jsp">Back</a>
+                    <input type="submit" class="btn btn-primary" value="Pay">
+                </div>
+            </form>
+            
         </div>
     </body>
 </html>
