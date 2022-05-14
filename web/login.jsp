@@ -70,8 +70,13 @@
                         <form method="post" action="LoginServlet">
                             <br>
                             <table>
-                                <tr><td>Email:</td><td><input type="text" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" name="email" required="true"></td></tr>
-                                <tr><td>Password:</td><td><input type="password" placeholder="<%=(passwordErr != null ? passwordErr : "Enter password")%>" name="password" required></td></tr>                    
+                                <tr><td>Email:</td></tr>
+                                <tr>
+                                    <td><input type="text" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" name="email" required="true"></td>
+                                    <td><small class="form-text text-muted">Example: jane@uts.com</small></td>
+                                </tr>
+                                <tr><td>Password:</td></tr>
+                                <tr><td><input type="password" placeholder="<%=(passwordErr != null ? passwordErr : "Enter password")%>" name="password" required></td></tr>                    
                             </table>
                             <br>
                             <div>
