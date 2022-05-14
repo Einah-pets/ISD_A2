@@ -15,8 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uts.isd.model.Order;
-import uts.isd.model.User;
+import uts.isd.model.*;
 import uts.isd.model.dao.DBManager;
 
 /**
@@ -36,6 +35,16 @@ public class CancelOrderController extends HttpServlet {
         ArrayList<Order> orders;
 
         try {
+            //update stock if confirmed order
+            for (Order o : manager.getOrders(currentUser.getUserID(), "", request.getParameter("orderIDtodel"))) {
+                if (o.getOrderStatus().equals("Confirmed")) {
+                    for (OrderLine ol : manager.fetchOrderLines(o.getOrderID())) {
+                        manager.updateStock(ol.getProductID(), manager.findProduct(ol.getProductID()).getProductQuantity() + ol.getQuantity());
+
+                    }
+
+                }
+            }
 
             manager.updateOrderStatus(Integer.parseInt(request.getParameter("orderIDtodel")), "Cancelled");
 
