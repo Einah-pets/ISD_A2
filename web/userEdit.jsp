@@ -82,11 +82,28 @@
                             <form action="UserUpdateServlet" method="post">
                                 <br>
                                 <table>
-                                    <tr><td>Email:</td><td><input type="text" name="email" value="${user.email}" required="true" readonly="readonly"></td></tr>
-                                    <tr><td>First name:</td><td><input type="text" name="firstName" value="${user.firstName}" required="true"></td></tr>
-                                    <tr><td>Last name:</td><td><input type="text" name="lastName" value="${user.lastName}" required="true"></td></tr>
-                                    <tr><td>Phone:</td><td><input type="text" name="phone" value="${user.phone}" required="true"></td></tr>
-                                    <tr><td>Password:</td><td><input type="password" name="password" value="${user.password}" required="true"></td></tr>
+                                    <tr><td>Email: (Cannot be edited)</td></tr>
+                                    <tr><td><input type="text" name="email" value="${user.email}" required="true" readonly="readonly"></td></tr>
+                                    <tr><td>First name:</td></tr>
+                                    <tr>
+                                        <td><input type="text" name="firstName" value="${user.firstName}" required="true"></td>
+                                        <td><small class="form-text text-muted">Example: Jane</small></td>
+                                    </tr>
+                                    <tr><td>Last name:</td></tr>
+                                    <tr>
+                                        <td><input type="text" name="lastName" value="${user.lastName}" required="true"></td>
+                                        <td><small class="form-text text-muted">Example: Doe</small></td>
+                                    </tr>
+                                    <tr><td>Phone:</td></tr>
+                                    <tr>
+                                        <td><input type="text" name="phone" value="${user.phone}" required="true"></td>
+                                        <td><small class="form-text text-muted">Must contain 10 digits</small></td>
+                                    </tr>
+                                    <tr><td>Password:</td></tr>
+                                    <tr>
+                                        <td><input type="password" name="password" value="${user.password}" required="true"></td>
+                                        <td><small class="form-text text-muted">Must contain letters and digits</small></td>
+                                    </tr>
                                 </table>
                                 <br>
                                 <div>
