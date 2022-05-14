@@ -60,29 +60,50 @@
             </nav>   
 
 
-            <div class="container">
-                <div class="row">
+            <div class="container" >
+                <div class="row" >
                     <div class="col">
                     </div>
-                    <div class="col">
+                    <div class="col" >
                         <h2>Create your account:</h2>
                         <%=(existErr != null ? existErr : "")%>
-                        <form action="RegisterServlet" method="post">
+                        <form action="RegisterServlet" method="post" >
                             <br>
+
                             <table>
-                                <tr><td>First name:</td><td><input type="text" placeholder="<%=(nameErr != null ? nameErr : "Enter first name")%>" name="firstName" required="true"></td></tr>
-                                <tr><td>Last name:</td><td><input type="text" placeholder="<%=(nameErr != null ? nameErr : "Enter last name")%>" name="lastName" required="true"></td></tr>
-                                <tr><td>Email:</td><td><input type="text" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" name="email" required></td></tr>
-                                <tr><td>Password:</td><td><input type="password" placeholder="<%=(passwordErr != null ? passwordErr : "Enter password")%>" name="password" required></td></tr>
-                                <tr><td>Phone:</td><td><input type="text" placeholder="<%=(phoneErr != null ? phoneErr : "Enter phone")%>" name="phone" required></td></tr> 
-                                <tr><td><label for="userType">Role:</label></td><td>
+                                <tr><td>First name:</td></tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="<%=(nameErr != null ? nameErr : "Enter first name")%>" name="firstName" required="true"></td>
+                                    <td><small class="form-text text-muted">Example: Jane</small></td>
+                                </tr>
+                                <tr><td>Last name:</td></tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="<%=(nameErr != null ? nameErr : "Enter last name")%>" name="lastName" required="true"></td>
+                                    <td><small class="form-text text-muted">Example: Doe</small></td>
+                                </tr>
+                                <tr><td>Email:</td></tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" name="email" required></td>
+                                    <td><small class="form-text text-muted">Example: jane@uts.com</small></td>
+                                </tr>
+                                <tr><td>Password:</td></tr>
+                                <tr>
+                                    <td><input type="password" class="form-control" placeholder="<%=(passwordErr != null ? passwordErr : "Enter password")%>" name="password" required></td>
+                                    <td><small class="form-text text-muted">Must contain letters and digits</small></td>
+                                </tr>
+                                <tr><td>Phone:</td></tr> 
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="<%=(phoneErr != null ? phoneErr : "Enter phone")%>" name="phone" required></td>
+                                    <td><small class="form-text text-muted">Must contain 10 digits</small></td>
+                                </tr>
+                                <tr><td><label for="userType">Role:</label></td></tr>
+                                <tr><td>
                                         <select id="userType" name="userType" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option value="Customer">Customer</option>
                                             <option value="Staff">Staff</option>
                                         </select>
                                     </td></tr> 
                             </table>
-
 
                             <br>
                             <div>
