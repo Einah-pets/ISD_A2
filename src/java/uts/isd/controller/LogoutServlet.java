@@ -36,6 +36,8 @@ public class LogoutServlet extends HttpServlet {
             manager.addAccessLog(userID, "Logout");
             //end session
             session.invalidate();
+            //reset cart
+            session.setAttribute("cart", null);
             request.getRequestDispatcher("logout.jsp").include(request, response);
         } catch (SQLException | NullPointerException ex) {
             Logger.getLogger(LogoutServlet.class.getName()).log(Level.SEVERE, null, ex);

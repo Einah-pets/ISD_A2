@@ -55,6 +55,8 @@ public class LoginServlet extends HttpServlet {
 //                    String accessTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
 //                    String userAction = "Login";
                     manager.addAccessLog(userID, "Login");
+                    
+                    
                 }
                 else if (user != null && !user.isActive()){
                     session.setAttribute("existErr","Error: This user has been deactivated.");
