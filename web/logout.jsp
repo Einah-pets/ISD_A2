@@ -13,8 +13,8 @@
         <title>Logout Page</title>
     </head>
     <body>   
-<!--        redirect to the index page after 3 seconds-->
-        <meta http-equiv="Refresh" content="3;url=index.jsp">
+<!--        redirect to the index page after 2 seconds-->
+        <meta http-equiv="Refresh" content="2;url=index.jsp">
         
         <div class="container">
 
