@@ -152,6 +152,9 @@
                         <h4>$<%=totalPrice%></h4>
                     </div>
                 </div>
+
+                    <br>
+
                 <div class="row">
                     <div class="col">
                         <form action="ConfirmOrderController" method="POST">
@@ -166,6 +169,11 @@
                     <p class="text-warning"><%=session.getAttribute("orderErr")%></p>
                     <%}%>
                 </div>
+                
+                
+                <!-- Setting the dollar amount of the products in the cart to the session -->
+                <% session.setAttribute("totalPrice",totalPrice);%>
+                        
                 <%} else {
                 %>
                 <p class="text-center">Cart is empty</p>
