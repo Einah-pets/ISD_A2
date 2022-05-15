@@ -15,13 +15,15 @@ public class Payment {
     private double amount;
     private boolean paymentStatus;
     private String paymentType;
+    private int userId;
 
-    public Payment(int paymentId, int orderId, double amount, boolean paymentStatus, String paymentType) {
+    public Payment(int paymentId, int orderId, double amount, boolean paymentStatus, String paymentType, int userId) {
         this.paymentId = paymentId;
         this.orderId = orderId;
         this.amount = amount;
         this.paymentStatus = paymentStatus;
         this.paymentType = paymentType;
+        this.userId = userId;
     }
 
     public int getPaymentId() {
@@ -63,7 +65,10 @@ public class Payment {
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
     }
-    
+
+    public int getUserId() {
+        return userId;
+    }
     
 }
 
