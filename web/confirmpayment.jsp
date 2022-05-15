@@ -19,6 +19,8 @@
         <div class="container">
 
             <h1>IoTBay</h1>
+            
+            <%User user = (User) session.getAttribute("user");%>
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -28,10 +30,16 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             
+                            <% if (user != null) {%>
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
                             </li>  
+                            <%} else {
+                            %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.jsp">Home</a>
                             </li>
+                            <%}%>
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
                                     <input type="hidden" value="1" name="page">
@@ -50,11 +58,15 @@
                             </li>   
                             <%}%>
                             <li class="nav-item">
-                                <a class="nav-link" href="cart.jsp">Cart</a>
+                                <a class="nav-link active" aria-current="page" href="cart.jsp">Cart</a>
                             </li>
                             <%
                                 if (session.getAttribute("user") != null) {
                             %>
+                            <!--Access log-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
+                            </li>
                             <li class="nav-item">
                                 <form action="OrderHistoryController" method="POST">
                                     <input type="submit" class="btn btn-light" value="Order History">
