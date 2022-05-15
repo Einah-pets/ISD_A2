@@ -363,13 +363,26 @@ public class DBManager {
     
     //Add a creditCard record to the CREDITCARD table in the database
     public void addCreditCard(String nameOnCard, long creditCardNo, String expirationDate, int cvv) throws SQLException, NullPointerException {
+        //Execution code for adding record
         st.executeUpdate("INSERT INTO CREDITCARD (nameOnCard, creditCardNo, expirationDate, cvv) VALUES ('" + nameOnCard + "', " + creditCardNo + ", '" + expirationDate + "', " + cvv + ")");
     }
     
     //Add a payment record to the PAYMENT table in the database
     public void addPayment(int orderID, double amount) throws SQLException, NullPointerException {
-        boolean paymentStatus = true;
+        //Payment is not finalised so currently status is in-progress i.e. false. Updated to true upon completion of payment
+        boolean paymentStatus = false;
+        //Payment type selected is credit card
         String paymentType = "credit card";
+        //Execution code for adding record
         st.executeUpdate("INSERT INTO PAYMENT (orderID, amount, paymentStatus, paymentType) VALUES (" + orderID + ", " + amount + ", " + paymentStatus + ", '" + paymentType + "')");
+    }
+    
+    //Updates payment status in the PAYMENT table after finalising the payment
+    public void updatePayment(int orderID) throws SQLException {
+        //Changing the status to true (was false)
+        boolean paymentStatus = true;
+        //Execution code for updating record
+        st.executeUpdate("UPDATE PAYMENT SET paymentStatus='" + paymentStatus + "' where orderID=" + orderID);
+
     }
 }

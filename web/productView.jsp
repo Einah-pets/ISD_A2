@@ -27,10 +27,17 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <!--Main-->
+                            <!--Main/Home-->
+                            <% if (user != null) {%>
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
+                            </li>  
+                            <%} else {
+                            %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.jsp">Home</a>
                             </li>
+                            <%}%>
                             <!--Catalogue-->
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">

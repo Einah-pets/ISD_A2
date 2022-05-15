@@ -65,6 +65,14 @@
 
         <servlet-class>uts.isd.controller.PaymentController</servlet-class>
     </servlet>
+    
+    <servlet>
+
+        <servlet-name>InputCardCheck</servlet-name>
+
+        <servlet-class>uts.isd.controller.InputCardCheck</servlet-class>
+
+    </servlet>
         
     <servlet>
 
@@ -218,6 +226,13 @@
         <servlet-name>PaymentController</servlet-name>
 
         <url-pattern>/PaymentController</url-pattern>
+
+    </servlet-mapping>
+    
+    <servlet-mapping>        
+        <servlet-name>InputCardCheck</servlet-name>
+
+        <url-pattern>/InputCardCheck</url-pattern>
 
     </servlet-mapping>
 

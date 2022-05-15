@@ -39,33 +39,35 @@ import uts.isd.model.dao.DBManager;
  *
  * @author Wisam
  */
-public class CreditCardController extends HttpServlet {
+public class InputCardCheck extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
-        Order cart = (Order) session.getAttribute("cart");
+        //Order cart = (Order) session.getAttribute("cart");
+        CreditCardValidator ccValidator = new CreditCardValidator();
+        ccValidator.clear(session);
         
         //Initialising the data variables of a credit card to the received input
         String nameOnCard = request.getParameter("nameOnCard");
-        long creditCardNo = Long.parseLong(request.getParameter("creditCardNo"));
+        String creditCardNo = request.getParameter("creditCardNo");
         String expirationDate = request.getParameter("expirationDate");
-        int cvv = Integer.parseInt(request.getParameter("cvv"));
+        String cvv = request.getParameter("cvv");
         
-        //The last order line in the cart is the order that the user is paying for
-        ArrayList<OrderLine> orderlinesInCart = (ArrayList) session.getAttribute("orderlinesInCart");
-        int orderID = orderlinesInCart.get(orderlinesInCart.size()-1).getOrderID();
-        
-        try {
-            //Adds credit card record to the database
-            manager.addCreditCard(nameOnCard, creditCardNo, expirationDate, cvv);
-            //Updates payment status from "in-progress" to "complete" (boolean false to true)
-            manager.updatePayment(orderID);
-            request.getRequestDispatcher("paycomplete.jsp").include(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(CreditCardController.class.getName()).log(Level.SEVERE, null, ex);
+        if(!ccValidator.validateNameOnCard(nameOnCard)){
+            session.setAttribute("nameOnCardErr","Incorrect name format");
+            request.getRequestDispatcher("addCard.jsp").include(request, response);
         }
-        
+        else if(!ccValidator.validateCreditCardNo(creditCardNo)){
+            session.setAttribute("creditCardNoErr","Incorrect number format");
+            request.getRequestDispatcher("addCard.jsp").include(request, response);
+        } 
+        else if(!ccValidator.validateCVV(cvv)){
+            session.setAttribute("cvvErr","Incorrect cvv format");
+            request.getRequestDispatcher("addCard.jsp").include(request, response);
+        } else {
+            request.getRequestDispatcher("confirmpayment.jsp").include(request, response);
+        }
         
     }
 }
