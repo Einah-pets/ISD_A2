@@ -17,31 +17,14 @@ import javax.servlet.http.HttpSession;
 import uts.isd.model.Product;
 import uts.isd.model.User;
 import uts.isd.model.dao.DBManager;
-
-// Lara /////////////////////////////////////////////////////////////////////////
-//@WebServlet(name = "AddProductServlet", urlPatterns = {"/AddProductServlet"})
-
-public class ShippingTrackingServlet extends HttpServlet {
-//  @Override
+/**
+ *
+ * @author AlineStamboulian
+ */
+public class ShippingEntering {
+        
     protected void doPOST(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
-        Validator validator = new Validator();
-        String ideliveryid = request.getParameter("deliveryid"); 
-        Integer deliveryid = Integer.parseInt(ideliveryid);
-        String deliverystatus = request.getParameter("deliverystatus");
-        String deliveryDate = request.getParameter("deliveryDate");
-        String deliveryType = request.getParameter("deliveryType");
-        validator.clear(session);
-        
-         request.getRequestDispatcher("shippingTrackingStatus.jsp").include(request, response);
-        
-        
-       
-    }}
-
-
+    }
     
-
-
-
+}
