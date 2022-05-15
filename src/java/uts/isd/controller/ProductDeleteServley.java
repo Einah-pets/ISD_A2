@@ -58,11 +58,11 @@ public class ProductDeleteServley extends HttpServlet {
             session.setAttribute("nameErr","Incorrect name format");
             request.getRequestDispatcher("AddProduct.jsp").include(request, response);
         }
-        else if(!validator.validateName(productPrice)){
+        else if(!validator.validatePrice(productPrice)){
             session.setAttribute("nameErr","Incorrect name format");
             request.getRequestDispatcher("AddProduct.jsp").include(request, response);
         }
-        else if(!validator.validateName(productQuantity)){
+        else if(!validator.validateNumber(productQuantity)){
             session.setAttribute("nameErr","Incorrect name format");
             request.getRequestDispatcher("AddProduct.jsp").include(request, response);
 }
