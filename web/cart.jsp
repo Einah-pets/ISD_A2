@@ -126,10 +126,10 @@
                         <form class="row row-cols-lg-auto g-3 align-items-center" action="CartController" method="POST">
 
                             <input type="hidden" name="productID" value="<%=prodID%>">
-                            <input type="submit" name="action" class="btn btn-light" value="-"> 
+                            <input type="submit" name="action" class="btn btn-secondary" value="-"> 
 
                             <p><%=prodQuantity%></p>
-                            <input type="submit" name="action" class="btn btn-light" value="+">
+                            <input type="submit" name="action" class="btn btn-secondary" value="+">
                         </form>
                     </div>
                     <div class="col-2">
@@ -144,7 +144,7 @@
                     <div class="col">
                         <form action="CartController" method="POST">
                             <input type="hidden" name="productID" value="<%=prodID%>">
-                            <input class="btn btn-light" type="submit" name="action" value="X">
+                            <input class="btn btn-secondary" type="submit" name="action" value="X">
                         </form>
                     </div>
 
@@ -165,7 +165,7 @@
                 <div class="row">
                     <div class="col">
                         <form action="ConfirmOrderController" method="POST">
-                            <input class="btn btn-light" type="submit" name="action" value="Confirm cart">
+                            <input class="btn btn-primary" type="submit" name="action" value="Confirm cart">
                         </form>
                     </div>
 
