@@ -20,6 +20,8 @@ public class Validator implements Serializable {
     private String passwordPattern = "[a-z0-9]{4,}";
     private String phonePattern = "^[0-9]{10}$";
     private String datePattern = "^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$";
+    private String pricePattern = "^[1-9]\\d{0,7}(?:\\.\\d{1,4})?$";
+     private String numberPattern = "^[0-9]$";
 
     public Validator() {
     }
@@ -52,6 +54,12 @@ public class Validator implements Serializable {
     
     public boolean validateDate(String date) {
         return validate(datePattern, date);
+    }
+    public boolean validatePrice(String price) {
+        return validate(pricePattern, price);
+    }
+    public boolean validateNumber (String number) {
+        return validate(numberPattern, number);
     }
     
     public void clear(HttpSession session){
