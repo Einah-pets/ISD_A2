@@ -388,4 +388,82 @@ public class DBManager {
         st.executeUpdate("UPDATE PAYMENT SET paymentStatus='" + paymentStatus + "' where orderID=" + orderID);
 
     }
+    
+    
+    
+    
+    
+    
+    // LARA//
+    // add product
+    public void addProduct(String productName, String productType, String productBrand, Double productPrice, Integer productQuantity, String productDescription) throws SQLException, NullPointerException {
+        st.executeUpdate("INSERT INTO product VALUES (" + productName + "," + productType + "," + productBrand + "," + productPrice + ", " + productQuantity + "," + productDescription + ")");
+    }
+    
+     public Product findProductN(String productName) throws SQLException {
+        String fetch = "select * from product where productName = '" + productName + "'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            String name = rs.getString(2);
+
+            if (name == productName) {
+                int productID = rs.getInt(1);
+                String productType = rs.getString(3);
+                String productBrand = rs.getString(4);
+                double productPrice = rs.getDouble(5);
+                int productQuantity = rs.getInt(6);
+                String productDescription = rs.getString(7);
+                return new Product(productID, productName, productType, productBrand, productPrice, productQuantity, productDescription);
+            }
+        }
+        return null;
+    }
+     
+     public Integer findDelStatus(int deliveryid) throws SQLException {
+         Integer statusnum;
+         String fetch;
+        
+          String fetch2 = "select * from delivery where deliveryid = '" + deliveryid + "'";
+        ResultSet rs = st.executeQuery(fetch2);
+
+        while (rs.next()) {
+            int id = rs.getInt(1);
+
+            if (id == deliveryid) {
+                
+                String deliveryStatus = rs.getString(1);
+                String deliveryDate = rs.getString(2);
+                String deliveryType = rs.getString(3);  
+                
+                
+                if (deliveryStatus=="NotFound") {
+                    return statusnum =1;
+                }
+                else if (deliveryStatus == "OrderRevieved") {
+                statusnum = 2;
+                }
+
+                else if (deliveryStatus == "InTransit") {
+                statusnum = 3;   
+                }
+
+                else if (deliveryStatus == "OutForDel") {
+                statusnum = 4;
+                }
+                else {
+                    return null;
+                }
+                
+            }
+        }
+        return null;
+    
+    }
+     
+    
+     public void addDeliveryDetails(String deliveryType, String deliveryStreetNo, String deliveryStreetName, String deliveryCity, String deliveryState, String deliveryCountry) throws SQLException, NullPointerException {                                                                                                                                                                                                                
+        st.executeUpdate("INSERT INTO DELIVERY (deliveryType, deliveryDate, deliveryUnit, deliveryStreetNo, deliveryStreetName, deliveryCity, deliveryState, deliveryCounty, deliveryStatus) VALUES ('" + deliveryType + "', " + "', " + deliveryStreetNo + deliveryStreetName + deliveryCity+ deliveryState+ deliveryCountry+ "')");
+    }
+     
 }
