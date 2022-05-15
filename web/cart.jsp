@@ -29,9 +29,15 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <!--Main-->
+                            <%if (user != null) {%>
+                            <!--Home-->
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
+                            </li>
+                            <%} else {%>
+                            <!--Main-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.jsp">Home</a>
                             </li>
                             <!--Catalogue-->
                             <li class="nav-item">
@@ -46,7 +52,7 @@
                             </li>
 
                             <!--if logged in-->
-                            <% if (user != null) {%>
+                            <% }if (user != null) {%>
                             <!--Access log-->
                             <li class="nav-item">
                                 <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
@@ -153,7 +159,7 @@
                     </div>
                 </div>
 
-                    <br>
+                <br>
 
                 <div class="row">
                     <div class="col">
@@ -163,17 +169,17 @@
                     </div>
 
                 </div>
-                
+
                 <div class="col">
                     <%if (session.getAttribute("orderErr") != null) {%>
                     <p class="text-warning"><%=session.getAttribute("orderErr")%></p>
                     <%}%>
                 </div>
-                
-                
+
+
                 <!-- Setting the dollar amount of the products in the cart to the session -->
-                <% session.setAttribute("totalPrice",totalPrice);%>
-                        
+                <% session.setAttribute("totalPrice", totalPrice);%>
+
                 <%} else {
                 %>
                 <p class="text-center">Cart is empty</p>

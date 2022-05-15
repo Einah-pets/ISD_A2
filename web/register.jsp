@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="uts.isd.model.*" %> 
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,6 +25,7 @@
 
         <div class="container">
             <h1>IoTBay</h1>
+            <%User user = (User) session.getAttribute("user");%>
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -31,9 +34,15 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <%if (user != null) {%>
                             <!--Home-->
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+                                <a class="nav-link" href="main.jsp">Main</a>
+                            </li>
+                            <%} else {%>
+                            <!--Main-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.jsp">Home</a>
                             </li>
                             <!--Catalogue-->
                             <li class="nav-item">
@@ -46,6 +55,25 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
+
+                            <!--if logged in-->
+                            <% }if (user != null) {%>
+                            <!--Access log-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
+                            </li>
+                            <!--Order history-->                            
+                            <li class="nav-item">
+                                <form action="OrderHistoryController" method="POST">
+                                    <input type="submit" class="btn btn-light" value="Order History">
+                                </form>
+                            </li>
+                            <!--Logout-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a>
+                            </li>  
+                            <%} else {
+                            %>
                             <!--Register-->
                             <li class="nav-item">
                                 <a class="nav-link" href="register.jsp">Register</a>
@@ -54,10 +82,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="login.jsp">Login</a>
                             </li>   
+                            <%}%>
                         </ul>          
                     </div>
                 </div>
-            </nav>   
+            </nav>
 
 
             <div class="container" >

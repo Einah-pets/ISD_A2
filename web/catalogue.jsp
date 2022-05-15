@@ -28,9 +28,15 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <!--Main-->
+                            <%if (user != null) {%>
+                            <!--Home-->
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
+                            </li>
+                            <%} else {%>
+                            <!--Main-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.jsp">Home</a>
                             </li>
                             <!--Catalogue-->
                             <li class="nav-item">
@@ -45,7 +51,7 @@
                             </li>
 
                             <!--if logged in-->
-                            <% if (user != null) {%>
+                            <% }if (user != null) {%>
                             <!--Access log-->
                             <li class="nav-item">
                                 <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
@@ -74,7 +80,7 @@
                         </ul>          
                     </div>
                 </div>
-            </nav>     
+            </nav>    
 
             <div class="container p-5">
                 <div class="row p-4 g-10">
