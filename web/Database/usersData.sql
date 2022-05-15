@@ -7,29 +7,6 @@
  * Created: 25/04/2022
  */
 
---Customer users
-INSERT INTO Users (firstName,lastName,phone,email,password,userType,isActive) VALUES 
-('Anonymous','User','','','','Customer',true),
-('Denis','Samar','0433333332','denis.s@student.uts.edu.au','deniss123','Customer',true),
-('Howard','Sander','0433333333','howard.s@student.uts.edu.au','howards123','Customer',true),
-('Lyona','Ibarion','0433333334','Lyona.i@student.uts.edu.au','lyonai123','Customer',true),
-('Om','Parisi','0433333335','om.p@student.uts.edu.au','omp123','Customer',true),
-('Mei','Kiefer','0433333336','mei.k@student.uts.edu.au','meik123','Customer',true),
-('Audrea','Das','0433333337','audrea.d@student.uts.edu.au','audread123','Customer',true),
-('Paul','Newman','0433333338','paul.n@student.uts.edu.au','pauln123','Customer',true),
-('Moran','Klein','0433333339','moran.k@student.uts.edu.au','morank123','Customer',true),
-('Irma','doe','0433333330','irma.d@student.uts.edu.au','irmad123','Customer',true),
-('Azad','Keo','0444444441','azad.k@student.uts.edu.au','azadk123','Customer',true),
-('Daisy','Rhoda','0444444442','daysi.r@student.uts.edu.au','daisyr123','Customer',true),
-('Ivan','Burel','0444444443','ivan.b@student.uts.edu.au','ivanb123','Customer',true),
-('Nusa','Jamie','0444444444','nusa.j@student.uts.edu.au','nusaj123','Customer',true),
-('Eliza','Artsen','0444444445','eliza.a@student.uts.edu.au','elizaa123','Customer',true),
-('Kaapo','Coste','0444444446','kappo.c@student.uts.edu.au','kaapoc123','Customer',false),
-('Ines','Dirix','0444444447','ines.d@student.uts.edu.au','inesd123','Customer',false),
-('Kaya','Ngoc','0444444448','kaya.n@student.uts.edu.au','kayan123','Customer',false),
-('Ryu','Himura','0444444449','ryu.h@student.uts.edu.au','ryuh123','Customer',false),
-('Rajeev','Morish','0444444440','rajeev.m@student.uts.edu.au','rajeevm123','Customer',false);
-
 --Staff users
 INSERT INTO Users (firstName,lastName,phone,email,password,userType,isActive) VALUES 
 ('Anna','Barton','0411111111','anna.b@uts.edu.au','annab123','Staff',true),
@@ -54,4 +31,25 @@ INSERT INTO Users (firstName,lastName,phone,email,password,userType,isActive) VA
 ('Yuko','Okamoto','0422222220','yuko.o@uts.edu.au','yulkoo123','Staff',false);
 
 
-
+--Customer users
+INSERT INTO Users (firstName,lastName,phone,email,password,userType,isActive) VALUES 
+('Quentin','Gil','0433333331','quentin.g@student.uts.edu.au','quenting123','Customer',true),
+('Denis','Samar','0433333332','denis.s@student.uts.edu.au','deniss123','Customer',true),
+('Howard','Sander','0433333333','howard.s@student.uts.edu.au','howards123','Customer',true),
+('Lyona','Ibarion','0433333334','Lyona.i@student.uts.edu.au','lyonai123','Customer',true),
+('Om','Parisi','0433333335','om.p@student.uts.edu.au','omp123','Customer',true),
+('Mei','Kiefer','0433333336','mei.k@student.uts.edu.au','meik123','Customer',true),
+('Audrea','Das','0433333337','audrea.d@student.uts.edu.au','audread123','Customer',true),
+('Paul','Newman','0433333338','paul.n@student.uts.edu.au','pauln123','Customer',true),
+('Moran','Klein','0433333339','moran.k@student.uts.edu.au','morank123','Customer',true),
+('Irma','doe','0433333330','irma.d@student.uts.edu.au','irmad123','Customer',true),
+('Azad','Keo','0444444441','azad.k@student.uts.edu.au','azadk123','Customer',true),
+('Daisy','Rhoda','0444444442','daysi.r@student.uts.edu.au','daisyr123','Customer',true),
+('Ivan','Burel','0444444443','ivan.b@student.uts.edu.au','ivanb123','Customer',true),
+('Nusa','Jamie','0444444444','nusa.j@student.uts.edu.au','nusaj123','Customer',true),
+('Eliza','Artsen','0444444445','eliza.a@student.uts.edu.au','elizaa123','Customer',true),
+('Kaapo','Coste','0444444446','kappo.c@student.uts.edu.au','kaapoc123','Customer',false),
+('Ines','Dirix','0444444447','ines.d@student.uts.edu.au','inesd123','Customer',false),
+('Kaya','Ngoc','0444444448','kaya.n@student.uts.edu.au','kayan123','Customer',false),
+('Ryu','Himura','0444444449','ryu.h@student.uts.edu.au','ryuh123','Customer',false),
+('Rajeev','Morish','0444444440','rajeev.m@student.uts.edu.au','rajeevm123','Customer',false);

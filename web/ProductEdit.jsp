@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="uts.isd.model.User"%>
+<%@page import="uts.isd.model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,10 +18,15 @@
         <body>
             <%
                 User user = (User)session.getAttribute("user");
+                Product product = (Product)session.getAttribute("product");
+             
                 String updated = (String)session.getAttribute("updated");
-                String updatePasswordErr = (String) session.getAttribute("updatePasswordErr");
-                String updateNameErr = (String) session.getAttribute("updateNameErr");
-                String updatePhoneErr = (String) session.getAttribute("updatePhoneErr");
+                String updateProductName = (String) session.getAttribute("updateProductName");
+                String updateProductType = (String) session.getAttribute("updateProductType");
+                String updateProductBrand = (String) session.getAttribute("updateProductBrand");
+                String updateProductPrice = (String) session.getAttribute("updateProductPrice");
+                String updateProductQuantity = (String) session.getAttribute("updateProductQuantity");
+                String updateProductDescription = (String) session.getAttribute("updateProductDescription");
             %>
             
             <div class="container">
@@ -55,23 +61,32 @@
                         <div class="col">
                             <h3>Edit your information:</h3>
                             <%=(updated != null ? updated : "")%>
-                            <%=(updatePasswordErr != null ? updatePasswordErr : "")%>
-                            <%=(updateNameErr != null ? updateNameErr : "")%>
-                            <%=(updatePhoneErr != null ? updatePhoneErr : "")%>
-                            <form action="UserUpdateServlet" method="post">
+                            <%=(updateProductName != null ? updateProductName : "")%>
+                            <%=(updateProductType != null ? updateProductType : "")%>
+                            <%=(updateProductBrand != null ? updateProductBrand : "")%>
+                            <%=(updateProductPrice != null ? updateProductPrice : "")%>
+                            <%=(updateProductQuantity != null ? updateProductQuantity : "")%>
+                            <%=(updateProductDescription != null ? updateProductDescription : "")%>
+                            
+                                                    
+                            
+                            <form action="AddProductServlet" method="post">
                                 <br>
                                 <table>
-                                    <tr><td>Email:</td><td><input type="text" name="email" value="${user.email}" required="true" readonly="readonly"></td></tr>
-                                    <tr><td>First name:</td><td><input type="text" name="firstName" value="${user.firstName}" required="true"></td></tr>
-                                    <tr><td>Last name:</td><td><input type="text" name="lastName" value="${user.lastName}" required="true"></td></tr>
-                                    <tr><td>Phone:</td><td><input type="text" name="phone" value="${user.phone}" required="true"></td></tr>
-                                    <tr><td>Password:</td><td><input type="password" name="password" value="${user.password}" required="true"></td></tr>
+                                    <tr><td>Product Name:</td><td><input type="text" name="productName" value="${product.productName}" required="true" readonly="readonly"></td></tr>
+                                    <tr><td>Product Type:</td><td><input type="text" name="productType" value="${product.productType}" required="true"></td></tr>
+                                    <tr><td>Product Brand:</td><td><input type="text" name="productBrand" value="${product.productBrand}" required="true"></td></tr>
+                                    <tr><td>Product Price:</td><td><input type="text" name="productPrice" value="${product.productPrice}" required="true"></td></tr>
+                                    <tr><td>Product Quantity</td><td><input type="text" name="productQuantity" value="${product.productQuantity}" required="true"></td></tr>
+                                    <tr><td>Product Description</td><td><input type="text" name="productDescription" value="${product.productDescription}" required="true"></td></tr>
                                 </table>
                                 <br>
                                 <div>
                                     <a href="main.jsp">Cancel</a>
                                     <input type="submit" class="btn btn-primary" value="Update">
+                                    <input type="submit"  style = "text-align: right" class="btn btn-primary" value="Delete">
                                 </div>
+                               
                             </form>
                         </div>
                         <div class="col">

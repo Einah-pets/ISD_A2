@@ -1,140 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee (Links to an external site.)" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance (Links to an external site.)" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee (Links to an external site.) http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd (Links to an external site.)">
-
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance (Links to an external site.)" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee (Links to an external site.) http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd (Links to an external site.)">
     <servlet>
-
         <servlet-name>ConnServlet </servlet-name>
-
         <servlet-class>uts.isd.controller.ConnServlet </servlet-class>
-
         <load-on-startup>0</load-on-startup>
-
-    </servlet>
-    
-    <servlet>
-
-        <servlet-name>CatalogueController</servlet-name>
-
-        <servlet-class>uts.isd.controller.CatalogueController</servlet-class>
-
-    </servlet>
-    
-    <servlet>
-
-        <servlet-name>OrderController</servlet-name>
-
-        <servlet-class>uts.isd.controller.OrderController</servlet-class>
-
-    </servlet>
-    
-    <servlet>
-
-        <servlet-name>CartController</servlet-name>
-
-        <servlet-class>uts.isd.controller.CartController</servlet-class>
-
-    </servlet>
-    
-    <servlet>
-
-        <servlet-name>OrderHistoryController</servlet-name>
-
-        <servlet-class>uts.isd.controller.OrderHistoryController</servlet-class>
-
     </servlet>
     <servlet>
-
-        <servlet-name>OrderLineController</servlet-name>
-
-        <servlet-class>uts.isd.controller.OrderLineController</servlet-class>
-
-    </servlet>
-    
-    <servlet>
-
-        <servlet-name>CreditCardController</servlet-name>
-
-        <servlet-class>uts.isd.controller.CreditCardController</servlet-class>
-
-    </servlet>
-    
-    <servlet>
-
-        <servlet-name>PaymentController</servlet-name>
-
-        <servlet-class>uts.isd.controller.PaymentController</servlet-class>
-    </servlet>
-        
-    <servlet>
-
-        <servlet-name>CancelOrderController</servlet-name>
-
-        <servlet-class>uts.isd.controller.CancelOrderController</servlet-class>
-
+        <servlet-name>AddProduct</servlet-name>
+        <servlet-class>uts.isd.controller.AddProduct</servlet-class>
     </servlet>
     <servlet>
-
-        <servlet-name>OrderSearchController</servlet-name>
-
-        <servlet-class>uts.isd.controller.OrderSearchController</servlet-class>
-
+        <servlet-name>AddProductServlet</servlet-name>
+        <servlet-class>uts.isd.controller.AddProductServlet</servlet-class>
     </servlet>
-
+    <servlet>
+        <servlet-name>UpdateProductServlet</servlet-name>
+        <servlet-class>uts.isd.controller.UpdateProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductSearchServlet</servlet-name>
+        <servlet-class>uts.isd.controller.CatalogueSearchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
-
-        <servlet-name>ConnServlet</servlet-name>
-
-        <url-pattern>/ConnServlet</url-pattern>
-
+        <servlet-name>AddProduct</servlet-name>
+        <url-pattern>/AddProduct</url-pattern>
     </servlet-mapping>
-    
-    <servlet-mapping>        
+    <servlet>
         <servlet-name>CatalogueController</servlet-name>
-
-        <url-pattern>/CatalogueController</url-pattern>
-
-    </servlet-mapping>
-    
-    <servlet-mapping>        
+        <servlet-class>uts.isd.controller.CatalogueController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>OrderController</servlet-name>
-
-        <url-pattern>/OrderController</url-pattern>
-
-    </servlet-mapping>
-    
-    <servlet-mapping>        
+        <servlet-class>uts.isd.controller.OrderController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CartController</servlet-name>
-
-        <url-pattern>/CartController</url-pattern>
-
-    </servlet-mapping>
-    
-    <servlet-mapping>        
+        <servlet-class>uts.isd.controller.CartController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>OrderHistoryController</servlet-name>
-
-        <url-pattern>/OrderHistoryController</url-pattern>
-
-    </servlet-mapping>
-    <servlet-mapping>        
+        <servlet-class>uts.isd.controller.OrderHistoryController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>OrderLineController</servlet-name>
-
+        <servlet-class>uts.isd.controller.OrderLineController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConnServlet</servlet-name>
+        <url-pattern>/ConnServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CatalogueController</servlet-name>
+        <url-pattern>/CatalogueController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderController</servlet-name>
+        <url-pattern>/OrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/CartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderHistoryController</servlet-name>
+        <url-pattern>/OrderHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderLineController</servlet-name>
         <url-pattern>/OrderLineController</url-pattern>
-
     </servlet-mapping>
-    <servlet-mapping>        
-        <servlet-name>CancelOrderController</servlet-name>
-
-        <url-pattern>/CancelOrderController</url-pattern>
-
-    </servlet-mapping>
-    <servlet-mapping>        
-        <servlet-name>OrderSearchController</servlet-name>
-
-        <url-pattern>/OrderSearchController</url-pattern>
-
-    </servlet-mapping>
-
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>uts.isd.controller.LoginServlet</servlet-class>
@@ -143,7 +77,6 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>uts.isd.controller.RegisterServlet</servlet-class>
@@ -152,7 +85,6 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>UserEditServlet</servlet-name>
         <servlet-class>uts.isd.controller.UserEditServlet</servlet-class>
@@ -161,7 +93,6 @@
         <servlet-name>UserEditServlet</servlet-name>
         <url-pattern>/UserEditServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>UserUpdateServlet</servlet-name>
         <servlet-class>uts.isd.controller.UserUpdateServlet</servlet-class>
@@ -170,7 +101,6 @@
         <servlet-name>UserUpdateServlet</servlet-name>
         <url-pattern>/UserUpdateServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>uts.isd.controller.LogoutServlet</servlet-class>
@@ -179,7 +109,6 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>UserDeactivateServlet</servlet-name>
         <servlet-class>uts.isd.controller.UserDeactivateServlet</servlet-class>
@@ -188,7 +117,6 @@
         <servlet-name>UserDeactivateServlet</servlet-name>
         <url-pattern>/UserDeactivateServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>AccessLogViewServlet</servlet-name>
         <servlet-class>uts.isd.controller.AccessLogViewServlet</servlet-class>
@@ -197,7 +125,6 @@
         <servlet-name>AccessLogViewServlet</servlet-name>
         <url-pattern>/AccessLogViewServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>AccessLogSearchServlet</servlet-name>
         <servlet-class>uts.isd.controller.AccessLogSearchServlet</servlet-class>
@@ -206,29 +133,23 @@
         <servlet-name>AccessLogSearchServlet</servlet-name>
         <url-pattern>/AccessLogSearchServlet</url-pattern>
     </servlet-mapping>
-    
-    <servlet-mapping>        
-        <servlet-name>CreditCardController</servlet-name>
-
-        <url-pattern>/CreditCardController</url-pattern>
-
+    <servlet-mapping>
+        <servlet-name>AddProductServlet</servlet-name>
+        <url-pattern>/AddProductServlet</url-pattern>
     </servlet-mapping>
-    
-    <servlet-mapping>        
-        <servlet-name>PaymentController</servlet-name>
-
-        <url-pattern>/PaymentController</url-pattern>
-
+    <servlet-mapping>
+        <servlet-name>UpdateProductServlet</servlet-name>
+        <url-pattern>/UpdateProductServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>ProductSearchServlet</servlet-name>
+        <url-pattern>/ProductSearchServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
-
         <session-timeout>
 
             30
 
         </session-timeout>
-
     </session-config>
-    
 </web-app>

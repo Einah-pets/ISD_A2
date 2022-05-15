@@ -4,9 +4,6 @@
     Author     : Stephanie
 --%>
 
-<%@page import="uts.isd.model.*"%>
-<%@page import="java.util.*"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,8 +15,6 @@
 
             <h1>IoTBay</h1>
 
-            <%User user = (User) session.getAttribute("user");%>
-
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,53 +22,52 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <!--Main-->
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
-                            </li>
-                            <!--Catalogue-->
+                            </li> 
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
                                     <input type="hidden" value="1" name="page">
                                     <input type="submit" class="btn btn-light" value="Catalogue">
-                                </form>                            
+                                </form>
+                            </li>  
+                            <!--
+                            IF USER IS LOGGED IN, THEY CAN ACCESS TRACKING FEATURE
+                            -->
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="shippingTracking.jsp">Track Order</a>
                             </li>
-                            <!--Cart-->
+                            
+                            <%
+                                if (session.getAttribute("user") != null) {
+                            %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="logout.jsp">Logout</a>
+                            </li>  
+                            <%} else {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.jsp">Login</a>
+                            </li>   
+                            <%}%> 
                             <li class="nav-item">
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
-
-                            <!--if logged in-->
-                            <% if (user != null) {%>
-                            <!--Access log-->
-                            <li class="nav-item">
-                                <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
-                            </li>
-                            <!--Order history-->                            
+                            <%
+                                //if (session.getAttribute("user") != null) {
+                            %>
                             <li class="nav-item">
                                 <form action="OrderHistoryController" method="POST">
                                     <input type="submit" class="btn btn-light" value="Order History">
                                 </form>
-                            </li>
-                            <!--Logout-->
-                            <li class="nav-item">
-                                <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a>
                             </li>  
-                            <%} else {
-                            %>
-                            <!--Register-->
-                            <li class="nav-item">
-                                <a class="nav-link" href="register.jsp">Register</a>
-                            </li> 
-                            <!--Login-->  
-                            <li class="nav-item">
-                                <a class="nav-link" href="login.jsp">Login</a>
-                            </li>   
-                            <%}%>
                         </ul>          
                     </div>
                 </div>
-            </nav>           
+            </nav>       
 
             <div class="container p-5">
                 <div class="row">
@@ -92,17 +86,12 @@
                         <p><%= prodPrice%></p>
                         <p><%= prodDescription%></p>
                         <form action="OrderController" method="POST">
-
-                            <%int p = (Integer) session.getAttribute("page") * 6 - 6 + Integer.parseInt(request.getParameter("selectedProd"));%>
+                            
+                            <%int p = (Integer)session.getAttribute("page") * 6 - 6 + Integer.parseInt(request.getParameter("selectedProd"));%>
                             <input type="hidden" name="productID" value="<%=p%>">
                             <input class="btn btn-primary" type="submit" value="Add to cart">
                         </form>
                     </div>
-                </div>
-                <div class="col">
-                    <%if (session.getAttribute("productErr") != null) {%>
-                    <p class="text-warning"><%=session.getAttribute("productErr")%></p>
-                    <%}%>
                 </div>
 
             </div>

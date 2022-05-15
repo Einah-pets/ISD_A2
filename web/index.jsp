@@ -26,29 +26,26 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <!--Home-->
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
                             </li>
-                            <!--Catalogue-->
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
                                     <input type="hidden" value="1" name="page">
                                     <input type="submit" class="btn btn-light" value="Catalogue">
-                                </form>                            
-                            </li>
-                            <!--Cart-->
+                                </form>                           
+                            </li>  
                             <li class="nav-item">
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
-                            <!--Register-->
                             <li class="nav-item">
                                 <a class="nav-link" href="register.jsp">Register</a>
-                            </li> 
-                            <!--Login-->  
+                            </li>  
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="login.jsp">Login</a>
                             </li>   
+                            
                         </ul>          
                     </div>
                 </div>
