@@ -69,15 +69,7 @@
                         
             <br>
             <h3>Payment Complete!</h3>
-            <br>
-            
-            
-                     
-            <a class=" btn-primary nav-link" style="max-width:190px; color:white; border-radius: 5px "href="ShippingEntering">Proceed to Shipping...</a>
-
-             
-                            
-            <!-- PAYMENT COMPLETE, GO TO SHIPPING DETAILS -->
+            <!-- PAYMENT COMPLETE, RETURN TO HOME -->
             
             
         </div>

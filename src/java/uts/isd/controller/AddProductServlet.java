@@ -40,12 +40,12 @@ public class AddProductServlet extends HttpServlet {
         validator.clear(session);
         
         DBManager manager = (DBManager) session.getAttribute("manager");
-       // Product product = new Product(productID, productName, productType, productBrand, productPrice, productQuantity, productDescription);
+        Product product = new Product(productID, productName, productType, productBrand, productPrice, productQuantity, productDescription);
     
         
         try{
-           Product product = manager.findProductN(productName);
-             
+          // Product product = manager.findProductN(productName);
+        
             if (product != null){
                 //create product
                     session.setAttribute("product", product);

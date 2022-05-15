@@ -21,9 +21,11 @@
             Product product = (Product) session.getAttribute("product");
             ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("Product");
             String productName = (String) session.getAttribute("productName");
-            products = manager.fetchAllProducts();
-            session.setAttribute("allProducts", products);
+           // products = manager.fetchAllProducts();
+           // session.setAttribute("allProducts", products);
         %>
+        
+        
         <div class="container">
 
             <h1>IoTBay</h1>
@@ -73,22 +75,15 @@
                 </div>
             </nav>     
                         <br>
-            <form method="post" action="CatalogueSearchServlet">
+            <form method="post" action="CatalogueSearchServlet"> 
                 <label class="label">Search catalogue by product name: 
-                    <input class="input" type="text" placeholder="<%//=(productName != null ? productName : "")%>" name="productName" required="true">
+                    <input class="input" type="text" placeholder="<%=(productName != null ? productName : "")%>" name="productName" required="true">
                 </label>
                 <input class="btn btn-secondary btn-sm" type="submit" value="Search">
-                <a href="StaffCatalogue.jsp" class="btn btn-secondary btn-sm">Reset search</a>
+                <a href="CatalogueViewServlet" class="btn btn-secondary btn-sm">Reset search</a>
             </form> 
                 <br>
-                <form method="post" action="CatalogueSearchServlet">
-                <label class="label">Search catalogue by product type: 
-                    <input class="input" type="text" placeholder="<%//=(productName != null ? productName : "")%>" name="productName" required="true">
-                </label>
-                <input class="btn btn-secondary btn-sm" type="submit" value="Search">
-                <a href="StaffCatalogue.jsp" class="btn btn-secondary btn-sm">Reset search</a>
-            </form> 
-                <br>
+       
             <br>
             <div class="container">
                 <table class="table">
@@ -116,7 +111,7 @@
                         <td><%= log.getProductDescription()%></td>
                         <td> 
                            
-                            <form  action="ProductEdit.jsp" method="POST">
+                         <form  action="ProductEdit.jsp" method="POST">
                        
                              <input class="btn btn-outline-primary" type="submit" value="Edit product">
                         </form></td>

@@ -395,24 +395,23 @@ public class DBManager {
         st.executeUpdate("INSERT INTO product VALUES (" + productName + "," + productType + "," + productBrand + "," + productPrice + ", " + productQuantity + "," + productDescription + ")");
     }
     
-     public Product findProductN(String productName) throws SQLException {
-        String fetch = "select * from product where productName = '" + productName + "'";
+     public  ArrayList<Product>  findProductN(String productName) throws SQLException {
+        String fetch = "select * from product where productName LIKE '%" + productName + "%'";
         ResultSet rs = st.executeQuery(fetch);
-
-        while (rs.next()) {
-            String name = rs.getString(2);
-
-            if (name == productName) {
-                int productID = rs.getInt(1);
+         ArrayList<Product> ProductArray = new ArrayList();
+         
+         while (rs.next()) {
+            int productID = rs.getInt(1);
                 String productType = rs.getString(3);
                 String productBrand = rs.getString(4);
                 double productPrice = rs.getDouble(5);
                 int productQuantity = rs.getInt(6);
                 String productDescription = rs.getString(7);
-                return new Product(productID, productName, productType, productBrand, productPrice, productQuantity, productDescription);
-            }
+                ProductArray.add(new Product(productID, productName, productType, productBrand, productPrice, productQuantity, productDescription));
         }
-        return null;
+        return ProductArray;
+        
+ 
     }
      
      public Integer findDelStatus(int deliveryid) throws SQLException {
@@ -461,7 +460,7 @@ public class DBManager {
     
     }
      
-}
+
 
     //Wisam's Part - Payment Processing
     
@@ -477,4 +476,5 @@ public class DBManager {
         st.executeUpdate("INSERT INTO PAYMENT (orderID, amount, paymentStatus, paymentType) VALUES (" + orderID + ", " + amount + ", " + paymentStatus + ", '" + paymentType + "')");
     }
 }
+        
 

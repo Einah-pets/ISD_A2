@@ -30,11 +30,9 @@
                             <a class="nav-link" href="main.jsp">Main</a>
                         </li>
                         <li class="nav-item">
-                            <form action="CatalogueController" method="POST">
-                                <input type="hidden" value="1" name="page">
-                                <input type="submit" class="btn btn-light" value="Catalogue">
-                            </form>
-                        </li>
+                                <a class="nav-link" href="CatalogueViewServlet">Catalogue</a>
+                         </li>
+                        
                         <%
                             if (session.getAttribute("user") != null) {
                         %>

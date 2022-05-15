@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,21 +31,21 @@ public class CatalogueSearchServlet extends HttpServlet {
         Product product = (Product) session.getAttribute("product");
         String productName = request.getParameter("productName");
         DBManager manager = (DBManager) session.getAttribute("manager");
-        ArrayList<AccessLog> searchProductLogs;
+        ArrayList<Product> searchProductLogs;
         validator.clear(session);
 
-        if (!validator.validateDate(productName)) {
-            session.setAttribute("productName", "Incorrect date format");
+     /*   if (!validator.validateName(productName)) {
+            session.setAttribute("productName", "Incorrect name");
             request.getRequestDispatcher("StaffCatalogue.jsp").include(request, response);
-        } else {
+        } else {*/
             try {
-                searchProductLogs = manager.fetchAccessLog(product.getProductID(), productName);
+                searchProductLogs = manager.findProductN(productName);
                 session.setAttribute("productLog", searchProductLogs);
                 session.setAttribute("productLogProductName", "");
                 request.getRequestDispatcher("StaffCatalogue.jsp").include(request, response);
             } catch (SQLException ex) {
-                Logger.getLogger(AccessLogSearchServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CatalogueSearchServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-}
+//}

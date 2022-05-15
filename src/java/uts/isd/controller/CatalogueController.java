@@ -63,6 +63,7 @@ public class CatalogueController extends HttpServlet {
                 }
             }
             request.getRequestDispatcher("catalogue.jsp").include(request, response);
+           
 
         } catch (SQLException ex) {
 
