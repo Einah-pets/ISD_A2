@@ -89,7 +89,7 @@
             <br>
             <h3>Payment Complete!</h3>
             <!-- PAYMENT COMPLETE, RETURN TO HOME -->
-            
+            <a class=" btn-primary nav-link" style="max-width:190px; color:white; border-radius: 5px "href="shippingEnterDetails.jsp">Proceed to Shipping...</a>
             
         </div>
     </body>
