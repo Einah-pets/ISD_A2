@@ -101,7 +101,7 @@
                     </table>
                     <br>
                     <div>
-                        <input class="btn btn-primary" type="submit" name="action" value="Search">
+                        <input class="btn btn-secondary" type="submit" name="action" value="Search">
                     </div>
                 </form>
 
@@ -129,7 +129,7 @@
                         <td>
                             <form action="OrderLineController" method="POST">
                                 <input type="hidden" name="orderID" value="<%=previousOrders.get(i).getOrderID()%>">
-                                <input class="btn btn-light" type="submit" value="See all products">
+                                <input class="btn btn-primary" type="submit" value="See all products">
                             </form>
 
                         </td>
@@ -139,7 +139,7 @@
                             <!--cancel this order-->
                             <form action="CancelOrderController" method="POST">
                                 <input type="hidden" name="orderIDtodel" value="<%=previousOrders.get(i).getOrderID()%>">
-                                <input class="btn btn-light" type="submit" value="Cancel order">
+                                <input class="btn btn-secondary" type="submit" value="Cancel order">
                             </form>
                         </td>
                         <%}%>

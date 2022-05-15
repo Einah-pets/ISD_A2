@@ -28,7 +28,6 @@
             
             <%User user = (User) session.getAttribute("user");%>
 
-            <%User user = (User) session.getAttribute("user");%>
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">

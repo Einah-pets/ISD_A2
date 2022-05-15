@@ -91,7 +91,7 @@
             <br>
             <br>
                     <div>
-                        <a href="payment.jsp" class="btn btn-secondary" style="float: left;">Proceed to Checkout</a>
+                        <a href="payment.jsp" class="btn btn-primary" style="float: left;">Proceed to Checkout</a>
                     </div>
 
         </div>
