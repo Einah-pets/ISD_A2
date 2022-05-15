@@ -122,7 +122,7 @@
                 
                 <br> </br>
               
-                <a class=" btn-primary nav-link" style="max-width:85px; color:white; border-radius: 5px "href="ShippingEntering">Submit</a>
+                <a class=" btn-primary nav-link" style="max-width:85px; color:white; border-radius: 5px "href="shippingTracking.jsp">Submit</a>
 
              </form>           
                                     
