@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="uts.isd.model.*"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,6 +41,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="index.jsp">Home</a>
                             </li>
+                            <%}%>
                             <!--Catalogue-->
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
@@ -52,7 +55,7 @@
                             </li>
 
                             <!--if logged in-->
-                            <% }if (user != null) {%>
+                            <% if (user != null) {%>
                             <!--Access log-->
                             <li class="nav-item">
                                 <a class="nav-link" href="AccessLogViewServlet">Access Log</a>

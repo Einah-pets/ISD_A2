@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="uts.isd.model.*"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,11 +18,13 @@
     <body>
         <!--        redirect to the index page after 2 seconds-->
         <meta http-equiv="Refresh" content="2;url=index.jsp">
-        
+
         <div class="container">
 
-        <h1>IoTBay</h1>
-        
+            <h1>IoTBay</h1>
+            <%User user = (User) session.getAttribute("user");%>
+
+
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -39,6 +43,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="index.jsp">Home</a>
                             </li>
+                            <%}%>
                             <!--Catalogue-->
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
@@ -52,7 +57,7 @@
                             </li>
 
                             <!--if logged in-->
-                            <% }if (user != null) {%>
+                            <% if (user != null) {%>
                             <!--Access log-->
                             <li class="nav-item">
                                 <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
@@ -82,9 +87,9 @@
                     </div>
                 </div>
             </nav>
-        
-        <br>
-        <p>Your account has been successfully deactivated. Redirecting to the Home page.</p>
+
+            <br>
+            <p>Your account has been successfully deactivated. Redirecting to the Home page.</p>
 
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

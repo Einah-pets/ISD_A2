@@ -22,7 +22,6 @@
             
             <%User user = (User) session.getAttribute("user");%>
 
-            <%User user = (User) session.getAttribute("user");%>
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -41,6 +40,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="index.jsp">Home</a>
                             </li>
+                            <%}%>
                             <!--Catalogue-->
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
@@ -54,7 +54,7 @@
                             </li>
 
                             <!--if logged in-->
-                            <% }if (user != null) {%>
+                            <% if (user != null) {%>
                             <!--Access log-->
                             <li class="nav-item">
                                 <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
