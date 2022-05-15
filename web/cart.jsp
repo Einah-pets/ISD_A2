@@ -29,10 +29,17 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <!--Main-->
+                            <%if (user != null) {%>
+                            <!--Home-->
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
                             </li>
+                            <%} else {%>
+                            <!--Main-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.jsp">Home</a>
+                            </li>
+                            <%}%>
                             <!--Catalogue-->
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
@@ -119,10 +126,10 @@
                         <form class="row row-cols-lg-auto g-3 align-items-center" action="CartController" method="POST">
 
                             <input type="hidden" name="productID" value="<%=prodID%>">
-                            <input type="submit" name="action" class="btn btn-light" value="-"> 
+                            <input type="submit" name="action" class="btn btn-secondary" value="-"> 
 
                             <p><%=prodQuantity%></p>
-                            <input type="submit" name="action" class="btn btn-light" value="+">
+                            <input type="submit" name="action" class="btn btn-secondary" value="+">
                         </form>
                     </div>
                     <div class="col-2">
@@ -137,7 +144,7 @@
                     <div class="col">
                         <form action="CartController" method="POST">
                             <input type="hidden" name="productID" value="<%=prodID%>">
-                            <input class="btn btn-light" type="submit" name="action" value="X">
+                            <input class="btn btn-secondary" type="submit" name="action" value="X">
                         </form>
                     </div>
 
@@ -153,27 +160,27 @@
                     </div>
                 </div>
 
-                    <br>
+                <br>
 
                 <div class="row">
                     <div class="col">
                         <form action="ConfirmOrderController" method="POST">
-                            <input class="btn btn-light" type="submit" name="action" value="Confirm cart">
+                            <input class="btn btn-primary" type="submit" name="action" value="Confirm cart">
                         </form>
                     </div>
 
                 </div>
-                
+
                 <div class="col">
                     <%if (session.getAttribute("orderErr") != null) {%>
                     <p class="text-warning"><%=session.getAttribute("orderErr")%></p>
                     <%}%>
                 </div>
-                
-                
+
+
                 <!-- Setting the dollar amount of the products in the cart to the session -->
-                <% session.setAttribute("totalPrice",totalPrice);%>
-                        
+                <% session.setAttribute("totalPrice", totalPrice);%>
+
                 <%} else {
                 %>
                 <p class="text-center">Cart is empty</p>

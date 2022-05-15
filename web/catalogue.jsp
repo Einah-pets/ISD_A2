@@ -28,13 +28,14 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <!--Main-->
-                            <% if (user != null) {%>
+                            <%if (user != null) {%>
+                            <!--Home-->
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
                             </li>  
-                            <%} else {
-                            %>
+                            
+                            <%} else {%>
+                            <!--Main-->
                             <li class="nav-item">
                                 <a class="nav-link" href="index.jsp">Home</a>
                             </li>
@@ -81,7 +82,7 @@
                         </ul>          
                     </div>
                 </div>
-            </nav>     
+            </nav>    
 
             <div class="container p-5">
                 <div class="row p-4 g-10">

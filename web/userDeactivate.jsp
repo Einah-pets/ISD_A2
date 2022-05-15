@@ -31,10 +31,17 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <!--Main-->
+                            <%if (user != null) {%>
+                            <!--Home-->
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
                             </li>
+                            <%} else {%>
+                            <!--Main-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.jsp">Home</a>
+                            </li>
+                            <%}%>
                             <!--Catalogue-->
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
@@ -46,6 +53,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
+
+                            <!--if logged in-->
+                            <% if (user != null) {%>
                             <!--Access log-->
                             <li class="nav-item">
                                 <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
@@ -60,11 +70,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a>
                             </li>  
-                            
+                            <%} else {
+                            %>
+                            <!--Register-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="register.jsp">Register</a>
+                            </li> 
+                            <!--Login-->  
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.jsp">Login</a>
+                            </li>   
+                            <%}%>
                         </ul>          
                     </div>
                 </div>
-            </nav>   
+            </nav>     
 
         <br>
         <p>Are you sure you want to deactivate your account?</p>
