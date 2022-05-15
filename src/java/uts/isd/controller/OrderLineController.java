@@ -5,6 +5,8 @@
 package uts.isd.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,13 +36,15 @@ public class OrderLineController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         DBManager manager = (DBManager) session.getAttribute("manager");
 
+        User currentUser = (User) session.getAttribute("user");
+
         try {
  
             
             int orderID = Integer.parseInt(request.getParameter("orderID"));
             
             ArrayList <Product> products = new ArrayList();
-            ArrayList <OrderLine> orderLines;
+            ArrayList <OrderLine> orderLines = new ArrayList();
             ArrayList quantities = new ArrayList();
             
             orderLines = manager.fetchOrderLines(orderID);

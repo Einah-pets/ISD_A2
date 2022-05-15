@@ -5,6 +5,8 @@
 package uts.isd.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +27,8 @@ import uts.isd.model.dao.*;
 @WebServlet(name = "CartController", urlPatterns = {"/CartController"})
 public class CartController extends HttpServlet {
 
+
+
     @Override
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +38,6 @@ public class CartController extends HttpServlet {
 
         try {
 
-            session.setAttribute("orderErr", null);
 
             Order cart = (Order) session.getAttribute("cart");
             OrderLine ol = manager.findOrderLine(cart.getOrderID(), Integer.parseInt(request.getParameter("productID")));
@@ -51,16 +54,12 @@ public class CartController extends HttpServlet {
                 case "X":
                     manager.deleteOrderLine(Integer.parseInt(request.getParameter("productID")), cart.getOrderID());
                     break;
-
+                default:
+                    break;
             }
 
             ArrayList<OrderLine> orderLines = manager.fetchOrderLines(cart.getOrderID());
             session.setAttribute("orderlinesInCart", orderLines);
-            
-            if(orderLines.isEmpty()){
-                session.setAttribute("orderlinesInCart",null);
-            }
-            
             ArrayList<Product> products = manager.fetchProducts(orderLines);
             session.setAttribute("productsInCart", products);
 

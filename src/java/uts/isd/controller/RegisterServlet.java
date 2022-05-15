@@ -76,7 +76,9 @@ public class RegisterServlet extends HttpServlet {
                     //create accesslog
                     int userID = user.getUserID();
                     manager.addAccessLog(userID, "Register");
+                    
                     request.getRequestDispatcher("main.jsp").include(request, response);
+                    
                 }
             }
             catch (SQLException | NullPointerException ex) {

@@ -14,15 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uts.isd.model.*;
-import java.util.*;
 import uts.isd.model.dao.DBManager;
-
 /**
  *
  * @author bluin
  */
 public class UserDeactivateServlet extends HttpServlet {
-
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -36,20 +34,14 @@ public class UserDeactivateServlet extends HttpServlet {
             //create deactivate access log
             int userID = user.getUserID();
             manager.addAccessLog(userID, "Deactivate");
-
-            //cancel all orders for this user
-            ArrayList<Order> orders = manager.getOrders(userID,null,null);
-            for (Order o : orders) {
-                manager.updateOrderStatus(o.getOrderID(),"Cancelled");
-            }
-
             //end
             session.invalidate();
             request.getRequestDispatcher("userDeactivateSuccess.jsp").include(request, response);
-        } catch (SQLException | NullPointerException ex) {
+        }
+        catch (SQLException | NullPointerException ex) {
             Logger.getLogger(UserDeactivateServlet.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());
         }
-
+        
     }
 }

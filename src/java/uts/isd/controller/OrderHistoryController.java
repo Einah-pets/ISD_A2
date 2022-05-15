@@ -5,6 +5,8 @@
 package uts.isd.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,28 +27,30 @@ import uts.isd.model.dao.*;
 @WebServlet(name = "OrderHistoryController", urlPatterns = {"/OrderHistoryController"})
 public class OrderHistoryController extends HttpServlet {
 
+
+
     @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         DBManager manager = (DBManager) session.getAttribute("manager");
 
         User currentUser = (User) session.getAttribute("user");
-        ArrayList<Order> orders;
 
         try {
 
-            orders = manager.getAllOrders(currentUser.getUserID());
-
-            session.setAttribute("previousOrders", orders);
+            
+            ArrayList <Order> orders = manager.getOrders(currentUser.getUserID());
+            session.setAttribute("previousOrders",orders);
 
             request.getRequestDispatcher("orderHistory.jsp").include(request, response);
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (SQLException ex) {
 
             Logger.getLogger(OrderHistoryController.class.getName()).log(Level.SEVERE, null, ex);
 
-        }
+        } 
 
     }
 
