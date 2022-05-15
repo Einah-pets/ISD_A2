@@ -25,10 +25,10 @@ public class AddProduct extends HttpServlet {
         String productName = request.getParameter("productName");
         String productType = request.getParameter("productType");
         String productBrand = request.getParameter("productBrand");
-        String DproductPrice = request.getParameter("productPrice");
-        Double productPrice = Double.parseDouble(DproductPrice);
-        String IproductQuantity = request.getParameter("productQuantity");
-        Integer productQuantity = Integer.parseInt(IproductQuantity);
+        String productPrice = request.getParameter("productPrice");
+        Double DproductPrice = Double.parseDouble(productPrice);
+        String productQuantity = request.getParameter("productQuantity");
+        Integer IproductQuantity = Integer.parseInt(productQuantity);
         String productDescription = request.getParameter("productDescription");
         validator.clear(session);
         Product product = null;
@@ -38,7 +38,7 @@ public class AddProduct extends HttpServlet {
                 
             if (product ==null){
                 //create product
-                    manager.addProduct(productName, productType, productBrand, productPrice, productQuantity, productDescription);
+                    manager.addProduct(productName, productType, productBrand, DproductPrice, IproductQuantity, productDescription);
                     request.getRequestDispatcher("CatalogueController").include(request, response);
                     
             }
@@ -68,14 +68,14 @@ public class AddProduct extends HttpServlet {
             session.setAttribute("nameErr","Incorrect name format");
             request.getRequestDispatcher("CatalogueController").include(request, response);
         }
-       /* else if(!validator.validateName(productPrice)){
+        else if(!validator.validatePrice(productPrice)){
             session.setAttribute("nameErr","Incorrect name format");
             request.getRequestDispatcher("CatalgoueController").include(request, response);
         }
-       /* else if(!validator.validateName(productQuantity)){
+        else if(!validator.validateNumber(productQuantity)){
             session.setAttribute("nameErr","Incorrect name format");
             request.getRequestDispatcher("CatalgoueController").include(request, response);
-        }*/
+        }
         else if(!validator.validateName(productDescription)){
             session.setAttribute("nameErr","Incorrect name format");
             request.getRequestDispatcher("CatalogueController").include(request, response);
