@@ -17,10 +17,13 @@
     <body>
         <%
             User user = (User) session.getAttribute("user");
+            
         %>
 
         <div class="container">
             <h1>IoTBay</h1>
+
+
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -29,10 +32,17 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <!--Main-->
+                            <%if (user != null) {%>
+                            <!--Home-->
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
                             </li>
+                            <%} else {%>
+                            <!--Main-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.jsp">Home</a>
+                            </li>
+                            <%}%>
                             <!--Catalogue-->
                             <li class="nav-item">
                                 <form action="CatalogueController" method="POST">
@@ -45,6 +55,8 @@
                                 <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
 
+                            <!--if logged in-->
+                            <% if (user != null) {%>
                             <!--Access log-->
                             <li class="nav-item">
                                 <a class="nav-link" href="AccessLogViewServlet">Access Log</a>
@@ -55,20 +67,33 @@
                                     <input type="submit" class="btn btn-light" value="Order History">
                                 </form>
                             </li>
-                            <!-- Staff Main-->
+                            <!-- Staff Main --> 
+                            <%// if (user.getUserType() == "Staff") {%>
                             <li class="nav-item">
                                 <form action="StaffMain.jsp" method="POST">
                                     <input type="submit" class="btn btn-light" value="Staff">
                                 </form>
                             </li>
+                            <%//}%>
                             <!--Logout-->
                             <li class="nav-item">
                                 <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a>
+                            </li>  
+                            <%} else {
+                            %>
+                            <!--Register-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="register.jsp">Register</a>
+                            </li> 
+                            <!--Login-->  
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.jsp">Login</a>
                             </li>   
+                            <%}%>
                         </ul>          
                     </div>
                 </div>
-            </nav>
+            </nav>  
 
 
             <br>

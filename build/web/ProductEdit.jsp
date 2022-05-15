@@ -3,7 +3,8 @@
     Created on : 30/03/2022, 11:35:48 AM
     Author     : bluin
 --%>
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="uts.isd.model.dao.*"%>
 <%@page import="uts.isd.model.User"%>
 <%@page import="uts.isd.model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -27,7 +28,13 @@
                 String updateProductPrice = (String) session.getAttribute("updateProductPrice");
                 String updateProductQuantity = (String) session.getAttribute("updateProductQuantity");
                 String updateProductDescription = (String) session.getAttribute("updateProductDescription");
-            %>
+                DBManager manager = (DBManager) session.getAttribute("manager");
+                ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("Product");
+                String productName = (String) session.getAttribute("productName");
+           // products = manager.fetchAllProducts();
+           // session.setAttribute("allProducts", products);
+        %>
+         
             
             <div class="container">
                 <h1>IoTBay</h1>
@@ -73,7 +80,10 @@
                             <form action="AddProductServlet" method="post">
                                 <br>
                                 <table>
-                                    <tr><td>Product Name:</td><td><input type="text" name="productName" value="${product.productName}" required="true" readonly="readonly"></td></tr>
+                                    <tr><td>Product Name:</td><td><input list="productNames" value="${product.productName}" required="true"></td></tr>
+                                    <datalist id ="productNames">
+                                    <% for (Product log : products) { %>
+                                      <option value ="<%= log.getProductName()%> " <% } %>
                                     <tr><td>Product Type:</td><td><input type="text" name="productType" value="${product.productType}" required="true"></td></tr>
                                     <tr><td>Product Brand:</td><td><input type="text" name="productBrand" value="${product.productBrand}" required="true"></td></tr>
                                     <tr><td>Product Price:</td><td><input type="text" name="productPrice" value="${product.productPrice}" required="true"></td></tr>
@@ -84,7 +94,7 @@
                                 <div>
                                     <a href="main.jsp">Cancel</a>
                                     <input type="submit" class="btn btn-primary" value="Update">
-                                    <input type="submit"  style = "text-align: right" class="btn btn-primary" value="Delete">
+                                    <a href="ProductDeleteServley" class="btn btn-secondary btn-sm">Delete</a>
                                 </div>
                                
                             </form>
