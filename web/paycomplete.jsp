@@ -19,8 +19,6 @@
         <div class="container">
 
             <h1>IoTBay</h1>
-            
-            <%User user = (User) session.getAttribute("user");%>
 
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -30,6 +28,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                             <%if (user != null) {%>
                             <!--Home-->
                             <li class="nav-item">
@@ -50,7 +49,7 @@
                             </li>
                             <!--Cart-->
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="cart.jsp">Cart</a>
+                                <a class="nav-link" href="cart.jsp">Cart</a>
                             </li>
 
                             <!--if logged in-->
@@ -88,7 +87,15 @@
                         
             <br>
             <h3>Payment Complete!</h3>
-            <!-- PAYMENT COMPLETE, RETURN TO HOME -->
+            <br>
+            
+            
+                     
+            <a class=" btn-primary nav-link" style="max-width:190px; color:white; border-radius: 5px "href="ShippingEntering">Proceed to Shipping...</a>
+
+             
+                            
+            <!-- PAYMENT COMPLETE, GO TO SHIPPING DETAILS -->
             
             
         </div>

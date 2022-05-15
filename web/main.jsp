@@ -66,6 +66,12 @@
                                     <input type="submit" class="btn btn-light" value="Order History">
                                 </form>
                             </li>
+                            <!-- Staff Main-->
+                            <li class="nav-item">
+                                <form action="StaffMain.jsp" method="POST">
+                                    <input type="submit" class="btn btn-light" value="Staff">
+                                </form>
+                            </li>
                             <!--Logout-->
                             <li class="nav-item">
                                 <a class="nav-link" href="LogoutServlet?userID=<%= user.getUserID()%>">Logout</a>
