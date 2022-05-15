@@ -47,7 +47,7 @@
                             </li>
                             <!--Cart-->
                             <li class="nav-item">
-                                <a class="nav-link" href="cart.jsp">Cart</a>
+                                <a class="nav-link active" aria-current="page" href="cart.jsp">Cart</a>
                             </li>
 
                             <!--if logged in-->

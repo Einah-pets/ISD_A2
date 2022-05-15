@@ -32,7 +32,8 @@
                             <!--Home-->
                             <li class="nav-item">
                                 <a class="nav-link" href="main.jsp">Main</a>
-                            </li>
+                            </li>  
+                            
                             <%} else {%>
                             <!--Main-->
                             <li class="nav-item">

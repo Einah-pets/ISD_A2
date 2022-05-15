@@ -46,20 +46,24 @@ public class PaymentController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
-        //User currentUser = (User) session.getAttribute("user");
+        User currentUser = (User) session.getAttribute("user");
+        User anonymousUser = (User) session.getAttribute("AnonymousUser");
         Order cart = (Order) session.getAttribute("cart");
         
         Double amount = (Double) session.getAttribute("totalPrice");
+       
+        
         ArrayList<OrderLine> orderlinesInCart = (ArrayList) session.getAttribute("orderlinesInCart");
         int orderID = orderlinesInCart.get(orderlinesInCart.size()-1).getOrderID();
         //int orderID = Integer.parseInt(request.getParameter("orderID"));
         
         
         try {
+            //Adds a payment record to the database
             manager.addPayment(orderID, amount);
             request.getRequestDispatcher("addCard.jsp").include(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(CreditCardController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

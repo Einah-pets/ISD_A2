@@ -19,6 +19,14 @@
         <div class="container">
 
             <h1>IoTBay</h1>
+            
+            <%
+                String nameOnCardErr = (String) session.getAttribute("nameOnCardErr");
+                String creditCardNoErr = (String) session.getAttribute("creditCardNoErr");
+                String cvvErr = (String) session.getAttribute("cvvErr");
+            %>
+            
+            <%User user = (User) session.getAttribute("user");%>
 
             <%User user = (User) session.getAttribute("user");%>
 
@@ -48,7 +56,7 @@
                             </li>
                             <!--Cart-->
                             <li class="nav-item">
-                                <a class="nav-link" href="cart.jsp">Cart</a>
+                                <a class="nav-link active" aria-current="page" href="cart.jsp">Cart</a>
                             </li>
 
                             <!--if logged in-->
@@ -83,13 +91,13 @@
                 </div>
             </nav>
                         
-                        <form action="confirmpayment.jsp" method="POST">
+                        <form action="InputCardCheck" method="POST">
                             <br>
                             <table>
-                                <tr><td>Owner: </td><td><input type="text" name = "nameOnCard" required></td></tr>
-                                <tr><td>Card Number: </td><td><input type="number" name = "creditCardNo" required></td></tr>
-                                <tr><td>Expiration Date: </td><td><input type="date" name = "expirationDate" required></td></tr>
-                                <tr><td>CVV: </td><td><input type="number" name = "cvv" required></td></tr>
+                                <tr><td>Owner: </td><td><input type="text" placeholder="<%=(nameOnCardErr != null ? nameOnCardErr : "Enter Name on Card")%>" name = "nameOnCard" required></td></tr>
+                                <tr><td>Card Number: </td><td><input type="text" placeholder="<%=(creditCardNoErr != null ? creditCardNoErr : "Enter Card Number")%>" name = "creditCardNo" required></td></tr>
+                                <tr><td>Expiration Date: </td><td><input type="date" placeholder="Select Expiry Date" name = "expirationDate" required></td></tr>
+                                <tr><td>CVV: </td><td><input type="text" placeholder="<%=(cvvErr != null ? cvvErr : "Enter CVV")%>" name = "cvv" required></td></tr>
                             </table>
                             <br>
                             <div>

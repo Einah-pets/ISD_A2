@@ -19,6 +19,8 @@
         <div class="container">
 
             <h1>IoTBay</h1>
+            
+            <%User user = (User) session.getAttribute("user");%>
 
             <%User user = (User) session.getAttribute("user");%>
 
@@ -48,7 +50,7 @@
                             </li>
                             <!--Cart-->
                             <li class="nav-item">
-                                <a class="nav-link" href="cart.jsp">Cart</a>
+                                <a class="nav-link active" aria-current="page" href="cart.jsp">Cart</a>
                             </li>
 
                             <!--if logged in-->

@@ -1,10 +1,14 @@
 # ISD assignment 1 - IoTBay
 
 ## features
-This assignment is the Release 0 iteration of the IoTBay case study. The main features contained are:
-1.Login
+This assignment is the Release 1 iteration of the IoTBay case study. The main features contained are:
+1.Login/Logout
 2.Register
-3.Logout
+3.Account management
+4.Order management
+5.Inventory management
+6.Payment management
+7.Delivery management
 
 ## Technologies
 The project was developped using:
