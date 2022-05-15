@@ -70,7 +70,16 @@ public class OrderController extends HttpServlet {
 
             if (ol == null) {
                 //add product to cart
-                manager.addOrderLine(Integer.parseInt(request.getParameter("productID")) + 1, cart.getOrderID());
+                if (manager.findProduct(Integer.parseInt(request.getParameter("productID")) + 1).getProductQuantity() > 0) {
+                    //check if item in stock
+                    manager.addOrderLine(Integer.parseInt(request.getParameter("productID")) + 1, cart.getOrderID());
+                    session.setAttribute("productErr", null);
+                } else {
+                    String err = "Sorry, this product in out of stock";
+                    session.setAttribute("productErr", err);
+                    request.getRequestDispatcher("productView.jsp").include(request, response);
+
+                }
             } else {
                 //update product quantity
                 manager.updateOrderLine(Integer.parseInt(request.getParameter("productID")) + 1, cart.getOrderID(), ol.getQuantity() + 1);

@@ -106,6 +106,11 @@
                         </form>
                     </div>
                 </div>
+                <div class="col">
+                    <%if (session.getAttribute("productErr") != null) {%>
+                    <p class="text-warning"><%=session.getAttribute("productErr")%></p>
+                    <%}%>
+                </div>
 
             </div>
 
