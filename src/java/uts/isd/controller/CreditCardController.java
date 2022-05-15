@@ -55,9 +55,9 @@ public class CreditCardController extends HttpServlet {
             manager.addCreditCard(nameOnCard, creditCardNo, expirationDate, cvv);
             //reset cart
             session.setAttribute("cart", null);
-            //update order history
-            orders = manager.getAllOrders(currentUser.getUserID());
-            session.setAttribute("previousOrders", orders);
+//            //update order history
+//            orders = manager.getAllOrders(currentUser.getUserID());
+//            session.setAttribute("previousOrders", orders);
             
             request.getRequestDispatcher("paycomplete.jsp").include(request, response);
         } catch (SQLException ex) {
