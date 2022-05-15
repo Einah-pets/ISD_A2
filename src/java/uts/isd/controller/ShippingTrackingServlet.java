@@ -34,6 +34,7 @@ public class ShippingTrackingServlet extends HttpServlet {
         String deliveryType = request.getParameter("deliveryType");
         validator.clear(session);
         
+         request.getRequestDispatcher("shippingTrackingStatus.jsp").include(request, response);
         
         
        

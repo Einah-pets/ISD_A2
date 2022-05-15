@@ -85,7 +85,47 @@
                     </div>
                 </div>
             </nav>       
+                  
+                        <h2>Shipping Details</h2>
+                        <text> Please Enter your Shipping Details for your order.</text>
+                        <br> </br>
+                        
+            <form action="ShippingEntering" method="POST">
+              
+              <table style="width:50%">
+                  
+                  
+                  <tr><td>Street Number:</td><td><input type="integer" name="Delstreetnum" required="true"></td></tr>
+                  <tr><td>Street Name:</td><td><input type="string" name="Delstreetname" required="true"></td></tr>
+                  <tr><td>City:</td><td><input type="string" name="Delcity" required="true"></td></tr>
+                  <tr><td>State:</td><td><input type="String" name="Delstate" required="true"></td></tr>
+                  <tr><td>Country:</td><td><input type="String" name="Delcountry" required="true"></td></tr>
+                  <tr><td> Delivery Status 
+                      <th><select size="1" id="DelStatus" name="DelStatus" required="true">
+                           
+                              <option value="Standard">Standard</option>
+                               <option value="Express">Express</option>
+                          </select></th> </td> </tr>
+                              
+                <%--              <input list="Statuses">
+                           <datalist id="statuses">
+                             <option value="Standard">
+                           </datalist>
+                      </td> </tr>
+                --%>
+              
+                
+                  
+                
+                
+              </table>
+                
+                <br> </br>
+              
+                <a class=" btn-primary nav-link" style="max-width:85px; color:white; border-radius: 5px "href="ShippingEntering">Submit</a>
 
+             </form>           
+                                    
                         
     </body>
 </html>
