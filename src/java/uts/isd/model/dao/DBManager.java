@@ -17,6 +17,7 @@ import uts.isd.model.AccessLog;
 
 /* 
 * DBManager is the primary DAO class to interact with the database. 
+
 * Complete the existing methods of this classes to perform CRUD operations with the db.
  */
 public class DBManager {
@@ -28,7 +29,9 @@ public class DBManager {
     }
 
     //Online Access User Management //////////////////////////////////////////////////////////////////////////////////
-    //Find user by email and password in the database   
+
+    //Find user by email and password in the database
+
     public User findUserEP(String email, String password) throws SQLException, NullPointerException {
         String fetch = "select * from users where email = '" + email + "' and password = '" + password + "'";
         ResultSet rs = st.executeQuery(fetch);
@@ -72,7 +75,10 @@ public class DBManager {
         return null;
     }
 
-    //Add a user-data into the database 
+
+    //Add a user-data into the database
+
+
     public void addUser(String firstName, String lastName, String phone, String email, String password, String userType) throws SQLException, NullPointerException {
         boolean isActive = true;
         st.executeUpdate("INSERT INTO users (firstName,lastName,phone,email,password,userType,isActive) VALUES ('" + firstName + "', '" + lastName + "', '" + phone + "', '" + email + "', '" + password + "', '" + userType + "', " + isActive + ")");
@@ -88,7 +94,9 @@ public class DBManager {
         st.executeUpdate("INSERT INTO staff VALUES ('" + location + "', '" + staffRole + "', " + userID + ")");
     }
 
-    //update a user details in the database   
+
+    //update a user details in the database
+
     public void updateUser(String firstName, String lastName, String phone, String email, String password) throws SQLException, NullPointerException {
         st.executeUpdate("UPDATE ISDUSER.users SET firstName ='" + firstName + "', lastName ='" + lastName + "', phone ='" + phone + "', password ='" + password + "' WHERE email='" + email + "'");
     }
@@ -98,11 +106,13 @@ public class DBManager {
         st.executeUpdate("UPDATE ISDUSER.users SET location ='" + location + "', staffRole ='" + staffRole + "' WHERE userID = " + userID + "");
     }
 
-    //delete a user from the database 
-//    public void deleteUser(int userID) throws SQLException, NullPointerException{       
-//        st.executeUpdate("DELETE FROM ISDUSER.customer WHERE userID ="+ userID +""); 
-//        st.executeUpdate("DELETE FROM ISDUSER.staff WHERE userID ="+ userID +""); 
-//        st.executeUpdate("DELETE FROM ISDUSER.users WHERE userID ="+ userID +"");   
+
+    //delete a user from the database
+//    public void deleteUser(int userID) throws SQLException, NullPointerException{
+//        st.executeUpdate("DELETE FROM ISDUSER.customer WHERE userID ="+ userID +"");
+//        st.executeUpdate("DELETE FROM ISDUSER.staff WHERE userID ="+ userID +"");
+//        st.executeUpdate("DELETE FROM ISDUSER.users WHERE userID ="+ userID +"");
+
 //    }
     //deactivate a user
     public void deactivateUser(String email) throws SQLException, NullPointerException {
@@ -129,6 +139,7 @@ public class DBManager {
     //checkuser
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //STEPH's PART
+
     //when customer put items in cart, order is created with orderStatus = in progress
     //Add a new order into the database   
     public void addOrder(int userID, String dateOfOrder, int deliveryID) throws SQLException {
@@ -145,12 +156,14 @@ public class DBManager {
 
     public ArrayList<Order> getAllOrders(int userID) throws SQLException {
         String fetch = "select * from orders where userID=" + userID + " and orderStatus in ('Confirmed','Cancelled')";
+
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<Order> orders = new ArrayList();
 
         while (rs.next()) {
             int orderID = rs.getInt(1);
-            String orderStatus = rs.getString(3);
+ String orderStatus = rs.getString(3);
+
             String orderDate = rs.getString(4);
             int deliveryID = rs.getInt(5);
             orders.add(new Order(orderID, userID, orderStatus, orderDate, deliveryID));
@@ -190,6 +203,7 @@ public class DBManager {
         return orders;
     }
 
+
     public Order getLastOrder() throws SQLException {
         String fetch1 = "select count(*) from Orders";
         ResultSet rs1 = st.executeQuery(fetch1);
@@ -205,7 +219,9 @@ public class DBManager {
         if (rs.next()) {
             int orderID = rs.getInt(1);
             int userID = rs.getInt(2);
+
             String orderStatus = rs.getString(3);
+
             String dateOfOrder = rs.getString(4);
             int deliveryID = rs.getInt(5);
 
@@ -216,17 +232,23 @@ public class DBManager {
         return null;
     }
 
+
     //add product to cart
+
     public void addOrderLine(int productID, int orderID) throws SQLException {
         st.executeUpdate("insert into orderline(productID, orderID, quantity)" + "values (" + productID + ", " + orderID + ", 1 )");
     }
 
+
     //change product quantity in cart
+
     public void updateOrderLine(int productID, int orderID, int productQuantity) throws SQLException {
         st.executeUpdate("update orderline set quantity =" + productQuantity + " where productID = " + productID + " and orderID = " + orderID);
     }
 
+
     //delete product from cart
+
     public void deleteOrderLine(int productID, int orderID) throws SQLException {
         st.executeUpdate("delete from orderline where productID =" + productID + " and orderID =" + orderID);
     }
@@ -280,7 +302,9 @@ public class DBManager {
 
     //find a product by id
     public Product findProduct(int productID) throws SQLException {
+
         String fetch = "select * from product where productID = " + productID;
+
         ResultSet rs = st.executeQuery(fetch);
 
         while (rs.next()) {
@@ -318,9 +342,11 @@ public class DBManager {
         return temp;        //array of all products in database
     }
 
+
     public void updateStock(int productID, int quantity) throws SQLException{
         st.executeUpdate("update product set productquantity =" + quantity + " where productID = " + productID);
     }
+
 
     //Add a user access log
     public void addAccessLog(int userID, String userAction) throws SQLException, NullPointerException {
@@ -362,52 +388,42 @@ public class DBManager {
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Wisam's Part - Payment Processing
-    
-    //Add a creditCard record to the CREDITCARD table in the database
-    public void addCreditCard(String nameOnCard, long creditCardNo, String expirationDate, int cvv) throws SQLException, NullPointerException {
-        //Execution code for adding record
-        st.executeUpdate("INSERT INTO CREDITCARD (nameOnCard, creditCardNo, expirationDate, cvv) VALUES ('" + nameOnCard + "', " + creditCardNo + ", '" + expirationDate + "', " + cvv + ")");
-    }
-    
-    //Add a payment record to the PAYMENT table in the database
-    public void addPayment(int orderID, double amount) throws SQLException, NullPointerException {
-        //Payment is not finalised so currently status is in-progress i.e. false. Updated to true upon completion of payment
-        boolean paymentStatus = false;
-        //Payment type selected is credit card
-        String paymentType = "credit card";
-        //Execution code for adding record
-        st.executeUpdate("INSERT INTO PAYMENT (orderID, amount, paymentStatus, paymentType) VALUES (" + orderID + ", " + amount + ", " + paymentStatus + ", '" + paymentType + "')");
-    }
-    
-    //Updates payment status in the PAYMENT table after finalising the payment
-    public void updatePayment(int orderID) throws SQLException {
-        //Changing the status to true (was false)
-        boolean paymentStatus = true;
-        //Execution code for updating record
-        st.executeUpdate("UPDATE PAYMENT SET paymentStatus='" + paymentStatus + "' where orderID=" + orderID);
 
-    }
-    
-    
-    
-    
-    
-    
     // LARA//
     // add product
     public void addProduct(String productName, String productType, String productBrand, Double productPrice, Integer productQuantity, String productDescription) throws SQLException, NullPointerException {
         st.executeUpdate("INSERT INTO product VALUES (" + productName + "," + productType + "," + productBrand + "," + productPrice + ", " + productQuantity + "," + productDescription + ")");
     }
+     public void deleteProduct(String productName) throws SQLException, NullPointerException {
+        st.executeUpdate("DELETE product WHERE productName='" + productName +"'");
+    }
     
-     public Product findProductN(String productName) throws SQLException {
-        String fetch = "select * from product where productName = '" + productName + "'";
+     public  ArrayList<Product>  findProductN(String productName) throws SQLException {
+        String fetch = "select * from product where productName LIKE '%" + productName + "%'";
         ResultSet rs = st.executeQuery(fetch);
+         ArrayList<Product> ProductArray = new ArrayList();
+         
+         while (rs.next()) {
+            int productID = rs.getInt(1);
+                String productType = rs.getString(3);
+                String productBrand = rs.getString(4);
+                double productPrice = rs.getDouble(5);
+                int productQuantity = rs.getInt(6);
+                String productDescription = rs.getString(7);
+                ProductArray.add(new Product(productID, productName, productType, productBrand, productPrice, productQuantity, productDescription));
+        }
+        return ProductArray;
+        
+ 
+    }
+     public Product findProductNa(String productName) throws SQLException {
 
-        while (rs.next()) {
-            String name = rs.getString(2);
+        String fetch = "select * from product where productID = " + productName;
 
-            if (name == productName) {
+        ResultSet rs = st.executeQuery(fetch);
+        String productNamedb = rs.getString(8);
+
+            if (productNamedb == productName) {
                 int productID = rs.getInt(1);
                 String productType = rs.getString(3);
                 String productBrand = rs.getString(4);
@@ -416,10 +432,9 @@ public class DBManager {
                 String productDescription = rs.getString(7);
                 return new Product(productID, productName, productType, productBrand, productPrice, productQuantity, productDescription);
             }
-        }
+        
         return null;
     }
-     
      public Integer findDelStatus(int deliveryid) throws SQLException {
          Integer statusnum;
          String fetch;
@@ -437,23 +452,28 @@ public class DBManager {
                 String deliveryType = rs.getString(3);  
                 
                 
-                if (deliveryStatus=="NotFound") {
+                if (deliveryStatus=="NotFound")
+                {
                     return statusnum =1;
                 }
-                else if (deliveryStatus == "OrderRevieved") {
+                else if (deliveryStatus == "OrderRevieved")
+            {
                 statusnum = 2;
-                }
+            }
 
-                else if (deliveryStatus == "InTransit") {
-                statusnum = 3;   
-                }
+            else if (deliveryStatus == "InTransit")
+            {
+             statusnum = 3;   
+            }
 
-                else if (deliveryStatus == "OutForDel") {
+            else if (deliveryStatus == "OutForDel")
+            {
                 statusnum = 4;
-                }
-                else {
-                    return null;
-                }
+            }
+        
+            else {
+            return null;
+            }
                 
             }
         }
@@ -461,9 +481,34 @@ public class DBManager {
     
     }
      
+
+
+    //Wisam's Part - Payment Processing
     
-     public void addDeliveryDetails(String deliveryType, String deliveryStreetNo, String deliveryStreetName, String deliveryCity, String deliveryState, String deliveryCountry) throws SQLException, NullPointerException {                                                                                                                                                                                                                
-        st.executeUpdate("INSERT INTO DELIVERY (deliveryType, deliveryDate, deliveryUnit, deliveryStreetNo, deliveryStreetName, deliveryCity, deliveryState, deliveryCounty, deliveryStatus) VALUES ('" + deliveryType + "', " + "', " + deliveryStreetNo + deliveryStreetName + deliveryCity+ deliveryState+ deliveryCountry+ "')");
+    //Add a creditCard record to the CREDITCARD table in the database
+    public void addCreditCard(String nameOnCard, long creditCardNo, String expirationDate, int cvv) throws SQLException, NullPointerException {
+        //Execution code for adding record
+        st.executeUpdate("INSERT INTO CREDITCARD (nameOnCard, creditCardNo, expirationDate, cvv) VALUES ('" + nameOnCard + "', " + creditCardNo + ", '" + expirationDate + "', " + cvv + ")");
     }
-     
+    
+    //Add a payment record to the PAYMENT table in the database
+    public void addPayment(int orderID, double amount) throws SQLException, NullPointerException {
+        //Payment is not finalised so currently status is in-progress i.e. false. Updated to true upon completion of payment
+        boolean paymentStatus = false;
+        //Payment type selected is credit card
+        String paymentType = "credit card";
+        //Execution code for adding record
+        st.executeUpdate("INSERT INTO PAYMENT (orderID, amount, paymentStatus, paymentType) VALUES (" + orderID + ", " + amount + ", " + paymentStatus + ", '" + paymentType + "')");
+    }
+
+    
+    //Updates payment status in the PAYMENT table after finalising the payment
+    public void updatePayment(int orderID) throws SQLException {
+        //Changing the status to true (was false)
+        boolean paymentStatus = true;
+        //Execution code for updating record
+        st.executeUpdate("UPDATE PAYMENT SET paymentStatus='" + paymentStatus + "' where orderID=" + orderID);
+
+    }
 }
+
